@@ -233,7 +233,7 @@
         <!--Level Selector View Controller-->
         <scene sceneID="sFd-7l-jhb">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="USZ-jF-1q2" customClass="LevelSelectorViewController" customModule="Peggle" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="levelSelectorViewControllerKey" modalPresentationStyle="fullScreen" id="USZ-jF-1q2" customClass="LevelSelectorViewController" customModule="Peggle" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uDg-gJ-XVE">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -344,7 +344,7 @@
         <!--Main Menu View Controller-->
         <scene sceneID="0FQ-t7-EPD">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="rTL-hi-IZ1" customClass="MainMenuViewController" customModule="Peggle" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainMenuViewControllerKey" modalPresentationStyle="fullScreen" id="rTL-hi-IZ1" customClass="MainMenuViewController" customModule="Peggle" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7rh-RH-wmr">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -467,7 +467,7 @@
         <image name="peg-orange" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jkl-1P-6cb"/>
-        <segue reference="IKN-XM-qz2"/>
+        <segue reference="mJC-NA-Fp4"/>
+        <segue reference="gQm-zX-8EC"/>
     </inferredMetricsTieBreakers>
 </document>

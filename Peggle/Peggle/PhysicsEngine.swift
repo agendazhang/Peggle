@@ -36,9 +36,9 @@ class PhysicsEngine {
         return true
     }
 
-    func addGravityToObjects() {
+    func addGravityToObjects(gravityForce: CGFloat) {
         for physicsObject in self.physicsObjects where physicsObject.velocity != .zero {
-            physicsObject.velocity.dy += NumberConstants.gravityForce
+            physicsObject.velocity.dy += gravityForce
         }
     }
 

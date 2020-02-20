@@ -32,6 +32,11 @@ class PeggleGameViewController: UIViewController {
            .handleGameBoardPan(recognizer:)))
         self.setUpHandleGameBoardPan(gameBoardPanGestureRecognizer: gameBoardPanGestureRecognizer)
 
+        NotificationCenter.default.addObserver(self, selector: #selector(winGame(_:)),
+            name: .winGameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loseGame(_:)),
+            name: .loseGameNotification, object: nil)
+
         startGame()
     }
 
@@ -66,5 +71,53 @@ class PeggleGameViewController: UIViewController {
             gameBoardView)
         self.gameEngine = peggleGameEngine
         peggleGameEngine.startGame()
+    }
+
+    @objc private func winGame(_ notification: Notification) {
+        let winGameAlert = UIAlertController(title: StringConstants.success, message:
+            StringConstants.winGameAlert,
+            preferredStyle: .alert)
+
+        winGameAlert
+            .addAction(UIAlertAction(title: StringConstants.ok,
+            style: .default) {
+                [weak self] (_) -> Void in self?
+                .segueToMainMenuViewController()
+        })
+
+        present(winGameAlert, animated: true)
+    }
+
+    @objc private func loseGame(_ notification: Notification) {
+        let loseGameAlert = UIAlertController(title: StringConstants.failed, message:
+            StringConstants.loseGameAlert,
+            preferredStyle: .alert)
+
+        loseGameAlert
+            .addAction(UIAlertAction(title: StringConstants.ok,
+            style: .default) {
+                [weak self] (_) -> Void in self?
+                .segueToMainMenuViewController()
+        })
+
+        present(loseGameAlert, animated: true)
+    }
+
+    private func segueToMainMenuViewController() {
+        let mainMenuViewController = createMainMenuViewController()
+
+        // Segue to `MainMenuViewController`
+        present(mainMenuViewController, animated: true)
+    }
+
+    private func createMainMenuViewController() ->
+        MainMenuViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let mainMenuViewController = storyboard
+            .instantiateViewController(withIdentifier: Keys
+            .mainMenuViewControllerKey.rawValue)
+            as! MainMenuViewController
+
+        return mainMenuViewController
     }
 }

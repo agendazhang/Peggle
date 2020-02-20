@@ -28,4 +28,7 @@ class NumberConstants {
 
     // PeggleGameCollisionHandler
     static let dampingForceAfterCollision: CGFloat = 0.9
+
+    // PeggleGameCondition
+    static let defaultNumberOfCannonBalls: Int = 10
 }

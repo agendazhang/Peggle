@@ -16,6 +16,7 @@ class PeggleGameEngine {
     private var gameTimer = Timer()
     private (set) var physicsObjects: [PhysicsObject]
     private var canFireCannon: Bool
+    private var gameCondition: PeggleGameCondition
     private var pegsHitPerCannonBall: [Peg] = []
 
     // View variables
@@ -28,6 +29,7 @@ class PeggleGameEngine {
         self.gameRenderer = PeggleGameRenderer(gameBoardView: gameBoardView)
         self.physicsObjects = []
         self.canFireCannon = true
+        self.gameCondition = PeggleGameCondition(pegBoardModel: pegBoardModel)
     }
 
     func addPhysicsObject(physicsObject: PhysicsObject) {
@@ -119,7 +121,7 @@ class PeggleGameEngine {
         let gameCollisionHandler = PeggleGameCollisionHandler(gameEngine: self)
         let physicsEngine = PhysicsEngine(physicsObjects: self.physicsObjects, physicsCollisionHandler: gameCollisionHandler)
         physicsEngine.moveObjects()
-        physicsEngine.addGravityToObjects()
+        physicsEngine.addGravityToObjects(gravityForce: NumberConstants.gravityForce)
 
         gameRenderer.moveImages(physicsObjects: physicsObjects)
     }
@@ -132,6 +134,10 @@ class PeggleGameEngine {
         // When a cannon ball is fired, no other cannon ball is allowed to be fired until the
         // previous ball hits the bottom wall and disappears
         guard self.canFireCannon else {
+            return
+        }
+
+        guard !self.gameCondition.checkWinGame() && !self.gameCondition.checkLoseGame() else {
             return
         }
 
@@ -152,6 +158,8 @@ class PeggleGameEngine {
             cannonBallRadius * 2, height: cannonBallRadius * 2))
 
         self.addPhysicsObject(physicsObject: cannonBall, image: cannonBallView)
+
+        self.gameCondition.loseCannonBall()
     }
 
     // Cannon ball can only be fired towards the bottom half of the game board
@@ -195,8 +203,19 @@ class PeggleGameEngine {
         self.canFireCannon = true
         self.removePhysicsObject(physicsObject: cannonBall)
 
+        self.gameCondition.updateNumOrangePegsRemaining(pegsHitPerCannonBall:
+            pegsHitPerCannonBall)
+
         // Remove the pegs that are hit only after the cannon ball exits the game
         self.removePegsHitPerCannonBall()
+
+        if self.gameCondition.checkWinGame() {
+            NotificationCenter.default.post(name: .winGameNotification, object: nil)
+        }
+
+        if self.gameCondition.checkLoseGame() {
+            NotificationCenter.default.post(name: .loseGameNotification, object: nil)
+        }
     }
 
     private func removePegsHitPerCannonBall() {

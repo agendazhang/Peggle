@@ -29,4 +29,8 @@ enum Keys: String {
     case levelSelectorViewCellKey
     case levelDesignerViewControllerKey
     case peggleGameViewControllerKey
+
+    // PeggleGameViewController
+    case levelSelectorViewControllerKey
+    case mainMenuViewControllerKey
 }

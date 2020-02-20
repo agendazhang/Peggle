@@ -200,12 +200,39 @@ class LevelDesignerViewController: UIViewController {
     }
 
     @IBAction private func handleSaveButtonTap(_ sender: UIButton) {
+        // If peg board does not have at least an orange peg, the level cannot be saved
+        if !self.checkPegBoardHasOrangePeg() {
+            self.alertNoOrangePeg()
+            return
+        }
+
         let levelDesignerSaveLevelViewController =
             createLevelDesignerSaveLevelViewController(previousLevelName:
             pegBoardModel.levelName, pegBoardModel: pegBoardModel)
 
         // Segue to `LevelDesignerSaveLevelViewController`
         show(levelDesignerSaveLevelViewController, sender: sender)
+    }
+
+    // Checks if there is at least an orange peg on the peg board
+    private func checkPegBoardHasOrangePeg() -> Bool {
+        for peg in pegBoardModel.pegBoard.pegs where peg.color == .orange {
+            return true
+        }
+
+        return false
+    }
+
+    private func alertNoOrangePeg() {
+        let noOrangePegAlert = UIAlertController(title: StringConstants.error, message:
+            StringConstants.noOrangePegAlert,
+            preferredStyle: .alert)
+
+        noOrangePegAlert
+            .addAction(UIAlertAction(title: StringConstants.ok,
+            style: .cancel))
+
+        present(noOrangePegAlert, animated: true)
     }
 
     private func createLevelDesignerSaveLevelViewController(previousLevelName: String?, pegBoardModel: PegBoardModel) ->
@@ -237,6 +264,12 @@ class LevelDesignerViewController: UIViewController {
     }
 
     @IBAction private func handleStartButtonTap(_ sender: UIButton) {
+        // If peg board does not have at least an orange peg, the level cannot be played
+        if !self.checkPegBoardHasOrangePeg() {
+            self.alertNoOrangePeg()
+            return
+        }
+
         let gameViewController =
             createPeggleGameViewController(pegBoardModel: self.pegBoardModel)
 
