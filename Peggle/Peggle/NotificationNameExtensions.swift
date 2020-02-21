@@ -13,4 +13,6 @@ extension Notification.Name {
     static let loseGameNotification = Notification.Name("loseGameNotification")
     static let numOrangePegsRemainingNotification =
         Notification.Name("numOrangePegsRemainingNotification")
+    static let numCannonBallsRemainingNotification =
+        Notification.Name("numCannonBallsRemainingNotification")
 }

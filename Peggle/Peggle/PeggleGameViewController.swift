@@ -47,6 +47,11 @@ class PeggleGameViewController: UIViewController {
             #selector(updateNumOrangePegsRemaining(_:)), name:
             .numOrangePegsRemainingNotification, object: nil)
 
+        // To get notification of the number of cannon balls remaining
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(updateNumCannonBallsRemaining(_:)), name:
+            .numCannonBallsRemainingNotification, object: nil)
+
         startGame()
     }
 
@@ -135,6 +140,14 @@ class PeggleGameViewController: UIViewController {
         if let dict = notification.userInfo as? [String: Int] {
             if let numOrangePegsRemaining = dict[Keys.numOrangePegsRemainingKey.rawValue] {
                 numOrangePegsRemainingLabel.text = String(numOrangePegsRemaining)
+            }
+        }
+    }
+
+    @objc private func updateNumCannonBallsRemaining(_ notification: Notification) {
+        if let dict = notification.userInfo as? [String: Int] {
+            if let numCannonBallsRemaining = dict[Keys.numCannonBallsRemainingKey.rawValue] {
+                numCannonBallsRemainingLabel.text = String(numCannonBallsRemaining)
             }
         }
     }

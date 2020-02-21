@@ -46,4 +46,8 @@ class PeggleGameCondition {
     func getNumOrangePegsRemaining() -> Int {
         return numOrangePegsRemaining
     }
+
+    func getNumCannonBallsRemaining() -> Int {
+        return numCannonBallsRemaining
+    }
 }

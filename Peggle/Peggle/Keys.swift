@@ -34,4 +34,5 @@ enum Keys: String {
     case levelSelectorViewControllerKey
     case mainMenuViewControllerKey
     case numOrangePegsRemainingKey
+    case numCannonBallsRemainingKey
 }

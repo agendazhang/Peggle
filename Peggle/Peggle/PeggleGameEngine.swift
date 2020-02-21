@@ -56,6 +56,12 @@ class PeggleGameEngine {
             [Keys.numOrangePegsRemainingKey.rawValue: numOrangePegsRemaining]
         NotificationCenter.default.post(name: .numOrangePegsRemainingNotification, object: nil, userInfo: numOrangePegsRemainingDict)
 
+        // Update the "Cannon Balls Remaining" label with the original count
+        let numCannonBallsRemaining = self.gameCondition.getNumCannonBallsRemaining()
+        let numCannonBallsRemainingDict: [String: Int] =
+            [Keys.numCannonBallsRemainingKey.rawValue: numCannonBallsRemaining]
+        NotificationCenter.default.post(name: .numCannonBallsRemainingNotification, object: nil, userInfo: numCannonBallsRemainingDict)
+
         self.startTimer()
     }
 
@@ -220,6 +226,12 @@ class PeggleGameEngine {
         let numOrangePegsRemainingDict: [String: Int] =
             [Keys.numOrangePegsRemainingKey.rawValue: numOrangePegsRemaining]
         NotificationCenter.default.post(name: .numOrangePegsRemainingNotification, object: nil, userInfo: numOrangePegsRemainingDict)
+
+        // Update the "Cannon Balls Remaining" label with the new count
+        let numCannonBallsRemaining = self.gameCondition.getNumCannonBallsRemaining()
+        let numCannonBallsRemainingDict: [String: Int] =
+            [Keys.numCannonBallsRemainingKey.rawValue: numCannonBallsRemaining]
+        NotificationCenter.default.post(name: .numCannonBallsRemainingNotification, object: nil, userInfo: numCannonBallsRemainingDict)
 
         if self.gameCondition.checkWinGame() {
             NotificationCenter.default.post(name: .winGameNotification, object: nil)
