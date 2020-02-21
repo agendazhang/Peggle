@@ -18,10 +18,9 @@ class NumberConstants {
 
     // PeggleGameEngine
     static let gameInterval: Float = 1 / 60
-
-    // PeggleGame
     static let cannonHeight: CGFloat = 60
     static let cannonBallStartingVelocity: CGFloat = 10
+    static let bucketHeight: CGFloat = 30
 
     // PhysicsEngine
     static let gravityForce: CGFloat = 0.2

@@ -20,7 +20,7 @@ class PeggleGameViewController: UIViewController {
 
     override func viewDidLoad() {
         self.gameBoardView.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width +
-            NumberConstants.cannonHeight)
+            NumberConstants.cannonHeight + NumberConstants.bucketHeight)
 
         self.gameBoardView.isUserInteractionEnabled = true
 
