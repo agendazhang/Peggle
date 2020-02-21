@@ -11,4 +11,6 @@ import Foundation
 extension Notification.Name {
     static let winGameNotification = Notification.Name("winGameNotification")
     static let loseGameNotification = Notification.Name("loseGameNotification")
+    static let numOrangePegsRemainingNotification =
+        Notification.Name("numOrangePegsRemainingNotification")
 }

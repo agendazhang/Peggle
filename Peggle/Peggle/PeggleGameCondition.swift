@@ -42,4 +42,8 @@ class PeggleGameCondition {
     func checkLoseGame() -> Bool {
         return self.numCannonBallsRemaining == 0 && self.numOrangePegsRemaining > 0
     }
+
+    func getNumOrangePegsRemaining() -> Int {
+        return numOrangePegsRemaining
+    }
 }

@@ -50,6 +50,12 @@ class PeggleGameEngine {
         self.setUpPegs()
         self.setUpWalls()
 
+        // Update the "Orange Pegs Remaining" label with the original count
+        let numOrangePegsRemaining = self.gameCondition.getNumOrangePegsRemaining()
+        let numOrangePegsRemainingDict: [String: Int] =
+            [Keys.numOrangePegsRemainingKey.rawValue: numOrangePegsRemaining]
+        NotificationCenter.default.post(name: .numOrangePegsRemainingNotification, object: nil, userInfo: numOrangePegsRemainingDict)
+
         self.startTimer()
     }
 
@@ -208,6 +214,12 @@ class PeggleGameEngine {
 
         // Remove the pegs that are hit only after the cannon ball exits the game
         self.removePegsHitPerCannonBall()
+
+        // Update the "Orange Pegs Remaining" label with the new count
+        let numOrangePegsRemaining = self.gameCondition.getNumOrangePegsRemaining()
+        let numOrangePegsRemainingDict: [String: Int] =
+            [Keys.numOrangePegsRemainingKey.rawValue: numOrangePegsRemaining]
+        NotificationCenter.default.post(name: .numOrangePegsRemainingNotification, object: nil, userInfo: numOrangePegsRemainingDict)
 
         if self.gameCondition.checkWinGame() {
             NotificationCenter.default.post(name: .winGameNotification, object: nil)

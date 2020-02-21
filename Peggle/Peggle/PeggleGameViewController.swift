@@ -15,6 +15,8 @@ class PeggleGameViewController: UIViewController {
 
     @IBOutlet private var gameBoardView: UICollectionView!
     @IBOutlet private var cannonView: UIImageView!
+    @IBOutlet private var numOrangePegsRemainingLabel: UILabel!
+    @IBOutlet private var numCannonBallsRemainingLabel: UILabel!
 
     override func viewDidLoad() {
         self.gameBoardView.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width +
@@ -23,19 +25,27 @@ class PeggleGameViewController: UIViewController {
         self.gameBoardView.isUserInteractionEnabled = true
 
         // Add tap handler for game board to shoot cannon ball
-        let gameBoardTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PeggleGameViewController
+        let gameBoardTapGestureRecognizer = UITapGestureRecognizer(target: self, action:
+            #selector(PeggleGameViewController
            .handleGameBoardTap(recognizer:)))
         self.setUpHandleGameBoardTap(gameBoardTapGestureRecognizer: gameBoardTapGestureRecognizer)
 
         // Add pan handler for game board to change angle of cannon
-        let gameBoardPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PeggleGameViewController
+        let gameBoardPanGestureRecognizer = UIPanGestureRecognizer(target: self, action:
+            #selector(PeggleGameViewController
            .handleGameBoardPan(recognizer:)))
         self.setUpHandleGameBoardPan(gameBoardPanGestureRecognizer: gameBoardPanGestureRecognizer)
 
+        // To get notification on whether the game is won or lose
         NotificationCenter.default.addObserver(self, selector: #selector(winGame(_:)),
             name: .winGameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loseGame(_:)),
             name: .loseGameNotification, object: nil)
+
+        // To get notification of the number of orange pegs remaining
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(updateNumOrangePegsRemaining(_:)), name:
+            .numOrangePegsRemainingNotification, object: nil)
 
         startGame()
     }
@@ -119,5 +129,13 @@ class PeggleGameViewController: UIViewController {
             as! MainMenuViewController
 
         return mainMenuViewController
+    }
+
+    @objc private func updateNumOrangePegsRemaining(_ notification: Notification) {
+        if let dict = notification.userInfo as? [String: Int] {
+            if let numOrangePegsRemaining = dict[Keys.numOrangePegsRemainingKey.rawValue] {
+                numOrangePegsRemainingLabel.text = String(numOrangePegsRemaining)
+            }
+        }
     }
 }

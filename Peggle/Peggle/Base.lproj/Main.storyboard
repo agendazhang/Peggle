@@ -436,11 +436,55 @@
                                     <segue destination="rTL-hi-IZ1" kind="show" id="mJC-NA-Fp4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMAINING:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PC5-Ai-aR7">
+                                <rect key="frame" x="347.5" y="914" width="139.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8e3-4Q-UFx">
+                                <rect key="frame" x="437" y="963" width="49.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FOo-s5-qIQ">
+                                <rect key="frame" x="334" y="954" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="RKQ-IF-fov"/>
+                                    <constraint firstAttribute="height" constant="55" id="dXo-WY-VUV"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="peg-orange"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U35-Md-41C">
+                                <rect key="frame" x="334" y="1019" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="e5M-2v-0aJ"/>
+                                    <constraint firstAttribute="width" constant="55" id="nhx-hc-fgZ"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="cannon-ball"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SC-M6-akL">
+                                <rect key="frame" x="437" y="1028" width="49.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="PC5-Ai-aR7" firstAttribute="top" secondItem="Shp-yP-2yH" secondAttribute="bottom" constant="20" id="2av-4q-gcg"/>
+                            <constraint firstItem="8e3-4Q-UFx" firstAttribute="top" secondItem="PC5-Ai-aR7" secondAttribute="bottom" constant="19" id="7TF-tc-rku"/>
                             <constraint firstItem="Shp-yP-2yH" firstAttribute="leading" secondItem="aIE-9l-l0f" secondAttribute="leading" id="Ann-Ut-DQb"/>
+                            <constraint firstItem="5SC-M6-akL" firstAttribute="leading" secondItem="U35-Md-41C" secondAttribute="trailing" constant="48" id="GCS-rA-IjO"/>
                             <constraint firstItem="OG8-9j-5Nf" firstAttribute="leading" secondItem="aIE-9l-l0f" secondAttribute="leading" constant="20" id="GPU-tU-AnM"/>
+                            <constraint firstItem="PC5-Ai-aR7" firstAttribute="centerX" secondItem="aIE-9l-l0f" secondAttribute="centerX" id="RA0-I8-9Xw"/>
+                            <constraint firstItem="8e3-4Q-UFx" firstAttribute="leading" secondItem="FOo-s5-qIQ" secondAttribute="trailing" constant="48" id="TMF-Ma-Tm8"/>
+                            <constraint firstItem="FOo-s5-qIQ" firstAttribute="leading" secondItem="aIE-9l-l0f" secondAttribute="leading" constant="334" id="ZW9-45-Xud"/>
+                            <constraint firstItem="FOo-s5-qIQ" firstAttribute="top" secondItem="PC5-Ai-aR7" secondAttribute="bottom" constant="10" id="bc9-g2-g0u"/>
+                            <constraint firstItem="U35-Md-41C" firstAttribute="top" secondItem="FOo-s5-qIQ" secondAttribute="bottom" constant="10" id="dME-27-c1q"/>
+                            <constraint firstItem="U35-Md-41C" firstAttribute="leading" secondItem="aIE-9l-l0f" secondAttribute="leading" constant="334" id="eY1-1X-Z56"/>
+                            <constraint firstItem="5SC-M6-akL" firstAttribute="top" secondItem="8e3-4Q-UFx" secondAttribute="bottom" constant="35" id="hby-9p-cqx"/>
                             <constraint firstItem="NKD-ik-1T7" firstAttribute="centerX" secondItem="aIE-9l-l0f" secondAttribute="centerX" id="p6E-du-93m"/>
                             <constraint firstItem="Shp-yP-2yH" firstAttribute="trailing" secondItem="aIE-9l-l0f" secondAttribute="trailing" id="sLM-vj-jw7"/>
                             <constraint firstItem="Shp-yP-2yH" firstAttribute="top" secondItem="aIE-9l-l0f" secondAttribute="top" id="tN3-gh-w8A"/>
@@ -452,6 +496,8 @@
                     <connections>
                         <outlet property="cannonView" destination="NKD-ik-1T7" id="UuZ-IA-fg8"/>
                         <outlet property="gameBoardView" destination="Shp-yP-2yH" id="Jmk-xa-d2j"/>
+                        <outlet property="numCannonBallsRemainingLabel" destination="5SC-M6-akL" id="ke7-dD-qnH"/>
+                        <outlet property="numOrangePegsRemainingLabel" destination="8e3-4Q-UFx" id="dWm-NX-xhR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZS-KV-gxq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -461,6 +507,7 @@
     </scenes>
     <resources>
         <image name="cannon" width="362" height="401"/>
+        <image name="cannon-ball" width="256" height="256"/>
         <image name="delete" width="256" height="256"/>
         <image name="house" catalog="system" width="64" height="54"/>
         <image name="peg-blue" width="128" height="128"/>
@@ -468,6 +515,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mJC-NA-Fp4"/>
-        <segue reference="gQm-zX-8EC"/>
+        <segue reference="IKN-XM-qz2"/>
     </inferredMetricsTieBreakers>
 </document>
