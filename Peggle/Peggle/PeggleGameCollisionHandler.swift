@@ -102,10 +102,23 @@ class PeggleGameCollisionHandler: PhysicsCollisionHandler {
         }
     }
 
-    // In our Peggle game, currently there is no instance where a moving `PhysicsRectangle`
-    // object collides with another `PhysicsRectangle` object, so this method is not
-    // implemented yet
+    // In our Peggle game, the only time where this happens is when a moving `Bucket`
+    // collides with a stationary `Wall`
     func handleCollisionForRectangleWithRectangle(physicsRectangle: PhysicsRectangle, physicsRectangle2: PhysicsRectangle) {
+
+        guard physicsRectangle.canMove && !physicsRectangle2.canMove else {
+            return
+        }
+
+        guard let bucket = physicsRectangle as? Bucket else {
+            return
+        }
+
+        guard let _ = physicsRectangle2 as? Wall else {
+            return
+        }
+
+        bucket.velocity.dx = -bucket.velocity.dx
     }
 
 }

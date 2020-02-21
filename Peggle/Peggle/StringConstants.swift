@@ -39,4 +39,7 @@ class StringConstants {
 
     // LevelDesignerViewController
     static let noOrangePegAlert = "Cannot proceed with no orange pegs on the board"
+
+    //BucketView
+    static let bucketImagePath = "bucket"
 }

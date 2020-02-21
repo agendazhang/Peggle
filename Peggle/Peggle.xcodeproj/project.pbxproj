@@ -30,6 +30,8 @@
 		37A14F1123E33B8400E764FD /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A14F1023E33B8400E764FD /* FileUtility.swift */; };
 		37B7CB2E23FEBD1400A221F2 /* PeggleGameCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB2D23FEBD1400A221F2 /* PeggleGameCondition.swift */; };
 		37B7CB3023FEF17000A221F2 /* NotificationNameExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB2F23FEF17000A221F2 /* NotificationNameExtensions.swift */; };
+		37B7CB3223FFDFA500A221F2 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3123FFDFA500A221F2 /* Bucket.swift */; };
+		37B7CB3423FFE04300A221F2 /* BucketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3323FFE04300A221F2 /* BucketView.swift */; };
 		37E5442C23D949C600C0FBF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5442B23D949C600C0FBF2 /* AppDelegate.swift */; };
 		37E5442E23D949C600C0FBF2 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E5442D23D949C600C0FBF2 /* art.scnassets */; };
 		37E5443323D949C600C0FBF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E5443123D949C600C0FBF2 /* Main.storyboard */; };
@@ -88,6 +90,8 @@
 		37A14F1023E33B8400E764FD /* FileUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
 		37B7CB2D23FEBD1400A221F2 /* PeggleGameCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleGameCondition.swift; sourceTree = "<group>"; };
 		37B7CB2F23FEF17000A221F2 /* NotificationNameExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtensions.swift; sourceTree = "<group>"; };
+		37B7CB3123FFDFA500A221F2 /* Bucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
+		37B7CB3323FFE04300A221F2 /* BucketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketView.swift; sourceTree = "<group>"; };
 		37E5442823D949C600C0FBF2 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E5442B23D949C600C0FBF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37E5442D23D949C600C0FBF2 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 				37E5446623DAFE1800C0FBF2 /* PegBoard.swift */,
 				373E52CE23EDB83C00CAA12B /* PhysicsObject.swift */,
 				373E52DA23EE617A00CAA12B /* Wall.swift */,
+				37B7CB3123FFDFA500A221F2 /* Bucket.swift */,
 				373E52D823EE554100CAA12B /* CannonBall.swift */,
 				373E52D623EDC01400CAA12B /* PhysicsRectangle.swift */,
 				373E52D423EDBE7D00CAA12B /* PhysicsCircle.swift */,
@@ -177,6 +182,7 @@
 				3725CEDF23DC4022008824B9 /* PegView.swift */,
 				373E52EE23F19AE800CAA12B /* PegGlowView.swift */,
 				373E52EA23EFB57200CAA12B /* CannonBallView.swift */,
+				37B7CB3323FFE04300A221F2 /* BucketView.swift */,
 				37A14F0E23E3396B00E764FD /* LevelSelectorViewCell.swift */,
 			);
 			name = View;
@@ -413,6 +419,7 @@
 				37F51CA623DF483B00ACEDF6 /* StringExtensions.swift in Sources */,
 				373E52D723EDC01400CAA12B /* PhysicsRectangle.swift in Sources */,
 				37E5446723DAFE1800C0FBF2 /* PegBoard.swift in Sources */,
+				37B7CB3423FFE04300A221F2 /* BucketView.swift in Sources */,
 				373E52E323EEE43400CAA12B /* PeggleGameViewController.swift in Sources */,
 				373E52E723EEEA1700CAA12B /* PeggleGameEngine.swift in Sources */,
 				37A14F0F23E3396B00E764FD /* LevelSelectorViewCell.swift in Sources */,
@@ -427,6 +434,7 @@
 				3725CEE923DC8C97008824B9 /* LevelDesignerViewController.swift in Sources */,
 				37A14F1123E33B8400E764FD /* FileUtility.swift in Sources */,
 				373E52CF23EDB83C00CAA12B /* PhysicsObject.swift in Sources */,
+				37B7CB3223FFDFA500A221F2 /* Bucket.swift in Sources */,
 				373E52DD23EE625600CAA12B /* WallType.swift in Sources */,
 				3725CEEB23DCA55D008824B9 /* NumberConstants.swift in Sources */,
 				373E52E123EEBE2600CAA12B /* PeggleGameCollisionHandler.swift in Sources */,

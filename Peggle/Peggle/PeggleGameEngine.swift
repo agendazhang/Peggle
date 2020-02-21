@@ -49,6 +49,7 @@ class PeggleGameEngine {
     func startGame() {
         self.setUpPegs()
         self.setUpWalls()
+        self.setUpBucket()
 
         // Update the "Orange Pegs Remaining" label with the original count
         let numOrangePegsRemaining = self.gameCondition.getNumOrangePegsRemaining()
@@ -117,6 +118,22 @@ class PeggleGameEngine {
         self.addPhysicsObject(physicsObject: bottomWall)
     }
 
+    // Add the moving peg at the bottom of the game board
+    private func setUpBucket() {
+        let gameBoardViewWidth = gameBoardView.frame.width
+        let gameBoardViewHeight = gameBoardView.frame.height
+
+        // Bucket starts at the bottom center of the game board
+        let bucket = Bucket(x: gameBoardViewWidth / 2, y: gameBoardViewHeight -
+            NumberConstants.bucketHeight / 2, width: NumberConstants.bucketWidth, height:
+            NumberConstants.bucketHeight, velocity: NumberConstants.bucketStartingVelocity)
+
+        let bucketView = BucketView(frame: CGRect(x: gameBoardViewWidth / 2 - NumberConstants.bucketWidth / 2,
+            y: gameBoardViewHeight - NumberConstants.bucketHeight, width: NumberConstants.bucketWidth, height: NumberConstants.bucketHeight))
+
+        self.addPhysicsObject(physicsObject: bucket, image: bucketView)
+    }
+
     // The FPS for the game is 60
     func startTimer() {
         gameTimer = Timer.scheduledTimer(timeInterval:
@@ -133,7 +150,8 @@ class PeggleGameEngine {
         let gameCollisionHandler = PeggleGameCollisionHandler(gameEngine: self)
         let physicsEngine = PhysicsEngine(physicsObjects: self.physicsObjects, physicsCollisionHandler: gameCollisionHandler)
         physicsEngine.moveObjects()
-        physicsEngine.addGravityToObjects(gravityForce: NumberConstants.gravityForce)
+
+        self.addGravityToCannonBall()
 
         gameRenderer.moveImages(physicsObjects: physicsObjects)
     }
@@ -190,6 +208,14 @@ class PeggleGameEngine {
         let dy = NumberConstants.cannonBallStartingVelocity * cos(cannonAngle)
 
         return CGVector(dx: dx, dy: dy)
+    }
+
+    private func addGravityToCannonBall() {
+        for physicsObject in self.physicsObjects {
+            if let cannonBall = physicsObject as? CannonBall {
+                cannonBall.velocity.dy += NumberConstants.gravityForce
+            }
+        }
     }
 
     func cannonBallHitsPeg(peg: Peg) {

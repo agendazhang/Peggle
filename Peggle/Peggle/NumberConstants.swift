@@ -21,6 +21,8 @@ class NumberConstants {
     static let cannonHeight: CGFloat = 60
     static let cannonBallStartingVelocity: CGFloat = 10
     static let bucketHeight: CGFloat = 30
+    static let bucketWidth: CGFloat = 100
+    static let bucketStartingVelocity: CGVector = CGVector(dx: 2, dy: 0)
 
     // PhysicsEngine
     static let gravityForce: CGFloat = 0.2

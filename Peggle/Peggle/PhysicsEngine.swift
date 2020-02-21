@@ -36,12 +36,6 @@ class PhysicsEngine {
         return true
     }
 
-    func addGravityToObjects(gravityForce: CGFloat) {
-        for physicsObject in self.physicsObjects where physicsObject.velocity != .zero {
-            physicsObject.velocity.dy += gravityForce
-        }
-    }
-
     private func checkCollision(physicsObject: PhysicsObject) {
         if let physicsCircle = physicsObject as? PhysicsCircle {
             checkCollisionForCircle(physicsCircle: physicsCircle)
@@ -164,8 +158,8 @@ class PhysicsEngine {
             return
         }
 
-        if rectangle1TopRightY <= rectangle2BottomLeftY
-            || rectangle1BottomLeftY >= rectangle2TopRightY {
+        if rectangle1TopRightY >= rectangle2BottomLeftY
+            || rectangle1BottomLeftY <= rectangle2TopRightY {
             return
         }
 
