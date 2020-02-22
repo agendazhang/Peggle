@@ -10,7 +10,7 @@ import UIKit
 
 class PeggleGameViewController: UIViewController {
 
-    var pegBoardModel = PegBoardModel()
+    var pegBoardLevel = PegBoardLevel()
     var gameEngine: PeggleGameEngine!
 
     @IBOutlet private var gameBoardView: UICollectionView!
@@ -88,7 +88,7 @@ class PeggleGameViewController: UIViewController {
     }
 
     private func startGame() {
-        let peggleGameEngine = PeggleGameEngine(pegBoardModel: pegBoardModel, gameBoardView:
+        let peggleGameEngine = PeggleGameEngine(pegBoardLevel: pegBoardLevel, gameBoardView:
             gameBoardView)
         self.gameEngine = peggleGameEngine
         peggleGameEngine.startGame()

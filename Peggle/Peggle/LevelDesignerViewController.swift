@@ -11,7 +11,7 @@ import UIKit
 class LevelDesignerViewController: UIViewController {
 
     // Model variables
-    var pegBoardModel = PegBoardModel()
+    var pegBoardLevel = PegBoardLevel()
     var isSavedLevel = false
 
     // View variables
@@ -42,7 +42,7 @@ class LevelDesignerViewController: UIViewController {
         if isSavedLevel {
             self.loadPegBoard()
         } else {
-            pegBoardModel = PegBoardModel(boardWidth:
+            pegBoardLevel = PegBoardLevel(boardWidth:
                 pegBoardView.frame.width, boardHeight: pegBoardView.frame.height)
         }
 
@@ -88,8 +88,8 @@ class LevelDesignerViewController: UIViewController {
 
         // Get the positions of pegs on the peg board from the 'Model' component
         // and creating the `View` components to display the peg board
-        for peg in pegBoardModel.getPegs() {
-            let pegPosition = pegBoardModel.getPegPosition(targetPeg: peg)
+        for peg in pegBoardLevel.getPegs() {
+            let pegPosition = pegBoardLevel.getPegPosition(targetPeg: peg)
             let pegRadius = calculatePegRadius()
 
             let pegView = PegView(frame: CGRect(x: pegPosition.x - pegRadius,
@@ -111,13 +111,13 @@ class LevelDesignerViewController: UIViewController {
         switch self.currentPegButtonSelected {
         case .blue, .orange:
             if self.currentPegButtonSelected == .blue {
-                guard pegBoardModel.addPeg(position: tapPosition, color: .blue) else {
+                guard pegBoardLevel.addPeg(position: tapPosition, color: .blue) else {
                     return
                 }
 
                 self.loadPegBoard()
             } else {
-                guard pegBoardModel.addPeg(position: tapPosition, color: .orange) else {
+                guard pegBoardLevel.addPeg(position: tapPosition, color: .orange) else {
                     return
                 }
 
@@ -125,7 +125,7 @@ class LevelDesignerViewController: UIViewController {
             }
 
         case .delete:
-            guard pegBoardModel.removePeg(position: tapPosition) else {
+            guard pegBoardLevel.removePeg(position: tapPosition) else {
                 return
             }
 
@@ -153,7 +153,7 @@ class LevelDesignerViewController: UIViewController {
             let newPosition = CGPoint(x: startingPositionCopy.x + translation.x, y:
                 startingPositionCopy.y + translation.y)
 
-            guard pegBoardModel.movePeg(oldPosition: startingPositionCopy, newPosition: newPosition) else {
+            guard pegBoardLevel.movePeg(oldPosition: startingPositionCopy, newPosition: newPosition) else {
                 return
             }
 
@@ -177,7 +177,7 @@ class LevelDesignerViewController: UIViewController {
     @objc func handlePegBoardLongPress(recognizer: UILongPressGestureRecognizer) {
         let tapPosition = recognizer.location(in: pegBoardView)
 
-        guard pegBoardModel.removePeg(position: tapPosition) else {
+        guard pegBoardLevel.removePeg(position: tapPosition) else {
             return
         }
 
@@ -208,7 +208,7 @@ class LevelDesignerViewController: UIViewController {
 
         let levelDesignerSaveLevelViewController =
             createLevelDesignerSaveLevelViewController(previousLevelName:
-            pegBoardModel.levelName, pegBoardModel: pegBoardModel)
+            pegBoardLevel.levelName, pegBoardLevel: pegBoardLevel)
 
         // Segue to `LevelDesignerSaveLevelViewController`
         show(levelDesignerSaveLevelViewController, sender: sender)
@@ -216,7 +216,7 @@ class LevelDesignerViewController: UIViewController {
 
     // Checks if there is at least an orange peg on the peg board
     private func checkPegBoardHasOrangePeg() -> Bool {
-        for peg in pegBoardModel.pegBoard.pegs where peg.color == .orange {
+        for peg in pegBoardLevel.pegBoard.pegs where peg.color == .orange {
             return true
         }
 
@@ -235,7 +235,7 @@ class LevelDesignerViewController: UIViewController {
         present(noOrangePegAlert, animated: true)
     }
 
-    private func createLevelDesignerSaveLevelViewController(previousLevelName: String?, pegBoardModel: PegBoardModel) ->
+    private func createLevelDesignerSaveLevelViewController(previousLevelName: String?, pegBoardLevel: PegBoardLevel) ->
         LevelDesignerSaveLevelViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let levelDesignerSaveLevelViewController = storyboard
@@ -243,20 +243,20 @@ class LevelDesignerViewController: UIViewController {
             .levelDesignerSaveLevelViewControllerKey.rawValue)
             as! LevelDesignerSaveLevelViewController
 
-        levelDesignerSaveLevelViewController.pegBoardModel = pegBoardModel
+        levelDesignerSaveLevelViewController.pegBoardLevel = pegBoardLevel
         levelDesignerSaveLevelViewController.delegate = self
 
         return levelDesignerSaveLevelViewController
     }
 
     // If the level is saved in the `LevelDesignerSaveLevelViewController`, then get the
-    // level name from it to update the property in the pegBoardModel
-    func receiveDataFromSaveLevelViewController(pegBoardModel: PegBoardModel) {
-        self.pegBoardModel = pegBoardModel
+    // level name from it to update the property in the pegBoardLevel
+    func receiveDataFromSaveLevelViewController(pegBoardLevel: PegBoardLevel) {
+        self.pegBoardLevel = pegBoardLevel
     }
 
     @IBAction private func handleResetButtonTap(_ sender: UIButton) {
-        guard pegBoardModel.resetPegBoard() else {
+        guard pegBoardLevel.resetPegBoard() else {
             return
         }
 
@@ -271,13 +271,13 @@ class LevelDesignerViewController: UIViewController {
         }
 
         let gameViewController =
-            createPeggleGameViewController(pegBoardModel: self.pegBoardModel)
+            createPeggleGameViewController(pegBoardLevel: self.pegBoardLevel)
 
         // Segue to `LevelDesignerViewController`
         show(gameViewController, sender: sender)
     }
 
-    private func createPeggleGameViewController(pegBoardModel: PegBoardModel) ->
+    private func createPeggleGameViewController(pegBoardLevel: PegBoardLevel) ->
         PeggleGameViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let gameViewController = storyboard
@@ -285,7 +285,7 @@ class LevelDesignerViewController: UIViewController {
             .peggleGameViewControllerKey.rawValue)
             as! PeggleGameViewController
 
-        gameViewController.pegBoardModel = pegBoardModel
+        gameViewController.pegBoardLevel = pegBoardLevel
 
         return gameViewController
     }

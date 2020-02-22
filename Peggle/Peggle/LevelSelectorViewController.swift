@@ -11,8 +11,8 @@ import UIKit
 class LevelSelectorViewController: UIViewController {
 
     // Model variables
-    var savedLevels: [PegBoardModel] = []
-    var currentLevelSelected = PegBoardModel()
+    var savedLevels: [PegBoardLevel] = []
+    var currentLevelSelected = PegBoardLevel()
     var isCurrentLevelSelected = false
 
     // View variables
@@ -50,7 +50,7 @@ class LevelSelectorViewController: UIViewController {
                     .unarchiveTopLevelObjectWithData(data) as? PegBoard {
                     let levelName = file.trimmingCharacters(
                         in: CharacterSet(charactersIn: StringConstants.plistFileExtension))
-                    let savedLevel = PegBoardModel(pegBoard: pegBoard, levelName: levelName)
+                    let savedLevel = PegBoardLevel(pegBoard: pegBoard, levelName: levelName)
                     savedLevels.append(savedLevel)
                 }
             }
@@ -70,13 +70,13 @@ class LevelSelectorViewController: UIViewController {
         }
 
         let levelDesignerViewController =
-            createLevelDesignerViewController(pegBoardModel: currentLevelSelected)
+            createLevelDesignerViewController(pegBoardLevel: currentLevelSelected)
 
         // Segue to `LevelDesignerViewController`
         show(levelDesignerViewController, sender: sender)
     }
 
-    private func createLevelDesignerViewController(pegBoardModel: PegBoardModel) ->
+    private func createLevelDesignerViewController(pegBoardLevel: PegBoardLevel) ->
         LevelDesignerViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let levelDesignerViewController = storyboard
@@ -84,7 +84,7 @@ class LevelSelectorViewController: UIViewController {
             .levelDesignerViewControllerKey.rawValue)
             as! LevelDesignerViewController
 
-        levelDesignerViewController.pegBoardModel = pegBoardModel
+        levelDesignerViewController.pegBoardLevel = pegBoardLevel
 
         levelDesignerViewController.isSavedLevel = true
 
@@ -97,13 +97,13 @@ class LevelSelectorViewController: UIViewController {
         }
 
         let gameViewController =
-            createPeggleGameViewController(pegBoardModel: currentLevelSelected)
+            createPeggleGameViewController(pegBoardLevel: currentLevelSelected)
 
         // Segue to `LevelDesignerViewController`
         show(gameViewController, sender: sender)
     }
 
-    private func createPeggleGameViewController(pegBoardModel: PegBoardModel) ->
+    private func createPeggleGameViewController(pegBoardLevel: PegBoardLevel) ->
         PeggleGameViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let gameViewController = storyboard
@@ -111,7 +111,7 @@ class LevelSelectorViewController: UIViewController {
             .peggleGameViewControllerKey.rawValue)
             as! PeggleGameViewController
 
-        gameViewController.pegBoardModel = pegBoardModel
+        gameViewController.pegBoardLevel = pegBoardLevel
 
         return gameViewController
     }

@@ -43,7 +43,7 @@
 		37E5446323DAF84F00C0FBF2 /* PegColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5446223DAF84F00C0FBF2 /* PegColor.swift */; };
 		37E5446523DAFA3F00C0FBF2 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5446423DAFA3F00C0FBF2 /* Keys.swift */; };
 		37E5446723DAFE1800C0FBF2 /* PegBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5446623DAFE1800C0FBF2 /* PegBoard.swift */; };
-		37E5446923DB098800C0FBF2 /* PegBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5446823DB098800C0FBF2 /* PegBoardModel.swift */; };
+		37E5446923DB098800C0FBF2 /* PegBoardLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5446823DB098800C0FBF2 /* PegBoardLevel.swift */; };
 		37F51CA223DEE71E00ACEDF6 /* LevelDesignerSaveLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F51CA123DEE71E00ACEDF6 /* LevelDesignerSaveLevelViewController.swift */; };
 		37F51CA423DF416D00ACEDF6 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F51CA323DF416D00ACEDF6 /* StringConstants.swift */; };
 		37F51CA623DF483B00ACEDF6 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F51CA523DF483B00ACEDF6 /* StringExtensions.swift */; };
@@ -109,7 +109,7 @@
 		37E5446223DAF84F00C0FBF2 /* PegColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegColor.swift; sourceTree = "<group>"; };
 		37E5446423DAFA3F00C0FBF2 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		37E5446623DAFE1800C0FBF2 /* PegBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegBoard.swift; sourceTree = "<group>"; };
-		37E5446823DB098800C0FBF2 /* PegBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegBoardModel.swift; sourceTree = "<group>"; };
+		37E5446823DB098800C0FBF2 /* PegBoardLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegBoardLevel.swift; sourceTree = "<group>"; };
 		37F51CA123DEE71E00ACEDF6 /* LevelDesignerSaveLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerSaveLevelViewController.swift; sourceTree = "<group>"; };
 		37F51CA323DF416D00ACEDF6 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		37F51CA523DF483B00ACEDF6 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -171,7 +171,7 @@
 				373E52D023EDBB4000CAA12B /* PhysicsEngine.swift */,
 				373E52DE23EEBD5800CAA12B /* PhysicsCollisionHandler.swift */,
 				373E52E023EEBE2600CAA12B /* PeggleGameCollisionHandler.swift */,
-				37E5446823DB098800C0FBF2 /* PegBoardModel.swift */,
+				37E5446823DB098800C0FBF2 /* PegBoardLevel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -423,7 +423,7 @@
 				373E52E323EEE43400CAA12B /* PeggleGameViewController.swift in Sources */,
 				373E52E723EEEA1700CAA12B /* PeggleGameEngine.swift in Sources */,
 				37A14F0F23E3396B00E764FD /* LevelSelectorViewCell.swift in Sources */,
-				37E5446923DB098800C0FBF2 /* PegBoardModel.swift in Sources */,
+				37E5446923DB098800C0FBF2 /* PegBoardLevel.swift in Sources */,
 				373E52EB23EFB57200CAA12B /* CannonBallView.swift in Sources */,
 				373E52E923EEEA7000CAA12B /* PeggleGameRenderer.swift in Sources */,
 				37E5446323DAF84F00C0FBF2 /* PegColor.swift in Sources */,

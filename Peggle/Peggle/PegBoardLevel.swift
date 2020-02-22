@@ -1,5 +1,5 @@
 //
-//  PegBoardModel.swift
+//  PegBoardLevel.swift
 //  Peggle
 //
 //  Created by Zhang Cheng on 24/1/20.
@@ -9,10 +9,9 @@
 import UIKit
 
 /**
-`PegBoardModel` manages the game's peg board by accepting executions from the `ViewController` and
- telling the `PegBoard` to execute them, then finally passing the result of the operations back to `ViewController`
+`PegBoardLevel` represents a level in the `Peggle` game.
 */
-class PegBoardModel: NSObject {
+class PegBoardLevel: NSObject {
     private (set) var pegBoard: PegBoard
     var levelName: String?
 

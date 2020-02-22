@@ -11,11 +11,11 @@ class PeggleGameCondition {
     private var numCannonBallsRemaining: Int
     private var numOrangePegsRemaining: Int
 
-    init(pegBoardModel: PegBoardModel) {
+    init(pegBoardLevel: PegBoardLevel) {
         self.numCannonBallsRemaining = NumberConstants.defaultNumberOfCannonBalls
 
         var numOrangePegs = 0
-        for peg in pegBoardModel.pegBoard.pegs where peg.color == .orange {
+        for peg in pegBoardLevel.pegBoard.pegs where peg.color == .orange {
             numOrangePegs += 1
         }
         self.numOrangePegsRemaining = numOrangePegs

@@ -10,7 +10,7 @@ import UIKit
 
 class LevelDesignerSaveLevelViewController: UIViewController {
 
-    var pegBoardModel = PegBoardModel()
+    var pegBoardLevel = PegBoardLevel()
     weak var delegate: LevelDesignerViewController?
     @IBOutlet private var levelNameTextField: UITextField!
 
@@ -21,7 +21,7 @@ class LevelDesignerSaveLevelViewController: UIViewController {
     }
 
     private func setSavedLevelName() {
-        guard let savedLevelName = pegBoardModel.levelName else {
+        guard let savedLevelName = pegBoardLevel.levelName else {
             return
         }
         self.levelNameTextField.text = savedLevelName
@@ -29,7 +29,7 @@ class LevelDesignerSaveLevelViewController: UIViewController {
 
     @IBAction private func handleCancelButtonTap(_ sender: UIButton) {
         if delegate != nil {
-            delegate?.receiveDataFromSaveLevelViewController(pegBoardModel: pegBoardModel)
+            delegate?.receiveDataFromSaveLevelViewController(pegBoardLevel: pegBoardLevel)
         }
         dismiss(animated: true)
     }
@@ -106,7 +106,7 @@ class LevelDesignerSaveLevelViewController: UIViewController {
         do {
             let data = try NSKeyedArchiver
                 .archivedData(withRootObject:
-                pegBoardModel.pegBoard, requiringSecureCoding: false)
+                pegBoardLevel.pegBoard, requiringSecureCoding: false)
 
             // Encode data to a file in the local Documents directory
             try data.write(to: URL(fileURLWithPath:
@@ -114,7 +114,7 @@ class LevelDesignerSaveLevelViewController: UIViewController {
                 levelName, fileExtension: StringConstants
                 .plistFileExtension)))
 
-            pegBoardModel.levelName = levelName
+            pegBoardLevel.levelName = levelName
             self.alertLevelSaved()
         } catch {
             self.alertLevelSaveFailed()

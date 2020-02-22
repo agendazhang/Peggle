@@ -11,7 +11,7 @@ import UIKit
 class PeggleGameEngine {
 
     // Model variables
-    private (set) var pegBoardModel: PegBoardModel
+    private (set) var pegBoardLevel: PegBoardLevel
     private (set) var gameRenderer: PeggleGameRenderer
     private var gameTimer = Timer()
     private (set) var physicsObjects: [PhysicsObject]
@@ -22,14 +22,14 @@ class PeggleGameEngine {
     // View variables
     private (set) var gameBoardView: UICollectionView
 
-    init(pegBoardModel: PegBoardModel, gameBoardView: UICollectionView) {
-        self.pegBoardModel = pegBoardModel
+    init(pegBoardLevel: PegBoardLevel, gameBoardView: UICollectionView) {
+        self.pegBoardLevel = pegBoardLevel
         self.gameBoardView = gameBoardView
 
         self.gameRenderer = PeggleGameRenderer(gameBoardView: gameBoardView)
         self.physicsObjects = []
         self.canFireCannon = true
-        self.gameCondition = PeggleGameCondition(pegBoardModel: pegBoardModel)
+        self.gameCondition = PeggleGameCondition(pegBoardLevel: pegBoardLevel)
     }
 
     func addPhysicsObject(physicsObject: PhysicsObject) {
@@ -70,14 +70,14 @@ class PeggleGameEngine {
         self.endTimer()
     }
 
-    // Based on the position and type of pegs given by `pegBoardModel`, load the game board
+    // Based on the position and type of pegs given by `pegBoardLevel`, load the game board
     // with these pegs
     private func setUpPegs() {
-        for peg in pegBoardModel.pegBoard.pegs {
+        for peg in pegBoardLevel.pegBoard.pegs {
             // To account for the additional cannon height
             peg.y += NumberConstants.cannonHeight
 
-            let pegPosition = pegBoardModel.getPegPosition(targetPeg: peg)
+            let pegPosition = pegBoardLevel.getPegPosition(targetPeg: peg)
             let pegRadius = peg.radius
 
             let pegView = PegView(frame: CGRect(x: pegPosition.x - pegRadius,
