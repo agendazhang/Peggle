@@ -190,6 +190,12 @@ class PeggleGameEngine {
         self.addPhysicsObject(physicsObject: cannonBall, image: cannonBallView)
 
         self.gameCondition.loseCannonBall()
+
+        // Update the "Cannon Balls Remaining" label with the new count
+        let numCannonBallsRemaining = self.gameCondition.getNumCannonBallsRemaining()
+        let numCannonBallsRemainingDict: [String: Int] =
+            [Keys.numCannonBallsRemainingKey.rawValue: numCannonBallsRemaining]
+        NotificationCenter.default.post(name: .numCannonBallsRemainingNotification, object: nil, userInfo: numCannonBallsRemainingDict)
     }
 
     // Cannon ball can only be fired towards the bottom half of the game board
@@ -235,9 +241,32 @@ class PeggleGameEngine {
         self.gameRenderer.changeImage(physicsObject: peg, image: pegGlowView)
     }
 
-    // Allow cannon to be fired again after previous cannon ball hits the bottom wall and
-    // disappears
     func cannonBallHitsBottomWall(cannonBall: CannonBall) {
+        self.endCurrentTurn(cannonBall: cannonBall)
+    }
+
+    func cannonBallEntersBucket(cannonBall: CannonBall) {
+        // Gain back the cannon ball
+        self.gameCondition.gainCannonBall()
+
+        // Update the "Cannon Balls Remaining" label with the new count
+        let numCannonBallsRemaining = self.gameCondition.getNumCannonBallsRemaining()
+        let numCannonBallsRemainingDict: [String: Int] =
+            [Keys.numCannonBallsRemainingKey.rawValue: numCannonBallsRemaining]
+        NotificationCenter.default.post(name: .numCannonBallsRemainingNotification, object:
+            nil, userInfo: numCannonBallsRemainingDict)
+
+        NotificationCenter.default.post(name: .freeBallNotification, object:
+            nil)
+
+        self.endCurrentTurn(cannonBall: cannonBall)
+    }
+
+    // Specifies the end of turn when a cannon ball reaches the bottom wall or enters the
+    // bucket
+    private func endCurrentTurn(cannonBall: CannonBall) {
+        // Allow cannon to be fired again after previous cannon ball hits the bottom wall or
+        // enters the bucket
         self.canFireCannon = true
         self.removePhysicsObject(physicsObject: cannonBall)
 
@@ -252,12 +281,6 @@ class PeggleGameEngine {
         let numOrangePegsRemainingDict: [String: Int] =
             [Keys.numOrangePegsRemainingKey.rawValue: numOrangePegsRemaining]
         NotificationCenter.default.post(name: .numOrangePegsRemainingNotification, object: nil, userInfo: numOrangePegsRemainingDict)
-
-        // Update the "Cannon Balls Remaining" label with the new count
-        let numCannonBallsRemaining = self.gameCondition.getNumCannonBallsRemaining()
-        let numCannonBallsRemainingDict: [String: Int] =
-            [Keys.numCannonBallsRemainingKey.rawValue: numCannonBallsRemaining]
-        NotificationCenter.default.post(name: .numCannonBallsRemainingNotification, object: nil, userInfo: numCannonBallsRemainingDict)
 
         if self.gameCondition.checkWinGame() {
             NotificationCenter.default.post(name: .winGameNotification, object: nil)

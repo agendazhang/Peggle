@@ -19,15 +19,15 @@ class PeggleGameCollisionHandler: PhysicsCollisionHandler {
     // collides with a stationary `Peg`
     func handleCollisionForCircleWithCircle(physicsCircle: PhysicsCircle, physicsCircle2: PhysicsCircle) {
 
-        guard physicsCircle.canMove && !physicsCircle2.canMove else {
-            return
-        }
-
         guard let cannonBall = physicsCircle as? CannonBall else {
             return
         }
 
         guard let peg = physicsCircle2 as? Peg else {
+            return
+        }
+
+        guard physicsCircle.canMove && !physicsCircle2.canMove else {
             return
         }
 
@@ -77,19 +77,25 @@ class PeggleGameCollisionHandler: PhysicsCollisionHandler {
     // collides with a stationary `Wall`
     func handleCollisionForCircleWithRectangle(physicsCircle: PhysicsCircle, physicsRectangle: PhysicsRectangle) {
 
-        guard physicsCircle.canMove && !physicsRectangle.canMove else {
+        if let cannonBall = physicsCircle as? CannonBall, let wall = physicsRectangle as?
+            Wall {
+            handleCollisionForCannonBallWithWall(cannonBall: cannonBall, wall: wall)
             return
         }
 
-        guard let cannonBall = physicsCircle as? CannonBall else {
+        if let cannonBall = physicsCircle as? CannonBall, let bucket = physicsRectangle as?
+            Bucket {
+            handleCollisionForCannonBallWithBucket(cannonBall: cannonBall, bucket: bucket)
+            return
+        }
+    }
+
+    private func handleCollisionForCannonBallWithWall(cannonBall: CannonBall, wall: Wall) {
+        guard cannonBall.canMove && !wall.canMove else {
             return
         }
 
-        guard let wall = physicsRectangle as? Wall else {
-            return
-        }
-
-        // in our algorithm, after colliding with a wall, the ball will make a mirror image 
+        // in our algorithm, after colliding with a wall, the ball will make a mirror image
         // deflection with respect to the normal of the wall, where the angle of incidence
         // equals the angle of reflection
         switch wall.wallType {
@@ -102,13 +108,30 @@ class PeggleGameCollisionHandler: PhysicsCollisionHandler {
         }
     }
 
+    private func handleCollisionForCannonBallWithBucket(cannonBall: CannonBall, bucket: Bucket) {
+        guard cannonBall.canMove && bucket.canMove else {
+            return
+        }
+
+        let bucketLeftX = bucket.x - bucket.width / 2
+        let bucketRightX = bucket.x + bucket.width / 2
+        let bucketTopY = bucket.y - bucket.height / 2
+
+        if cannonBall.x > bucketLeftX && cannonBall.x < bucketRightX && cannonBall.y <
+            bucketTopY {
+            // Since the bucket is modelled as a rectangle, the cannon ball can only fall
+            // into the bucket if it overlaps with the top line of the rectangle
+            gameEngine.cannonBallEntersBucket(cannonBall: cannonBall)
+        } else {
+            // Else if the cannon ball overlaps with the sides of the rectangle, it will
+            // bounce away in the opposite x-direction
+            cannonBall.velocity.dx = cannonBall.velocity.dx * -1
+        }
+    }
+
     // In our Peggle game, the only time where this happens is when a moving `Bucket`
     // collides with a stationary `Wall`
     func handleCollisionForRectangleWithRectangle(physicsRectangle: PhysicsRectangle, physicsRectangle2: PhysicsRectangle) {
-
-        guard physicsRectangle.canMove && !physicsRectangle2.canMove else {
-            return
-        }
 
         guard let bucket = physicsRectangle as? Bucket else {
             return
@@ -118,7 +141,11 @@ class PeggleGameCollisionHandler: PhysicsCollisionHandler {
             return
         }
 
-        bucket.velocity.dx = -bucket.velocity.dx
+        guard physicsRectangle.canMove && !physicsRectangle2.canMove else {
+            return
+        }
+
+        bucket.velocity.dx = bucket.velocity.dx * -1
     }
 
 }

@@ -8,6 +8,11 @@
 
 import UIKit
 
+/**
+`Bucket` represents the moving bucket at the bottom of the game board to catch the falling `CannonBall`.
+
+It is modelled as a rectangle shape as it looks like a rectangle when viewed by the side.
+*/
 class Bucket: NSObject, PhysicsRectangle {
     var uuid: UUID
     var x: CGFloat

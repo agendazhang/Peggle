@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+`CannonBall` represents the object that is fired from the cannon and collides with the pegs in the game board.
+*/
 class CannonBall: NSObject, PhysicsCircle {
     var uuid: UUID
     var x: CGFloat

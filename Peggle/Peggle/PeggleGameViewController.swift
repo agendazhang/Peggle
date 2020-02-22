@@ -52,6 +52,11 @@ class PeggleGameViewController: UIViewController {
             #selector(updateNumCannonBallsRemaining(_:)), name:
             .numCannonBallsRemainingNotification, object: nil)
 
+        // To get notification to display free ball animation
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(displayFreeBallAnimation(_:)), name:
+            .freeBallNotification, object: nil)
+
         startGame()
     }
 
@@ -150,5 +155,18 @@ class PeggleGameViewController: UIViewController {
                 numCannonBallsRemainingLabel.text = String(numCannonBallsRemaining)
             }
         }
+    }
+
+    @objc private func displayFreeBallAnimation(_ notification: Notification) {
+        let numCannonBallsRemaining = numCannonBallsRemainingLabel.text
+        numCannonBallsRemainingLabel.text = StringConstants.freeBallAnimationText
+
+        UIView.animate(withDuration: 2, delay: 0.5, options: .curveEaseOut, animations: {
+            self.numCannonBallsRemainingLabel.alpha = 0.0
+        }, completion: {
+            (_: Bool) -> Void in
+            self.numCannonBallsRemainingLabel.text = numCannonBallsRemaining
+            self.numCannonBallsRemainingLabel.alpha = 1.0
+        })
     }
 }

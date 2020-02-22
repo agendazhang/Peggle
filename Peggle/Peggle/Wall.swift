@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+`Wall` represents the 4 sides of the game board.
+*/
 class Wall: NSObject, PhysicsRectangle {
     var uuid: UUID
     var x: CGFloat
