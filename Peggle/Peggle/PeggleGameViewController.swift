@@ -17,6 +17,7 @@ class PeggleGameViewController: UIViewController {
     @IBOutlet private var cannonView: UIImageView!
     @IBOutlet private var numOrangePegsRemainingLabel: UILabel!
     @IBOutlet private var numCannonBallsRemainingLabel: UILabel!
+    @IBOutlet private var freeBallAnimationLabel: UILabel!
 
     override func viewDidLoad() {
         self.gameBoardView.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width +
@@ -158,15 +159,13 @@ class PeggleGameViewController: UIViewController {
     }
 
     @objc private func displayFreeBallAnimation(_ notification: Notification) {
-        let numCannonBallsRemaining = numCannonBallsRemainingLabel.text
-        numCannonBallsRemainingLabel.text = StringConstants.freeBallAnimationText
+        freeBallAnimationLabel.alpha = 1.0
 
-        UIView.animate(withDuration: 2, delay: 0.5, options: .curveEaseOut, animations: {
-            self.numCannonBallsRemainingLabel.alpha = 0.0
+        UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseOut, animations: {
+            self.freeBallAnimationLabel.alpha = 0.0
         }, completion: {
             (_: Bool) -> Void in
-            self.numCannonBallsRemainingLabel.text = numCannonBallsRemaining
-            self.numCannonBallsRemainingLabel.alpha = 1.0
+            self.freeBallAnimationLabel.alpha = 0.0
         })
     }
 }

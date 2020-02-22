@@ -42,7 +42,4 @@ class StringConstants {
 
     // BucketView
     static let bucketImagePath = "bucket"
-
-    // PeggleGameViewController
-    static let freeBallAnimationText = "+1"
 }
