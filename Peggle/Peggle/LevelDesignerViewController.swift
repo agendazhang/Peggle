@@ -19,6 +19,7 @@ class LevelDesignerViewController: UIViewController {
 
     @IBOutlet private var bluePegButton: UIButton!
     @IBOutlet private var orangePegButton: UIButton!
+    @IBOutlet private var greenPegButton: UIButton!
 
     @IBOutlet private var increasePegSizeButton: UIButton!
     @IBOutlet private var decreasePegSizeButton: UIButton!
@@ -33,6 +34,7 @@ class LevelDesignerViewController: UIViewController {
     enum PegButton: String {
         case blue
         case orange
+        case green
         case increaseSize
         case decreaseSize
         case delete
@@ -103,15 +105,21 @@ class LevelDesignerViewController: UIViewController {
         let tapPosition = recognizer.location(in: pegBoardView)
 
         switch self.currentPegButtonSelected {
-        case .blue, .orange:
+        case .blue, .orange, .green:
             if self.currentPegButtonSelected == .blue {
                 guard pegBoardLevel.addPeg(position: tapPosition, color: .blue) else {
                     return
                 }
 
                 self.loadPegBoard()
-            } else {
+            } else if self.currentPegButtonSelected == .orange {
                 guard pegBoardLevel.addPeg(position: tapPosition, color: .orange) else {
+                    return
+                }
+
+                self.loadPegBoard()
+            } else {
+                guard pegBoardLevel.addPeg(position: tapPosition, color: .green) else {
                     return
                 }
 
@@ -199,6 +207,11 @@ class LevelDesignerViewController: UIViewController {
 
     @IBAction private func handleOrangePegButtonTap(_ sender: UIButton) {
         self.currentPegButtonSelected = .orange
+        self.loadPegButtons()
+    }
+
+    @IBAction private func handleGreenPegButtonTap(_ sender: UIButton) {
+        self.currentPegButtonSelected = .green
         self.loadPegButtons()
     }
 
@@ -313,30 +326,42 @@ class LevelDesignerViewController: UIViewController {
         case .blue:
             self.bluePegButton.alpha = 1
             self.orangePegButton.alpha = 0.5
+            self.greenPegButton.alpha = 0.5
             self.increasePegSizeButton.alpha = 0.5
             self.decreasePegSizeButton.alpha = 0.5
             self.deletePegButton.alpha = 0.5
         case .orange:
             self.bluePegButton.alpha = 0.5
             self.orangePegButton.alpha = 1
+            self.greenPegButton.alpha = 0.5
+            self.increasePegSizeButton.alpha = 0.5
+            self.decreasePegSizeButton.alpha = 0.5
+            self.deletePegButton.alpha = 0.5
+        case .green:
+            self.bluePegButton.alpha = 0.5
+            self.orangePegButton.alpha = 0.5
+            self.greenPegButton.alpha = 1
             self.increasePegSizeButton.alpha = 0.5
             self.decreasePegSizeButton.alpha = 0.5
             self.deletePegButton.alpha = 0.5
         case .increaseSize:
             self.bluePegButton.alpha = 0.5
             self.orangePegButton.alpha = 0.5
+            self.greenPegButton.alpha = 0.5
             self.increasePegSizeButton.alpha = 1
             self.decreasePegSizeButton.alpha = 0.5
             self.deletePegButton.alpha = 0.5
         case .decreaseSize:
             self.bluePegButton.alpha = 0.5
             self.orangePegButton.alpha = 0.5
+            self.greenPegButton.alpha = 0.5
             self.increasePegSizeButton.alpha = 0.5
             self.decreasePegSizeButton.alpha = 1
             self.deletePegButton.alpha = 0.5
         case .delete:
             self.bluePegButton.alpha = 0.5
             self.orangePegButton.alpha = 0.5
+            self.greenPegButton.alpha = 0.5
             self.increasePegSizeButton.alpha = 0.5
             self.decreasePegSizeButton.alpha = 0.5
             self.deletePegButton.alpha = 1

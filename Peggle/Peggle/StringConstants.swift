@@ -11,6 +11,7 @@ class StringConstants {
     // PegViewCell
     static let bluePegImagePath = "peg-blue"
     static let orangePegImagePath = "peg-orange"
+    static let greenPegImagePath = "peg-green"
 
     // LevelDesignerSaveLevelViewController
     static let error = "Error"
@@ -31,6 +32,7 @@ class StringConstants {
     // PegHitViewCell
     static let bluePegGlowImagePath = "peg-blue-glow"
     static let orangePegGlowImagePath = "peg-orange-glow"
+    static let greenPegGlowImagePath = "peg-green-glow"
 
     // PeggleGameLevelController
     static let winGameAlert = "YOU WIN"

@@ -27,8 +27,8 @@ class PegGlowView: UIImageView {
     static func getPegImage(pegColor: PegColor) -> UIImage? {
         switch pegColor {
         case .blue: return UIImage(named: StringConstants.bluePegGlowImagePath)
-        case .orange: return UIImage(named:
-            StringConstants.orangePegGlowImagePath)
+        case .orange: return UIImage(named: StringConstants.orangePegGlowImagePath)
+        case .green: return UIImage(named: StringConstants.greenPegGlowImagePath)
         }
     }
 }

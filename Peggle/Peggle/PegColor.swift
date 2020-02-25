@@ -9,4 +9,5 @@
 enum PegColor: String {
     case blue
     case orange
+    case green
 }

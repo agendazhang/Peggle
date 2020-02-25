@@ -132,6 +132,17 @@
                                     <action selector="handleIncreasePegSizeButtonTap:" destination="BV1-FR-VrT" eventType="touchUpInside" id="h4z-OO-Ifc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2f-ej-Wix">
+                                <rect key="frame" x="222" y="979" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="CUg-eV-QRd"/>
+                                    <constraint firstAttribute="height" constant="70" id="NvG-eP-49C"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="peg-green"/>
+                                <connections>
+                                    <action selector="handleGreenPegButtonTap:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ubq-1H-dab"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -144,6 +155,7 @@
                             <constraint firstItem="gsR-gx-ajX" firstAttribute="leading" secondItem="Wub-LN-zRa" secondAttribute="leading" constant="62" id="DGF-QC-7LX"/>
                             <constraint firstItem="Wub-LN-zRa" firstAttribute="bottom" secondItem="hfI-Ex-0Kx" secondAttribute="bottom" constant="10" id="GZw-C3-ejk"/>
                             <constraint firstItem="a8M-4x-s3J" firstAttribute="leading" secondItem="aa8-PH-Zii" secondAttribute="trailing" constant="20" id="Ih6-8a-5gR"/>
+                            <constraint firstItem="rv4-oB-hlX" firstAttribute="top" secondItem="H2f-ej-Wix" secondAttribute="bottom" constant="5" id="Mtc-pJ-TI8"/>
                             <constraint firstItem="Wub-LN-zRa" firstAttribute="bottom" secondItem="gsR-gx-ajX" secondAttribute="bottom" constant="10" id="Rkl-rw-d6N"/>
                             <constraint firstItem="Wub-LN-zRa" firstAttribute="bottom" secondItem="rv4-oB-hlX" secondAttribute="bottom" constant="10" id="SQJ-ma-STx"/>
                             <constraint firstItem="9Fg-gY-dvb" firstAttribute="top" secondItem="aa8-PH-Zii" secondAttribute="bottom" constant="15" id="WNC-PB-ELF"/>
@@ -152,6 +164,7 @@
                             <constraint firstItem="cXe-L5-D7O" firstAttribute="top" secondItem="Wub-LN-zRa" secondAttribute="top" constant="60" id="ZQz-Lq-ud6"/>
                             <constraint firstItem="a8M-4x-s3J" firstAttribute="leading" secondItem="9Fg-gY-dvb" secondAttribute="trailing" constant="20" id="awd-bM-avf"/>
                             <constraint firstItem="rv4-oB-hlX" firstAttribute="leading" secondItem="gsR-gx-ajX" secondAttribute="trailing" constant="20" id="hCZ-m0-Osj"/>
+                            <constraint firstItem="H2f-ej-Wix" firstAttribute="leading" secondItem="OIl-16-BgF" secondAttribute="trailing" constant="10" id="hww-QL-9ge"/>
                             <constraint firstItem="HQr-Gc-Gws" firstAttribute="top" secondItem="Wub-LN-zRa" secondAttribute="top" constant="11" id="l7f-ot-eZf"/>
                             <constraint firstItem="OIl-16-BgF" firstAttribute="leading" secondItem="LSl-lC-trk" secondAttribute="trailing" constant="10" id="rhn-zv-l3D"/>
                             <constraint firstItem="Wub-LN-zRa" firstAttribute="trailing" secondItem="a8M-4x-s3J" secondAttribute="trailing" constant="62" id="sWo-1o-dc8"/>
@@ -166,6 +179,7 @@
                         <outlet property="bluePegButton" destination="LSl-lC-trk" id="4Yk-A7-aCz"/>
                         <outlet property="decreasePegSizeButton" destination="9Fg-gY-dvb" id="aby-CR-t6K"/>
                         <outlet property="deletePegButton" destination="a8M-4x-s3J" id="cTz-4L-i8F"/>
+                        <outlet property="greenPegButton" destination="H2f-ej-Wix" id="IdC-KL-IIA"/>
                         <outlet property="increasePegSizeButton" destination="aa8-PH-Zii" id="h4m-vy-HMK"/>
                         <outlet property="loadButton" destination="gsR-gx-ajX" id="A4T-Ub-gTN"/>
                         <outlet property="orangePegButton" destination="OIl-16-BgF" id="Uyf-Jc-g80"/>
@@ -551,6 +565,7 @@
         <image name="house" catalog="system" width="64" height="54"/>
         <image name="minus.magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="peg-blue" width="128" height="128"/>
+        <image name="peg-green" width="128" height="128"/>
         <image name="peg-orange" width="128" height="128"/>
         <image name="plus.magnifyingglass" catalog="system" width="64" height="56"/>
     </resources>
