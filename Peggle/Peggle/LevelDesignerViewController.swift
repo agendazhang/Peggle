@@ -72,16 +72,6 @@ class LevelDesignerViewController: UIViewController {
         self.loadPegButtons()
     }
 
-    private func calculatePegRadius() -> CGFloat {
-        let frameWidth = pegBoardView.frame.width
-        let frameHeight = pegBoardView.frame.height
-        if frameWidth < frameHeight {
-            return (frameWidth / 2) / CGFloat(NumberConstants.numPegCols)
-        } else {
-            return (frameHeight / 2) / CGFloat(NumberConstants.numPegRows)
-        }
-    }
-
     private func loadPegBoard() {
         for view in pegBoardView.subviews {
             guard let _ = view as? PegView else {
@@ -91,15 +81,14 @@ class LevelDesignerViewController: UIViewController {
             view.removeFromSuperview()
         }
 
-        // Get the positions of pegs on the peg board from the 'Model' component
+        // Get the positions of pegs on the peg board from the `Model` component
         // and creating the `View` components to display the peg board
         for peg in pegBoardLevel.getPegs() {
             let pegPosition = pegBoardLevel.getPegPosition(targetPeg: peg)
-            let pegRadius = calculatePegRadius()
+            let pegRadius = peg.radius
 
             let pegView = PegView(frame: CGRect(x: pegPosition.x - pegRadius,
-                y: pegPosition.y - pegRadius, width: calculatePegRadius() * 2, height:
-                calculatePegRadius() * 2))
+                y: pegPosition.y - pegRadius, width: pegRadius * 2, height: pegRadius * 2))
             pegView.pegColor = peg.color
             pegBoardView.addSubview(pegView)
         }
@@ -128,10 +117,21 @@ class LevelDesignerViewController: UIViewController {
 
                 self.loadPegBoard()
             }
+
         case .increaseSize:
-            return
+            guard pegBoardLevel.increasePegSize(position: tapPosition) else {
+                return
+            }
+
+            self.loadPegBoard()
+
         case .decreaseSize:
-            return
+            guard pegBoardLevel.decreasePegSize(position: tapPosition) else {
+                return
+            }
+
+            self.loadPegBoard()
+
         case .delete:
             guard pegBoardLevel.removePeg(position: tapPosition) else {
                 return

@@ -15,6 +15,10 @@ class NumberConstants {
     static let numPegCols = 20
     static let defaultBoardWidth: CGFloat = 1024
     static let defaultBoardHeight: CGFloat = 1024
+    static let increaseSizeRatio: CGFloat = 1.1
+    static let decreaseSizeRatio: CGFloat = 0.9
+    static let maximumSizeRatio: CGFloat = 2.0
+    static let minimumSizeRatio: CGFloat = 0.5
 
     // PeggleGameEngine
     static let gameInterval: Float = 1 / 60

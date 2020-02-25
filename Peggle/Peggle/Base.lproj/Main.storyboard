@@ -114,7 +114,7 @@
                                     <constraint firstAttribute="height" constant="50" id="Aa9-os-Gw7"/>
                                     <constraint firstAttribute="width" constant="50" id="Zle-hc-9gf"/>
                                 </constraints>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="minus.magnifyingglass" catalog="system"/>
                                 <connections>
                                     <action selector="handleDecreasePegSizeButtonTap:" destination="BV1-FR-VrT" eventType="touchUpInside" id="AOe-JZ-voJ"/>
@@ -126,7 +126,7 @@
                                     <constraint firstAttribute="height" constant="50" id="A2d-F5-WNm"/>
                                     <constraint firstAttribute="width" constant="50" id="uS0-ts-CEn"/>
                                 </constraints>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="plus.magnifyingglass" catalog="system"/>
                                 <connections>
                                     <action selector="handleIncreasePegSizeButtonTap:" destination="BV1-FR-VrT" eventType="touchUpInside" id="h4z-OO-Ifc"/>

@@ -138,18 +138,22 @@ class PegBoard: NSObject, NSCoding {
         let newPeg = Peg(x: newPosition.x, y: newPosition.y, color: oldPeg.color, radius:
             oldPeg.radius)
 
+        // Moved peg must be within the 4 borders
         guard isPegWithinBorder(peg: newPeg) else {
             return false
         }
 
+        // Moved peg must not overlap with any other pegs
         for peg in pegs where peg != oldPeg {
             if !arePegsWithinValidDistance(peg1: newPeg, peg2: peg) {
                 return false
             }
         }
 
-        return self.addPeg(position: newPosition, color: oldPeg.color)
-            && self.removePeg(targetPeg: oldPeg)
+        oldPeg.x = newPosition.x
+        oldPeg.y = newPosition.y
+
+        return true
     }
 
     func resetPegBoard() -> Bool {
@@ -158,10 +162,62 @@ class PegBoard: NSObject, NSCoding {
     }
 
     func increasePegSize(position: CGPoint) -> Bool {
+        guard let oldPeg = getPeg(point: position) else {
+            return false
+        }
+
+        // Maximum peg radius is 2 times the default peg radius
+        guard oldPeg.radius * NumberConstants.increaseSizeRatio <=
+            calculateDefaultPegRadius() * NumberConstants.maximumSizeRatio else {
+            return false
+        }
+
+        let newPeg = Peg(x: oldPeg.x, y: oldPeg.y, color: oldPeg.color, radius:
+            oldPeg.radius * NumberConstants.increaseSizeRatio)
+
+        // Resized peg must be within the 4 borders
+        guard isPegWithinBorder(peg: newPeg) else {
+            return false
+        }
+
+        // Resized peg must not overlap with any other pegs
+        for peg in pegs where !arePegsWithinValidDistance(peg1: newPeg,
+            peg2: peg) && (peg.x != oldPeg.x || peg.y != oldPeg.y) {
+            return false
+        }
+
+        oldPeg.radius = oldPeg.radius * NumberConstants.increaseSizeRatio
+
         return true
     }
 
     func decreasePegSize(position: CGPoint) -> Bool {
+        guard let oldPeg = getPeg(point: position) else {
+            return false
+        }
+
+        // Minimum peg radius is 0.5 times the default peg radius
+        guard oldPeg.radius * NumberConstants.decreaseSizeRatio >=
+            calculateDefaultPegRadius() * NumberConstants.minimumSizeRatio else {
+            return false
+        }
+
+        let newPeg = Peg(x: oldPeg.x, y: oldPeg.y, color: oldPeg.color, radius:
+            oldPeg.radius * NumberConstants.decreaseSizeRatio)
+
+        // Resized peg must be within the 4 borders
+        guard isPegWithinBorder(peg: newPeg) else {
+            return false
+        }
+
+        // Resized peg must not overlap with any other pegs
+        for peg in pegs where !arePegsWithinValidDistance(peg1: newPeg,
+            peg2: peg) && (peg.x != oldPeg.x || peg.y != oldPeg.y) {
+            return false
+        }
+
+        oldPeg.radius = oldPeg.radius * NumberConstants.decreaseSizeRatio
+
         return true
     }
 
