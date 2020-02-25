@@ -16,10 +16,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSl-lC-trk">
-                                <rect key="frame" x="62" y="949" width="100" height="100"/>
+                                <rect key="frame" x="62" y="979" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="4eH-qK-tnR"/>
-                                    <constraint firstAttribute="height" constant="100" id="SB1-lp-B0Q"/>
+                                    <constraint firstAttribute="width" constant="70" id="4eH-qK-tnR"/>
+                                    <constraint firstAttribute="height" constant="70" id="SB1-lp-B0Q"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="peg-blue"/>
                                 <connections>
@@ -27,10 +27,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIl-16-BgF">
-                                <rect key="frame" x="172" y="949" width="100" height="100"/>
+                                <rect key="frame" x="142" y="979" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="HTx-X2-oZM"/>
-                                    <constraint firstAttribute="width" constant="100" id="sra-oe-3fj"/>
+                                    <constraint firstAttribute="height" constant="70" id="HTx-X2-oZM"/>
+                                    <constraint firstAttribute="width" constant="70" id="sra-oe-3fj"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="peg-orange"/>
                                 <connections>
@@ -65,7 +65,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfI-Ex-0Kx">
-                                <rect key="frame" x="683" y="1054" width="89" height="48"/>
+                                <rect key="frame" x="695" y="1054" width="89" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="START"/>
                                 <connections>
@@ -73,10 +73,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8M-4x-s3J">
-                                <rect key="frame" x="672" y="949" width="100" height="100"/>
+                                <rect key="frame" x="702" y="979" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="1dm-hi-Ox5"/>
-                                    <constraint firstAttribute="width" constant="100" id="zEl-HH-BMd"/>
+                                    <constraint firstAttribute="height" constant="70" id="1dm-hi-Ox5"/>
+                                    <constraint firstAttribute="width" constant="70" id="zEl-HH-BMd"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="delete"/>
                                 <connections>
@@ -94,8 +94,8 @@
                                     <segue destination="rTL-hi-IZ1" kind="show" id="jkl-1P-6cb"/>
                                 </connections>
                             </button>
-                            <collectionView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cXe-L5-D7O">
-                                <rect key="frame" x="0.0" y="56" width="834" height="834"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cXe-L5-D7O">
+                                <rect key="frame" x="0.0" y="60" width="834" height="834"/>
                                 <color key="backgroundColor" red="0.70894507062867973" green="0.99926858857174616" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cXe-L5-D7O" secondAttribute="height" multiplier="1:1" id="s5z-S6-5q9"/>
@@ -108,26 +108,54 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Fg-gY-dvb">
+                                <rect key="frame" x="632" y="990" width="50" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Aa9-os-Gw7"/>
+                                    <constraint firstAttribute="width" constant="50" id="Zle-hc-9gf"/>
+                                </constraints>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" backgroundImage="minus.magnifyingglass" catalog="system"/>
+                                <connections>
+                                    <action selector="handleDecreasePegSizeButtonTap:" destination="BV1-FR-VrT" eventType="touchUpInside" id="AOe-JZ-voJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aa8-PH-Zii">
+                                <rect key="frame" x="632" y="925" width="50" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="A2d-F5-WNm"/>
+                                    <constraint firstAttribute="width" constant="50" id="uS0-ts-CEn"/>
+                                </constraints>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" backgroundImage="plus.magnifyingglass" catalog="system"/>
+                                <connections>
+                                    <action selector="handleIncreasePegSizeButtonTap:" destination="BV1-FR-VrT" eventType="touchUpInside" id="h4z-OO-Ifc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="zIO-HU-T15" firstAttribute="top" secondItem="OIl-16-BgF" secondAttribute="bottom" constant="5" id="0Mb-dp-VO4"/>
                             <constraint firstItem="HQr-Gc-Gws" firstAttribute="leading" secondItem="Wub-LN-zRa" secondAttribute="leading" constant="15" id="32T-rh-DY7"/>
+                            <constraint firstItem="aa8-PH-Zii" firstAttribute="top" secondItem="cXe-L5-D7O" secondAttribute="bottom" constant="30" id="3cP-b4-Y3H"/>
                             <constraint firstItem="cXe-L5-D7O" firstAttribute="leading" secondItem="Wub-LN-zRa" secondAttribute="leading" id="6r8-Mq-QsI"/>
                             <constraint firstItem="cXe-L5-D7O" firstAttribute="trailing" secondItem="Wub-LN-zRa" secondAttribute="trailing" id="BfQ-di-io9"/>
                             <constraint firstItem="Wub-LN-zRa" firstAttribute="bottom" secondItem="zIO-HU-T15" secondAttribute="bottom" constant="10" id="CKi-zD-NQy"/>
                             <constraint firstItem="gsR-gx-ajX" firstAttribute="leading" secondItem="Wub-LN-zRa" secondAttribute="leading" constant="62" id="DGF-QC-7LX"/>
                             <constraint firstItem="Wub-LN-zRa" firstAttribute="bottom" secondItem="hfI-Ex-0Kx" secondAttribute="bottom" constant="10" id="GZw-C3-ejk"/>
+                            <constraint firstItem="a8M-4x-s3J" firstAttribute="leading" secondItem="aa8-PH-Zii" secondAttribute="trailing" constant="20" id="Ih6-8a-5gR"/>
                             <constraint firstItem="Wub-LN-zRa" firstAttribute="bottom" secondItem="gsR-gx-ajX" secondAttribute="bottom" constant="10" id="Rkl-rw-d6N"/>
                             <constraint firstItem="Wub-LN-zRa" firstAttribute="bottom" secondItem="rv4-oB-hlX" secondAttribute="bottom" constant="10" id="SQJ-ma-STx"/>
+                            <constraint firstItem="9Fg-gY-dvb" firstAttribute="top" secondItem="aa8-PH-Zii" secondAttribute="bottom" constant="15" id="WNC-PB-ELF"/>
                             <constraint firstItem="gsR-gx-ajX" firstAttribute="top" secondItem="LSl-lC-trk" secondAttribute="bottom" constant="5" id="WaI-1J-QCj"/>
                             <constraint firstItem="LSl-lC-trk" firstAttribute="leading" secondItem="Wub-LN-zRa" secondAttribute="leading" constant="62" id="XKf-sD-bir"/>
                             <constraint firstItem="cXe-L5-D7O" firstAttribute="top" secondItem="Wub-LN-zRa" secondAttribute="top" constant="60" id="ZQz-Lq-ud6"/>
+                            <constraint firstItem="a8M-4x-s3J" firstAttribute="leading" secondItem="9Fg-gY-dvb" secondAttribute="trailing" constant="20" id="awd-bM-avf"/>
                             <constraint firstItem="rv4-oB-hlX" firstAttribute="leading" secondItem="gsR-gx-ajX" secondAttribute="trailing" constant="20" id="hCZ-m0-Osj"/>
                             <constraint firstItem="HQr-Gc-Gws" firstAttribute="top" secondItem="Wub-LN-zRa" secondAttribute="top" constant="11" id="l7f-ot-eZf"/>
                             <constraint firstItem="OIl-16-BgF" firstAttribute="leading" secondItem="LSl-lC-trk" secondAttribute="trailing" constant="10" id="rhn-zv-l3D"/>
                             <constraint firstItem="Wub-LN-zRa" firstAttribute="trailing" secondItem="a8M-4x-s3J" secondAttribute="trailing" constant="62" id="sWo-1o-dc8"/>
-                            <constraint firstItem="Wub-LN-zRa" firstAttribute="trailing" secondItem="hfI-Ex-0Kx" secondAttribute="trailing" constant="62" id="yBW-I5-wXk"/>
+                            <constraint firstItem="Wub-LN-zRa" firstAttribute="trailing" secondItem="hfI-Ex-0Kx" secondAttribute="trailing" constant="50" id="yBW-I5-wXk"/>
                             <constraint firstItem="zIO-HU-T15" firstAttribute="leading" secondItem="rv4-oB-hlX" secondAttribute="trailing" constant="20" id="zqm-b9-545"/>
                             <constraint firstItem="hfI-Ex-0Kx" firstAttribute="top" secondItem="a8M-4x-s3J" secondAttribute="bottom" constant="5" id="zrr-rd-IZQ"/>
                         </constraints>
@@ -136,7 +164,9 @@
                     <navigationItem key="navigationItem" id="ElG-UI-mP9"/>
                     <connections>
                         <outlet property="bluePegButton" destination="LSl-lC-trk" id="4Yk-A7-aCz"/>
+                        <outlet property="decreasePegSizeButton" destination="9Fg-gY-dvb" id="aby-CR-t6K"/>
                         <outlet property="deletePegButton" destination="a8M-4x-s3J" id="cTz-4L-i8F"/>
+                        <outlet property="increasePegSizeButton" destination="aa8-PH-Zii" id="h4m-vy-HMK"/>
                         <outlet property="loadButton" destination="gsR-gx-ajX" id="A4T-Ub-gTN"/>
                         <outlet property="orangePegButton" destination="OIl-16-BgF" id="Uyf-Jc-g80"/>
                         <outlet property="pegBoardView" destination="cXe-L5-D7O" id="GaK-9f-N8F"/>
@@ -519,11 +549,13 @@
         <image name="cannon-ball" width="256" height="256"/>
         <image name="delete" width="256" height="256"/>
         <image name="house" catalog="system" width="64" height="54"/>
+        <image name="minus.magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="peg-blue" width="128" height="128"/>
         <image name="peg-orange" width="128" height="128"/>
+        <image name="plus.magnifyingglass" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mJC-NA-Fp4"/>
+        <segue reference="jkl-1P-6cb"/>
         <segue reference="IKN-XM-qz2"/>
     </inferredMetricsTieBreakers>
 </document>

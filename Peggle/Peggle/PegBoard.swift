@@ -45,7 +45,7 @@ class PegBoard: NSObject, NSCoding {
         self.pegs = []
     }
 
-    private func calculatePegRadius() -> CGFloat {
+    private func calculateDefaultPegRadius() -> CGFloat {
         if boardWidth < boardHeight {
             return (boardWidth / 2) / CGFloat(numCols)
         } else {
@@ -53,28 +53,26 @@ class PegBoard: NSObject, NSCoding {
         }
     }
 
-    // Checks if a point is more than a radius distance from all 4 borders
+    // Checks if a peg is more than a radius distance from all 4 borders
     // of the board
-    private func isPegWithinBorder(pegPosition: CGPoint) -> Bool {
-        let pegRadius = calculatePegRadius()
-        return pegPosition.x >= pegRadius
-            && pegPosition.x < boardWidth - pegRadius
-            && pegPosition.y >= pegRadius
-            && pegPosition.y < boardHeight - pegRadius
+    private func isPegWithinBorder(peg: Peg) -> Bool {
+        return peg.x >= peg.radius
+            && peg.x < boardWidth - peg.radius
+            && peg.y >= peg.radius
+            && peg.y < boardHeight - peg.radius
     }
 
-    // Checks if 2 points are more than a diameter distance apart
-    private func arePegsWithinValidDistance(peg1Position: CGPoint,
-        peg2Position: CGPoint) -> Bool {
-        return sqrt(pow(peg1Position.x - peg2Position.x, 2.0)
-            + pow(peg1Position.y - peg2Position.y, 2.0)) > calculatePegRadius() * 2
+    // Checks if 2 pegs are more than a diameter distance apart
+    private func arePegsWithinValidDistance(peg1: Peg,
+        peg2: Peg) -> Bool {
+        return sqrt(pow(peg1.x - peg2.x, 2.0)
+            + pow(peg1.y - peg2.y, 2.0)) > peg1.radius + peg2.radius
     }
 
     // Checks if a point is within a radius distance from a peg
-    private func isPointWithinPeg(point: CGPoint, pegPosition: CGPoint) -> Bool {
-        let pegRadius = calculatePegRadius()
-        return sqrt(pow(point.x - pegPosition.x, 2.0)
-            + pow(point.y - pegPosition.y, 2.0)) <= pegRadius
+    private func isPointWithinPeg(point: CGPoint, peg: Peg) -> Bool {
+        return sqrt(pow(point.x - peg.x, 2.0)
+            + pow(point.y - peg.y, 2.0)) <= peg.radius
     }
 
     func getPegPosition(targetPeg: Peg) -> CGPoint {
@@ -82,9 +80,7 @@ class PegBoard: NSObject, NSCoding {
     }
 
     func getPeg(point: CGPoint) -> Peg? {
-        for peg in pegs where isPointWithinPeg(point: point, pegPosition:
-            getPegPosition(targetPeg: peg)) {
-
+        for peg in pegs where isPointWithinPeg(point: point, peg: peg) {
             return peg
         }
 
@@ -95,17 +91,18 @@ class PegBoard: NSObject, NSCoding {
     // of the board and more than a diameter distance from all the current pegs
     // in the board
     func addPeg(position: CGPoint, color: PegColor) -> Bool {
-        guard isPegWithinBorder(pegPosition: position) else {
-            return false
-        }
-
-        for peg in pegs where !arePegsWithinValidDistance(peg1Position: position,
-            peg2Position: getPegPosition(targetPeg: peg)) {
-            return false
-        }
-
         let newPeg = Peg(x: position.x, y: position.y, color: color, radius:
-            calculatePegRadius())
+            calculateDefaultPegRadius())
+
+        guard isPegWithinBorder(peg: newPeg) else {
+            return false
+        }
+
+        for peg in pegs where !arePegsWithinValidDistance(peg1: newPeg,
+            peg2: peg) {
+            return false
+        }
+
         pegs.append(newPeg)
 
         return true
@@ -122,7 +119,7 @@ class PegBoard: NSObject, NSCoding {
     }
 
     private func removePeg(targetPeg: Peg) -> Bool {
-        for i in 0..<pegs.count where pegs[i] == targetPeg {
+        for i in 0..<pegs.count where pegs[i].x == targetPeg.x && pegs[i].y == targetPeg.y {
             pegs.remove(at: i)
             return true
         }
@@ -138,13 +135,15 @@ class PegBoard: NSObject, NSCoding {
             return false
         }
 
-        guard isPegWithinBorder(pegPosition: newPosition) else {
+        let newPeg = Peg(x: newPosition.x, y: newPosition.y, color: oldPeg.color, radius:
+            oldPeg.radius)
+
+        guard isPegWithinBorder(peg: newPeg) else {
             return false
         }
 
         for peg in pegs where peg != oldPeg {
-            if !arePegsWithinValidDistance(peg1Position: newPosition,
-                peg2Position: getPegPosition(targetPeg: peg)) {
+            if !arePegsWithinValidDistance(peg1: newPeg, peg2: peg) {
                 return false
             }
         }
@@ -155,6 +154,14 @@ class PegBoard: NSObject, NSCoding {
 
     func resetPegBoard() -> Bool {
         pegs = []
+        return true
+    }
+
+    func increasePegSize(position: CGPoint) -> Bool {
+        return true
+    }
+
+    func decreasePegSize(position: CGPoint) -> Bool {
         return true
     }
 

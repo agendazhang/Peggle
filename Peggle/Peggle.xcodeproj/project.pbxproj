@@ -32,6 +32,9 @@
 		37B7CB3023FEF17000A221F2 /* NotificationNameExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB2F23FEF17000A221F2 /* NotificationNameExtensions.swift */; };
 		37B7CB3223FFDFA500A221F2 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3123FFDFA500A221F2 /* Bucket.swift */; };
 		37B7CB3423FFE04300A221F2 /* BucketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3323FFE04300A221F2 /* BucketView.swift */; };
+		37B7CB38240187E800A221F2 /* CirclePeg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB37240187E800A221F2 /* CirclePeg.swift */; };
+		37B7CB3A240187FC00A221F2 /* TrianglePeg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB39240187FC00A221F2 /* TrianglePeg.swift */; };
+		37B7CB3C24018A3C00A221F2 /* PhysicsTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3B24018A3C00A221F2 /* PhysicsTriangle.swift */; };
 		37E5442C23D949C600C0FBF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5442B23D949C600C0FBF2 /* AppDelegate.swift */; };
 		37E5442E23D949C600C0FBF2 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E5442D23D949C600C0FBF2 /* art.scnassets */; };
 		37E5443323D949C600C0FBF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E5443123D949C600C0FBF2 /* Main.storyboard */; };
@@ -92,6 +95,9 @@
 		37B7CB2F23FEF17000A221F2 /* NotificationNameExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtensions.swift; sourceTree = "<group>"; };
 		37B7CB3123FFDFA500A221F2 /* Bucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
 		37B7CB3323FFE04300A221F2 /* BucketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketView.swift; sourceTree = "<group>"; };
+		37B7CB37240187E800A221F2 /* CirclePeg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePeg.swift; sourceTree = "<group>"; };
+		37B7CB39240187FC00A221F2 /* TrianglePeg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrianglePeg.swift; sourceTree = "<group>"; };
+		37B7CB3B24018A3C00A221F2 /* PhysicsTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsTriangle.swift; sourceTree = "<group>"; };
 		37E5442823D949C600C0FBF2 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E5442B23D949C600C0FBF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37E5442D23D949C600C0FBF2 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -159,6 +165,9 @@
 			isa = PBXGroup;
 			children = (
 				37E5445D23DAA16400C0FBF2 /* Peg.swift */,
+				37B7CB39240187FC00A221F2 /* TrianglePeg.swift */,
+				37B7CB37240187E800A221F2 /* CirclePeg.swift */,
+				37B7CB3B24018A3C00A221F2 /* PhysicsTriangle.swift */,
 				37E5446623DAFE1800C0FBF2 /* PegBoard.swift */,
 				373E52CE23EDB83C00CAA12B /* PhysicsObject.swift */,
 				373E52DA23EE617A00CAA12B /* Wall.swift */,
@@ -421,13 +430,16 @@
 				37E5446723DAFE1800C0FBF2 /* PegBoard.swift in Sources */,
 				37B7CB3423FFE04300A221F2 /* BucketView.swift in Sources */,
 				373E52E323EEE43400CAA12B /* PeggleGameViewController.swift in Sources */,
+				37B7CB3C24018A3C00A221F2 /* PhysicsTriangle.swift in Sources */,
 				373E52E723EEEA1700CAA12B /* PeggleGameEngine.swift in Sources */,
 				37A14F0F23E3396B00E764FD /* LevelSelectorViewCell.swift in Sources */,
 				37E5446923DB098800C0FBF2 /* PegBoardLevel.swift in Sources */,
 				373E52EB23EFB57200CAA12B /* CannonBallView.swift in Sources */,
 				373E52E923EEEA7000CAA12B /* PeggleGameRenderer.swift in Sources */,
 				37E5446323DAF84F00C0FBF2 /* PegColor.swift in Sources */,
+				37B7CB3A240187FC00A221F2 /* TrianglePeg.swift in Sources */,
 				37B7CB2E23FEBD1400A221F2 /* PeggleGameCondition.swift in Sources */,
+				37B7CB38240187E800A221F2 /* CirclePeg.swift in Sources */,
 				37F51CA223DEE71E00ACEDF6 /* LevelDesignerSaveLevelViewController.swift in Sources */,
 				373E52D523EDBE7D00CAA12B /* PhysicsCircle.swift in Sources */,
 				373E52DF23EEBD5800CAA12B /* PhysicsCollisionHandler.swift in Sources */,

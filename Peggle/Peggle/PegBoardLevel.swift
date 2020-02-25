@@ -63,6 +63,14 @@ class PegBoardLevel: NSObject {
         return pegBoard.resetPegBoard()
     }
 
+    func increasePegSize(position: CGPoint) -> Bool {
+        return pegBoard.increasePegSize(position: position)
+    }
+
+    func decreasePegSize(position: CGPoint) -> Bool {
+        return pegBoard.decreasePegSize(position: position)
+    }
+
     func printPegBoard() -> String {
         return "\(self.pegBoard)"
     }
