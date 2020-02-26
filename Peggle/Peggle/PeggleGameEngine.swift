@@ -239,9 +239,80 @@ class PeggleGameEngine {
         pegGlowView.pegColor = peg.color
 
         self.gameRenderer.changeImage(physicsObject: peg, image: pegGlowView)
+
+        if peg.color == .green {
+            self.activatePowerUps(peg: peg)
+        }
+    }
+
+    private func activatePowerUps(peg: Peg) {
+        // If number of orange pegs remaining >= 10, then the powerup will be "Space Blast",
+        // else it will be "Spooky Ball"
+        if self.gameCondition.getNumOrangePegsRemaining() >=
+            NumberConstants.minimumOrangePegsRemainingToActivateSpaceBlast {
+            self.activateSpaceBlast(peg: peg)
+        } else {
+            self.activateSpookyBall(peg: peg)
+        }
+    }
+
+    // Pegs close to the original green peg get cleared
+    private func activateSpaceBlast(peg: Peg) {
+        for physicsObject in self.physicsObjects {
+            guard let eachPeg = physicsObject as? Peg else {
+                continue
+            }
+
+            let distanceBetweenCentres = sqrt((eachPeg.x - peg.x) * (eachPeg.x - peg.x) +
+                (eachPeg.y - peg.y) * (eachPeg.y - peg.y))
+            let distanceBetweenPegs = distanceBetweenCentres - (eachPeg.radius +
+                peg.radius)
+
+            // If the peg is close to the green peg that was hit, it would be cleared
+            if distanceBetweenPegs <=
+                NumberConstants.maximumDistanceToActivateSpaceBlast {
+                cannonBallHitsPeg(peg: eachPeg)
+            }
+        }
+    }
+
+    var isSpookyBallActivated = false
+
+    // When the ball goes below the gameplay area, it reappears at the top of the gameplay
+    // area at the same x-axis position
+    private func activateSpookyBall(peg: Peg) {
+        isSpookyBallActivated = true
+    }
+
+    private func fireSpookyBall(xPosition: CGFloat) {
+        // x position is the same as the x position where the previous cannon ball
+        // disappeared
+        let cannonBallStartingX = xPosition
+        let cannonBallStartingY = NumberConstants.cannonHeight / 2
+        let cannonBallRadius = gameBoardView.frame.width /
+            CGFloat(NumberConstants.numPegRows) / 2
+        
+        // Get a random angle for the cannon ball to be fired downwards
+        let cannonAngle = CGFloat(Double.random(in: -Double.pi / 2 ..< Double.pi / 2))
+        let cannonBallVelocity = self.calculateCannonBallStartingVelocity(cannonAngle:
+            cannonAngle)
+
+        let cannonBall = CannonBall(x: cannonBallStartingX, y: cannonBallStartingY, radius:
+            cannonBallRadius, velocity: cannonBallVelocity)
+
+        let cannonBallView = CannonBallView(frame: CGRect(x: cannonBallStartingX -
+            cannonBallRadius, y: cannonBallStartingY - cannonBallRadius, width:
+            cannonBallRadius * 2, height: cannonBallRadius * 2))
+
+        self.addPhysicsObject(physicsObject: cannonBall, image: cannonBallView)
     }
 
     func cannonBallHitsBottomWall(cannonBall: CannonBall) {
+        if isSpookyBallActivated {
+            isSpookyBallActivated = false
+            fireSpookyBall(xPosition: cannonBall.x)
+        }
+
         self.endCurrentTurn(cannonBall: cannonBall)
     }
 
@@ -258,6 +329,11 @@ class PeggleGameEngine {
 
         NotificationCenter.default.post(name: .freeBallNotification, object:
             nil)
+
+        if isSpookyBallActivated {
+            isSpookyBallActivated = false
+            fireSpookyBall(xPosition: cannonBall.x)
+        }
 
         self.endCurrentTurn(cannonBall: cannonBall)
     }

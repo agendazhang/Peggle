@@ -27,6 +27,8 @@ class NumberConstants {
     static let bucketHeight: CGFloat = 30
     static let bucketWidth: CGFloat = 100
     static let bucketStartingVelocity: CGVector = CGVector(dx: 2, dy: 0)
+    static let minimumOrangePegsRemainingToActivateSpaceBlast: Int = 10
+    static let maximumDistanceToActivateSpaceBlast: CGFloat = 50
 
     // PhysicsEngine
     static let gravityForce: CGFloat = 0.2
