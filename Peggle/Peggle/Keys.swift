@@ -8,11 +8,15 @@
 
 enum Keys: String {
 
-    // Peg
+    // CirclePeg
     case xKey
     case yKey
     case colorKey
     case radiusKey
+
+    // TrianglePeg
+    case centerToVerticeDistKey
+    case angleKey
 
     // PegBoard
     case boardWidthKey

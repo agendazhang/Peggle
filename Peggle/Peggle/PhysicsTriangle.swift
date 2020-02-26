@@ -17,4 +17,6 @@ protocol PhysicsTriangle: PhysicsObject {
     var centerToVerticeDist: CGFloat { get set }
     // This property represents the angle of its rotation
     var angle: CGFloat { get set }
+
+    func getVerticesCoordinates() -> [CGPoint]
 }
