@@ -20,6 +20,7 @@ class StringConstants {
     static let cancel = "Cancel"
     static let notAlphanumericLevelNameAlert = "Level name cannot be empty and must be alphanumeric. No spaces in between letters."
     static let levelNameExistsAlert = "Level name already exists. Override existing level?"
+    static let levelNameIsPreloadedLevelAlert = "Level name belongs to preloaded level. Choose another name"
     static let levelNameSavedAlert = "Level is successfully saved"
     static let levelNameSaveFailedAlert = "Level failed to save"
     static let documentFolderDoesNotExist = "Document folder does not exist"
@@ -44,4 +45,9 @@ class StringConstants {
 
     // BucketView
     static let bucketImagePath = "bucket"
+
+    // LoadLevel
+    static let preloaded1 = "Preloaded1"
+    static let preloaded2 = "Preloaded2"
+    static let preloaded3 = "Preloaded3"
 }

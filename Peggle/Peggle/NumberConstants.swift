@@ -13,8 +13,8 @@ class NumberConstants {
     // PegBoard
     static let numPegRows = 20
     static let numPegCols = 20
-    static let defaultBoardWidth: CGFloat = 1024
-    static let defaultBoardHeight: CGFloat = 1024
+    static let defaultBoardWidth: CGFloat = 834
+    static let defaultBoardHeight: CGFloat = 834
     static let increaseSizeRatio: CGFloat = 1.1
     static let decreaseSizeRatio: CGFloat = 0.9
     static let maximumSizeRatio: CGFloat = 2.0

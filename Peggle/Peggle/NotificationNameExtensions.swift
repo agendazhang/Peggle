@@ -22,6 +22,8 @@ extension Notification.Name {
     static let notAlphanumericLevelNameNotification =
         Notification.Name("notAlphanumericLevelNameNotification")
     static let levelNameExistsNotification = Notification.Name("levelNameExistsNotification")
+    static let levelNameIsPreloadedLevelNotification =
+        Notification.Name("levelNameIsPreloadedLevelNotification")
     static let levelSavedNotification = Notification.Name("levelSavedNotification")
     static let levelSaveFailedNotification = Notification.Name("levelSaveFailedNotification")
 

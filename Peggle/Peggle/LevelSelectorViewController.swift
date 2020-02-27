@@ -14,7 +14,8 @@ class LevelSelectorViewController: UIViewController {
     var savedLevels: [PegBoardLevel] = []
     var currentLevelSelected = PegBoardLevel()
     var isCurrentLevelSelected = false
-    private var levelLoader = LevelLoader()
+    private var levelLoader = LevelLoader(boardWidth: UIScreen.main.bounds.width,
+        boardHeight: UIScreen.main.bounds.width)
 
     // View variables
     @IBOutlet private var displayedLevelNamesTableView: UITableView!

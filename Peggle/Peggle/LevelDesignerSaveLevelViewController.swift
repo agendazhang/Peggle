@@ -30,6 +30,11 @@ class LevelDesignerSaveLevelViewController: UIViewController {
             #selector(alertLevelNameExists(_:)), name:
             .levelNameExistsNotification, object: nil)
 
+        // To get notification that level name belongs to preloaded level
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(alertLevelNameIsPreloadedLevel(_:)), name:
+            .levelNameIsPreloadedLevelNotification, object: nil)
+
         // To get notification that level is successfully saved
         NotificationCenter.default.addObserver(self, selector:
             #selector(alertLevelSaved(_:)), name: .levelSavedNotification, object: nil)
@@ -99,6 +104,18 @@ class LevelDesignerSaveLevelViewController: UIViewController {
 
             present(levelNameExistsAlert, animated: true)
         }
+    }
+
+    @objc private func alertLevelNameIsPreloadedLevel(_ notification: Notification) {
+        let levelNameIsPreloadedLevelAlert = UIAlertController(title: StringConstants.error, message:
+            StringConstants.levelNameIsPreloadedLevelAlert,
+            preferredStyle: .alert)
+
+        levelNameIsPreloadedLevelAlert
+            .addAction(UIAlertAction(title: StringConstants.ok,
+            style: .cancel))
+
+        present(levelNameIsPreloadedLevelAlert, animated: true)
     }
 
     private func saveLevel(levelName: String) {

@@ -26,6 +26,13 @@ class LevelSaver {
             return
         }
 
+        // level name cannot be the same as that of a preloaded level
+        guard !self.loadPreloadedLevelNames().contains(levelName) else {
+            NotificationCenter.default.post(name: .levelNameIsPreloadedLevelNotification,
+                object: nil)
+            return
+        }
+
         self.saveLevel(levelName: levelName, pegBoard: pegBoard)
     }
 
@@ -41,6 +48,14 @@ class LevelSaver {
             print(StringConstants.documentFolderDoesNotExist)
             return false
         }
+    }
+
+    private func loadPreloadedLevelNames() -> [String] {
+        let preloaded1 = StringConstants.preloaded1
+        let preloaded2 = StringConstants.preloaded2
+        let preloaded3 = StringConstants.preloaded3
+
+        return [preloaded1, preloaded2, preloaded3]
     }
 
     func saveLevel(levelName: String, pegBoard: PegBoard) {
