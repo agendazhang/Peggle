@@ -13,11 +13,31 @@ class LevelDesignerSaveLevelViewController: UIViewController {
     var pegBoardLevel = PegBoardLevel()
     weak var delegate: LevelDesignerViewController?
     @IBOutlet private var levelNameTextField: UITextField!
+    private var levelSaver: LevelSaver = LevelSaver()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setSavedLevelName()
+
+        // To get notification that level name is not alphanumeric
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(alertNotAlphanumericLevelName(_:)), name:
+            .notAlphanumericLevelNameNotification, object: nil)
+
+        // To get notification that level name already exists
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(alertLevelNameExists(_:)), name:
+            .levelNameExistsNotification, object: nil)
+
+        // To get notification that level is successfully saved
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(alertLevelSaved(_:)), name: .levelSavedNotification, object: nil)
+
+        // To get notification that level failed to save
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(alertLevelSaveFailed(_:)), name:
+            .levelSaveFailedNotification, object: nil)
     }
 
     private func setSavedLevelName() {
@@ -42,23 +62,11 @@ class LevelDesignerSaveLevelViewController: UIViewController {
 
         levelName = levelName.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        // Level name cannot be empty and must be alphanumeric. Spaces in
-        // between letters are not allowed. Leading and trailing whitespaces
-        // will be trimmed.
-        if !levelName.isAlphanumeric() {
-            self.alertNotAlphanumericLevelName()
-            return
-        }
-
-        if self.levelNameExists(levelName: levelName) {
-            self.alertLevelNameExists(levelName: levelName)
-            return
-        }
-
-        self.saveLevel(levelName: levelName)
+        self.levelSaver.checkSaveLevel(levelName: levelName, pegBoard:
+            pegBoardLevel.pegBoard)
     }
 
-    private func alertNotAlphanumericLevelName() {
+    @objc private func alertNotAlphanumericLevelName(_ notification: Notification) {
         let notAlphanumericLevelNameAlert = UIAlertController(title: StringConstants.error, message:
             StringConstants.notAlphanumericLevelNameAlert,
             preferredStyle: .alert)
@@ -70,59 +78,34 @@ class LevelDesignerSaveLevelViewController: UIViewController {
         present(notAlphanumericLevelNameAlert, animated: true)
     }
 
-    private func levelNameExists(levelName: String) -> Bool {
-        let fileManager = FileManager.default
-        do {
-            let contents = try fileManager
-                .contentsOfDirectory(atPath: FileUtility.getDocumentsDirectory())
-            return contents
-                .contains(levelName + StringConstants.plistFileExtension)
-        } catch {
-            print(StringConstants.documentFolderDoesNotExist)
-            return false
-        }
-    }
-
     // Asks the user if he wants to override an existing level with same name
-    private func alertLevelNameExists(levelName: String) {
-        let levelNameExistsAlert = UIAlertController(title: StringConstants.error, message:
-            StringConstants.levelNameExistsAlert,
-            preferredStyle: .alert)
+    @objc private func alertLevelNameExists(_ notification: Notification) {
 
-        levelNameExistsAlert
-            .addAction(UIAlertAction(title: StringConstants.cancel,
-            style: .cancel))
-        levelNameExistsAlert
-            .addAction(UIAlertAction(title: StringConstants.ok,
-            style: .default) {
-                [weak self] (_) -> Void in self?
-                .saveLevel(levelName: levelName)
-        })
+        if let dict = notification.userInfo as? [String: String] {
+            guard let levelName = dict[Keys.levelNameKey.rawValue] else {
+                return
+            }
+            let levelNameExistsAlert = UIAlertController(title: StringConstants.error, message: StringConstants.levelNameExistsAlert, preferredStyle: .alert)
 
-        present(levelNameExistsAlert, animated: true)
+            levelNameExistsAlert
+                .addAction(UIAlertAction(title: StringConstants.cancel,
+                style: .cancel))
+            levelNameExistsAlert
+                .addAction(UIAlertAction(title: StringConstants.ok,
+                style: .default) {
+                    [weak self] (_) -> Void in self?
+                        .saveLevel(levelName: levelName)
+            })
+
+            present(levelNameExistsAlert, animated: true)
+        }
     }
 
     private func saveLevel(levelName: String) {
-        do {
-            let data = try NSKeyedArchiver
-                .archivedData(withRootObject:
-                pegBoardLevel.pegBoard, requiringSecureCoding: false)
-
-            // Encode data to a file in the local Documents directory
-            try data.write(to: URL(fileURLWithPath:
-                FileUtility.fileURLInDocumentsDirectory(fileName:
-                levelName, fileExtension: StringConstants
-                .plistFileExtension)))
-
-            pegBoardLevel.levelName = levelName
-            self.alertLevelSaved()
-        } catch {
-            self.alertLevelSaveFailed()
-            return
-        }
+        self.levelSaver.saveLevel(levelName: levelName, pegBoard: pegBoardLevel.pegBoard)
     }
 
-    private func alertLevelSaved() {
+    @objc private func alertLevelSaved(_ notification: Notification) {
         let levelSavedAlert = UIAlertController(title: StringConstants.success,
             message: StringConstants.levelNameSavedAlert,
             preferredStyle: .alert)
@@ -134,7 +117,7 @@ class LevelDesignerSaveLevelViewController: UIViewController {
         present(levelSavedAlert, animated: true)
     }
 
-    private func alertLevelSaveFailed() {
+    @objc private func alertLevelSaveFailed(_ notification: Notification) {
         let levelSavedAlert = UIAlertController(title: StringConstants.error,
             message: StringConstants.levelNameSaveFailedAlert,
             preferredStyle: .alert)

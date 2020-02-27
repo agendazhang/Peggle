@@ -9,6 +9,7 @@
 import Foundation
 
 extension Notification.Name {
+    // PeggleGameViewController
     static let winGameNotification = Notification.Name("winGameNotification")
     static let loseGameNotification = Notification.Name("loseGameNotification")
     static let numOrangePegsRemainingNotification =
@@ -16,4 +17,14 @@ extension Notification.Name {
     static let numCannonBallsRemainingNotification =
         Notification.Name("numCannonBallsRemainingNotification")
     static let freeBallNotification = Notification.Name("freeBallNotification")
+
+    // LevelDesignerSaveLevelViewController
+    static let notAlphanumericLevelNameNotification =
+        Notification.Name("notAlphanumericLevelNameNotification")
+    static let levelNameExistsNotification = Notification.Name("levelNameExistsNotification")
+    static let levelSavedNotification = Notification.Name("levelSavedNotification")
+    static let levelSaveFailedNotification = Notification.Name("levelSaveFailedNotification")
+
+    // LevelSelectorViewController
+    static let levelLoadedNotification = Notification.Name("levelLoadedNotification")
 }

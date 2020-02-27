@@ -35,6 +35,8 @@
 		37B7CB38240187E800A221F2 /* CirclePeg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB37240187E800A221F2 /* CirclePeg.swift */; };
 		37B7CB3A240187FC00A221F2 /* TrianglePeg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB39240187FC00A221F2 /* TrianglePeg.swift */; };
 		37B7CB3C24018A3C00A221F2 /* PhysicsTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3B24018A3C00A221F2 /* PhysicsTriangle.swift */; };
+		37B7CB3E240772E600A221F2 /* LevelSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3D240772E600A221F2 /* LevelSaver.swift */; };
+		37B7CB40240782DF00A221F2 /* LevelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3F240782DF00A221F2 /* LevelLoader.swift */; };
 		37E5442C23D949C600C0FBF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5442B23D949C600C0FBF2 /* AppDelegate.swift */; };
 		37E5442E23D949C600C0FBF2 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E5442D23D949C600C0FBF2 /* art.scnassets */; };
 		37E5443323D949C600C0FBF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E5443123D949C600C0FBF2 /* Main.storyboard */; };
@@ -98,6 +100,8 @@
 		37B7CB37240187E800A221F2 /* CirclePeg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePeg.swift; sourceTree = "<group>"; };
 		37B7CB39240187FC00A221F2 /* TrianglePeg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrianglePeg.swift; sourceTree = "<group>"; };
 		37B7CB3B24018A3C00A221F2 /* PhysicsTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsTriangle.swift; sourceTree = "<group>"; };
+		37B7CB3D240772E600A221F2 /* LevelSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSaver.swift; sourceTree = "<group>"; };
+		37B7CB3F240782DF00A221F2 /* LevelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLoader.swift; sourceTree = "<group>"; };
 		37E5442823D949C600C0FBF2 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E5442B23D949C600C0FBF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37E5442D23D949C600C0FBF2 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 				373E52D623EDC01400CAA12B /* PhysicsRectangle.swift */,
 				373E52D423EDBE7D00CAA12B /* PhysicsCircle.swift */,
 				373E52E623EEEA1700CAA12B /* PeggleGameEngine.swift */,
+				37B7CB3D240772E600A221F2 /* LevelSaver.swift */,
+				37B7CB3F240782DF00A221F2 /* LevelLoader.swift */,
 				37B7CB2D23FEBD1400A221F2 /* PeggleGameCondition.swift */,
 				373E52D023EDBB4000CAA12B /* PhysicsEngine.swift */,
 				373E52DE23EEBD5800CAA12B /* PhysicsCollisionHandler.swift */,
@@ -440,10 +446,12 @@
 				37B7CB3A240187FC00A221F2 /* TrianglePeg.swift in Sources */,
 				37B7CB2E23FEBD1400A221F2 /* PeggleGameCondition.swift in Sources */,
 				37B7CB38240187E800A221F2 /* CirclePeg.swift in Sources */,
+				37B7CB40240782DF00A221F2 /* LevelLoader.swift in Sources */,
 				37F51CA223DEE71E00ACEDF6 /* LevelDesignerSaveLevelViewController.swift in Sources */,
 				373E52D523EDBE7D00CAA12B /* PhysicsCircle.swift in Sources */,
 				373E52DF23EEBD5800CAA12B /* PhysicsCollisionHandler.swift in Sources */,
 				3725CEE923DC8C97008824B9 /* LevelDesignerViewController.swift in Sources */,
+				37B7CB3E240772E600A221F2 /* LevelSaver.swift in Sources */,
 				37A14F1123E33B8400E764FD /* FileUtility.swift in Sources */,
 				373E52CF23EDB83C00CAA12B /* PhysicsObject.swift in Sources */,
 				37B7CB3223FFDFA500A221F2 /* Bucket.swift in Sources */,

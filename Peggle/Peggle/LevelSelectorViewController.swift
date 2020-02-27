@@ -14,6 +14,7 @@ class LevelSelectorViewController: UIViewController {
     var savedLevels: [PegBoardLevel] = []
     var currentLevelSelected = PegBoardLevel()
     var isCurrentLevelSelected = false
+    private var levelLoader = LevelLoader()
 
     // View variables
     @IBOutlet private var displayedLevelNamesTableView: UITableView!
@@ -25,38 +26,22 @@ class LevelSelectorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.loadSavedLevels()
+        // To get notification that a level is loaded from file
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(loadLevel(_:)), name: .levelLoadedNotification, object: nil)
+
+        self.levelLoader.loadLevels()
 
         self.displayedLevelNamesTableView.dataSource = self
         self.displayedLevelNamesTableView.delegate = self
     }
 
-    private func loadSavedLevels() {
-        let fileManager = FileManager.default
-        do {
-            // Get all the files of the saved levels from the local directory
-            let contents = try fileManager
-                .contentsOfDirectory(atPath: FileUtility.getDocumentsDirectory())
-
-            for file in contents {
-                let fileURL = FileUtility.getDocumentsDirectory() + "/" + file
-                guard let data = try? Data(contentsOf: URL(fileURLWithPath: fileURL))
-                    else {
-                    continue
-                }
-
-                // Decode the data from the file
-                if let pegBoard = try NSKeyedUnarchiver
-                    .unarchiveTopLevelObjectWithData(data) as? PegBoard {
-                    let levelName = file.trimmingCharacters(
-                        in: CharacterSet(charactersIn: StringConstants.plistFileExtension))
-                    let savedLevel = PegBoardLevel(pegBoard: pegBoard, levelName: levelName)
-                    savedLevels.append(savedLevel)
-                }
+    @objc private func loadLevel(_ notification: Notification) {
+        if let dict = notification.userInfo as? [String: PegBoardLevel] {
+            guard let pegBoardLevel = dict[Keys.pegBoardLevelKey.rawValue] else {
+                return
             }
-        } catch {
-            print(StringConstants.errorLoadingSavedLevels)
-            return
+            savedLevels.append(pegBoardLevel)
         }
     }
 

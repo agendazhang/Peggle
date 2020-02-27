@@ -291,7 +291,7 @@ class PeggleGameEngine {
         let cannonBallStartingY = NumberConstants.cannonHeight / 2
         let cannonBallRadius = gameBoardView.frame.width /
             CGFloat(NumberConstants.numPegRows) / 2
-        
+
         // Get a random angle for the cannon ball to be fired downwards
         let cannonAngle = CGFloat(Double.random(in: -Double.pi / 2 ..< Double.pi / 2))
         let cannonBallVelocity = self.calculateCannonBallStartingVelocity(cannonAngle:
