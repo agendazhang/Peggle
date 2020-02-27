@@ -30,6 +30,10 @@ class LevelDesignerViewController: UIViewController {
     @IBOutlet private var resetButton: UIButton!
     @IBOutlet private var startButton: UIButton!
 
+    @IBOutlet private var numBluePegsLabel: UILabel!
+    @IBOutlet private var numOrangePegsLabel: UILabel!
+    @IBOutlet private var numGreenPegsLabel: UILabel!
+
     // Controller variables
     enum PegButton: String {
         case blue
@@ -72,6 +76,8 @@ class LevelDesignerViewController: UIViewController {
 
         // Blue peg button is selected by default at first
         self.loadPegButtons()
+
+        self.displayNumOfPegs()
     }
 
     private func loadPegBoard() {
@@ -147,6 +153,8 @@ class LevelDesignerViewController: UIViewController {
 
             self.loadPegBoard()
         }
+
+        self.displayNumOfPegs()
     }
 
     private func setUpHandlePegBoardPan(pegBoardPanGestureRecognizer: UIPanGestureRecognizer) {
@@ -182,6 +190,8 @@ class LevelDesignerViewController: UIViewController {
         default:
             return
         }
+
+        self.displayNumOfPegs()
     }
 
     private func setUpHandlePegBoardLongPress(
@@ -198,6 +208,8 @@ class LevelDesignerViewController: UIViewController {
         }
 
         self.loadPegBoard()
+
+        self.displayNumOfPegs()
     }
 
     @IBAction private func handleBluePegButtonTap(_ sender: UIButton) {
@@ -292,6 +304,20 @@ class LevelDesignerViewController: UIViewController {
         }
 
         self.loadPegBoard()
+
+        self.displayNumOfPegs()
+    }
+
+    private func displayNumOfPegs() {
+        guard let numBluePegs = pegBoardLevel.getNumPegs()[.blue],
+            let numOrangePegs = pegBoardLevel.getNumPegs()[.orange],
+            let numGreenPegs = pegBoardLevel.getNumPegs()[.green] else {
+            return
+        }
+
+        numBluePegsLabel.text = String(numBluePegs)
+        numOrangePegsLabel.text = String(numOrangePegs)
+        numGreenPegsLabel.text = String(numGreenPegs)
     }
 
     @IBAction private func handleStartButtonTap(_ sender: UIButton) {

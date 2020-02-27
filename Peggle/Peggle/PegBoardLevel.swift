@@ -71,6 +71,10 @@ class PegBoardLevel: NSObject {
         return pegBoard.decreasePegSize(position: position)
     }
 
+    func getNumPegs() -> [PegColor: Int] {
+        return self.pegBoard.getNumPegs()
+    }
+
     func printPegBoard() -> String {
         return "\(self.pegBoard)"
     }

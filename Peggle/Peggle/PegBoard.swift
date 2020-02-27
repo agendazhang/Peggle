@@ -221,6 +221,31 @@ class PegBoard: NSObject, NSCoding {
         return true
     }
 
+    func getNumPegs() -> [PegColor: Int] {
+        var numPegs = [PegColor.blue: 0, PegColor.orange: 0, PegColor.green: 0]
+
+        for peg in pegs {
+            if peg.color == .blue {
+                guard let bluePegCount = numPegs[.blue] else {
+                    continue
+                }
+                numPegs[.blue] = bluePegCount + 1
+            } else if peg.color == .orange {
+                guard let orangePegCount = numPegs[.orange] else {
+                    continue
+                }
+                numPegs[.orange] = orangePegCount + 1
+            } else if peg.color == .green {
+                guard let  greenPegCount = numPegs[.green] else {
+                    continue
+                }
+                numPegs[.green] = greenPegCount + 1
+            }
+        }
+
+        return numPegs
+    }
+
     // MARK: CustomStringConvertible
     override var description: String {
         return "\(self.pegs)"
