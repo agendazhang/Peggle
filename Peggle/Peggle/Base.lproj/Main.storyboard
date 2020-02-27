@@ -403,7 +403,7 @@
                                 <rect key="frame" x="231" y="469" width="373" height="174"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <state key="normal" title="PLAY">
+                                <state key="normal" title="LOAD LEVELS">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
@@ -570,7 +570,7 @@
         <image name="plus.magnifyingglass" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jkl-1P-6cb"/>
-        <segue reference="IKN-XM-qz2"/>
+        <segue reference="mJC-NA-Fp4"/>
+        <segue reference="gQm-zX-8EC"/>
     </inferredMetricsTieBreakers>
 </document>
