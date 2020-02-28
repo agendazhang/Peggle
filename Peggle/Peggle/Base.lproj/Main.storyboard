@@ -546,14 +546,20 @@
                                     <segue destination="rTL-hi-IZ1" kind="show" id="mJC-NA-Fp4"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMAINING:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PC5-Ai-aR7">
-                                <rect key="frame" x="347.5" y="939" width="139.5" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMAINING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PC5-Ai-aR7">
+                                <rect key="frame" x="351" y="939" width="132.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdI-Dx-7jL">
+                                <rect key="frame" x="583.5" y="939" width="81" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIME LEFT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYO-0J-VHw">
-                                <rect key="frame" x="129.5" y="939" width="118" height="30"/>
+                                <rect key="frame" x="133" y="939" width="118" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -596,19 +602,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jnz-0Y-yrq">
+                                <rect key="frame" x="607" y="994" width="102" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="rdI-Dx-7jL" firstAttribute="leading" secondItem="PC5-Ai-aR7" secondAttribute="trailing" constant="100" id="3f0-Hd-Ici"/>
+                            <constraint firstItem="rdI-Dx-7jL" firstAttribute="top" secondItem="Shp-yP-2yH" secondAttribute="bottom" constant="15" id="48E-OY-KDR"/>
                             <constraint firstItem="5SC-M6-akL" firstAttribute="centerX" secondItem="aIE-9l-l0f" secondAttribute="centerX" id="4f6-3u-3pF"/>
                             <constraint firstItem="8e3-4Q-UFx" firstAttribute="top" secondItem="PC5-Ai-aR7" secondAttribute="bottom" constant="15" id="4iE-Ny-x8E"/>
                             <constraint firstItem="lVw-1e-YlV" firstAttribute="top" secondItem="bYO-0J-VHw" secondAttribute="bottom" constant="25" id="ADW-OM-TqE"/>
                             <constraint firstItem="Shp-yP-2yH" firstAttribute="leading" secondItem="aIE-9l-l0f" secondAttribute="leading" id="Ann-Ut-DQb"/>
                             <constraint firstItem="PC5-Ai-aR7" firstAttribute="top" secondItem="Shp-yP-2yH" secondAttribute="bottom" constant="15" id="Dpu-Aa-RCj"/>
                             <constraint firstItem="tNL-Bb-xXO" firstAttribute="top" secondItem="8e3-4Q-UFx" secondAttribute="bottom" constant="22" id="EiT-Vo-M0U"/>
+                            <constraint firstItem="Jnz-0Y-yrq" firstAttribute="top" secondItem="rdI-Dx-7jL" secondAttribute="bottom" constant="25" id="F8q-gd-7U4"/>
                             <constraint firstItem="bYO-0J-VHw" firstAttribute="top" secondItem="Shp-yP-2yH" secondAttribute="bottom" constant="15" id="Fk1-7M-wpW"/>
                             <constraint firstItem="OG8-9j-5Nf" firstAttribute="leading" secondItem="aIE-9l-l0f" secondAttribute="leading" constant="20" id="GPU-tU-AnM"/>
                             <constraint firstItem="tNL-Bb-xXO" firstAttribute="leading" secondItem="5SC-M6-akL" secondAttribute="trailing" constant="10" id="PMo-Ll-wD0"/>
                             <constraint firstItem="PC5-Ai-aR7" firstAttribute="centerX" secondItem="aIE-9l-l0f" secondAttribute="centerX" id="RA0-I8-9Xw"/>
+                            <constraint firstItem="Jnz-0Y-yrq" firstAttribute="leading" secondItem="8e3-4Q-UFx" secondAttribute="trailing" constant="165" id="YYi-em-zvQ"/>
                             <constraint firstItem="8e3-4Q-UFx" firstAttribute="leading" secondItem="39k-H0-6rt" secondAttribute="trailing" constant="20" id="Zbw-jL-Yif"/>
                             <constraint firstItem="yEw-2C-osa" firstAttribute="top" secondItem="39k-H0-6rt" secondAttribute="bottom" constant="10" id="a8d-Ej-JSm"/>
                             <constraint firstItem="8e3-4Q-UFx" firstAttribute="centerX" secondItem="aIE-9l-l0f" secondAttribute="centerX" id="dAw-NA-ais"/>
@@ -632,6 +648,7 @@
                         <outlet property="gameTimeLeftLabel" destination="lVw-1e-YlV" id="NvA-mh-Vhd"/>
                         <outlet property="numCannonBallsRemainingLabel" destination="5SC-M6-akL" id="ke7-dD-qnH"/>
                         <outlet property="numOrangePegsRemainingLabel" destination="8e3-4Q-UFx" id="dWm-NX-xhR"/>
+                        <outlet property="scoreLabel" destination="Jnz-0Y-yrq" id="080-y4-JZF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZS-KV-gxq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

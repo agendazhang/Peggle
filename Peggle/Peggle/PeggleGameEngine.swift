@@ -326,11 +326,6 @@ class PeggleGameEngine {
 
     func cannonBallHitsBottomWall(cannonBall: CannonBall) {
         self.endCurrentTurn(cannonBall: cannonBall)
-
-        if isSpookyBallActivated {
-            isSpookyBallActivated = false
-            fireSpookyBall(xPosition: cannonBall.x)
-        }
     }
 
     func cannonBallEntersBucket(cannonBall: CannonBall) {
@@ -348,26 +343,15 @@ class PeggleGameEngine {
             nil)
 
         self.endCurrentTurn(cannonBall: cannonBall)
-
-        if isSpookyBallActivated {
-            isSpookyBallActivated = false
-            fireSpookyBall(xPosition: cannonBall.x)
-        }
     }
 
     // Specifies the end of turn when a cannon ball reaches the bottom wall or enters the
     // bucket
     private func endCurrentTurn(cannonBall: CannonBall) {
-        // Allow cannon to be fired again after previous cannon ball hits the bottom wall or
-        // enters the bucket
-        self.canFireCannon = true
         self.removePhysicsObject(physicsObject: cannonBall)
 
         self.gameCondition.updateNumOrangePegsRemaining(pegsHitPerCannonBall:
             pegsHitPerCannonBall)
-
-        // Remove the pegs that are hit only after the cannon ball exits the game
-        self.removePegsHitPerCannonBall()
 
         // Update the "Orange Pegs Remaining" label with the new count
         let numOrangePegsRemaining = self.gameCondition.getNumOrangePegsRemaining()
@@ -375,14 +359,39 @@ class PeggleGameEngine {
             [Keys.numOrangePegsRemainingKey.rawValue: numOrangePegsRemaining]
         NotificationCenter.default.post(name: .numOrangePegsRemainingNotification, object: nil, userInfo: numOrangePegsRemainingDict)
 
-        if self.gameCondition.checkWinGame() {
-            NotificationCenter.default.post(name: .winGameNotification, object: nil)
-            self.endTimer()
-        }
+        // Update the score by calculating with the pegs hit this turn
+        self.gameCondition.updateScore(pegsHitPerCannonBall:
+            pegsHitPerCannonBall)
 
-        if self.gameCondition.checkLoseGame() {
-            NotificationCenter.default.post(name: .loseGameNotification, object: nil)
-            self.endTimer()
+        // Update the "Score" label with the new score
+        let score = self.gameCondition.getScore()
+        let scoreDict: [String: Int] =
+            [Keys.scoreKey.rawValue: score]
+        NotificationCenter.default.post(name: .scoreNotification, object: nil, userInfo:
+            scoreDict)
+
+        // Remove the pegs that are hit only after the cannon ball exits the game
+        self.removePegsHitPerCannonBall()
+
+        // If spooky ball is activated, a free cannon ball will be fired before the game
+        // condition checks for win/loss
+        if isSpookyBallActivated {
+            isSpookyBallActivated = false
+            fireSpookyBall(xPosition: cannonBall.x)
+        } else {
+            // Allow cannon to be fired again after previous cannon ball hits the bottom
+            // wall or enters the bucket
+            self.canFireCannon = true
+
+            if self.gameCondition.checkWinGame() {
+                NotificationCenter.default.post(name: .winGameNotification, object: nil)
+                self.endTimer()
+            }
+
+            if self.gameCondition.checkLoseGame() {
+                NotificationCenter.default.post(name: .loseGameNotification, object: nil)
+                self.endTimer()
+            }
         }
     }
 

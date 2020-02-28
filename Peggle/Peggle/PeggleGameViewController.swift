@@ -19,6 +19,7 @@ class PeggleGameViewController: UIViewController {
     @IBOutlet private var numCannonBallsRemainingLabel: UILabel!
     @IBOutlet private var freeBallAnimationLabel: UILabel!
     @IBOutlet private var gameTimeLeftLabel: UILabel!
+    @IBOutlet private var scoreLabel: UILabel!
 
     override func viewDidLoad() {
         self.gameBoardView.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width +
@@ -53,6 +54,11 @@ class PeggleGameViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector:
             #selector(updateNumCannonBallsRemaining(_:)), name:
             .numCannonBallsRemainingNotification, object: nil)
+
+        // To get notification of the score
+       NotificationCenter.default.addObserver(self, selector:
+           #selector(updateScore(_:)), name:
+           .scoreNotification, object: nil)
 
         // To get notification to display free ball animation
         NotificationCenter.default.addObserver(self, selector:
@@ -160,6 +166,14 @@ class PeggleGameViewController: UIViewController {
         if let dict = notification.userInfo as? [String: Int] {
             if let numCannonBallsRemaining = dict[Keys.numCannonBallsRemainingKey.rawValue] {
                 numCannonBallsRemainingLabel.text = String(numCannonBallsRemaining)
+            }
+        }
+    }
+
+    @objc private func updateScore(_ notification: Notification) {
+        if let dict = notification.userInfo as? [String: Int] {
+            if let score = dict[Keys.scoreKey.rawValue] {
+                scoreLabel.text = String(score)
             }
         }
     }

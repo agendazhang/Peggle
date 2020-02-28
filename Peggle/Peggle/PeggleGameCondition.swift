@@ -11,6 +11,7 @@ class PeggleGameCondition {
     private var numCannonBallsRemaining: Int
     private var numOrangePegsRemaining: Int
     private var gameTimeLeft: Float
+    private var score: Int
 
     init(pegBoardLevel: PegBoardLevel) {
         self.numCannonBallsRemaining = NumberConstants.defaultNumberOfCannonBalls
@@ -22,6 +23,8 @@ class PeggleGameCondition {
         self.numOrangePegsRemaining = numOrangePegs
 
         self.gameTimeLeft = NumberConstants.defaultGameTime
+
+        self.score = 0
     }
 
     func updateNumOrangePegsRemaining(pegsHitPerCannonBall: [Peg]) {
@@ -46,6 +49,28 @@ class PeggleGameCondition {
         gameTimeLeft += NumberConstants.gameInterval
     }
 
+    func updateScore(pegsHitPerCannonBall: [Peg]) {
+        var numBluePegs = 0
+        var numOrangePegs = 0
+        var numGreenPegs = 0
+
+        for peg in pegsHitPerCannonBall {
+            switch peg.color {
+            case .blue: numBluePegs += 1
+            case .orange: numOrangePegs += 1
+            case .green: numGreenPegs += 1
+            }
+        }
+
+        let totalNumPegs = numBluePegs + numOrangePegs + numGreenPegs
+
+        let bluePegsScore = numBluePegs * NumberConstants.bluePegBaseScore
+        let orangePegsScore = numOrangePegs * NumberConstants.orangePegBaseScore
+        let greenPegsScore = numGreenPegs * NumberConstants.greenPegBaseScore
+
+        self.score += totalNumPegs * (bluePegsScore + orangePegsScore + greenPegsScore)
+    }
+
     func checkWinGame() -> Bool {
         return self.numOrangePegsRemaining == 0
     }
@@ -65,5 +90,9 @@ class PeggleGameCondition {
 
     func getGameTimeLeft() -> Float {
         return gameTimeLeft
+    }
+
+    func getScore() -> Int {
+        return score
     }
 }

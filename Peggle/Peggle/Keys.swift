@@ -40,6 +40,7 @@ enum Keys: String {
     case numOrangePegsRemainingKey
     case numCannonBallsRemainingKey
     case gameTimeLeftKey
+    case scoreKey
 
     // LevelSaver
     case levelNameKey

@@ -39,4 +39,7 @@ class NumberConstants {
 
     // PeggleGameCondition
     static let defaultNumberOfCannonBalls: Int = 10
+    static let bluePegBaseScore: Int = 10
+    static let orangePegBaseScore: Int = 100
+    static let greenPegBaseScore: Int = 10
 }
