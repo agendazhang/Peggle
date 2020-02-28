@@ -164,7 +164,7 @@ class PeggleGameEngine {
         NotificationCenter.default.post(name: .gameTimeLeftNotification, object: nil,
             userInfo: gameTimeLeftDict)
 
-        if self.gameCondition.checkLoseGame() {
+        if self.gameCondition.checkLoseGameByTime() {
             NotificationCenter.default.post(name: .loseGameNotification, object: nil)
             self.endTimer()
         }
@@ -181,7 +181,9 @@ class PeggleGameEngine {
             return
         }
 
-        guard !self.gameCondition.checkWinGame() && !self.gameCondition.checkLoseGame() else {
+        guard !self.gameCondition.checkWinGame() &&
+            !self.gameCondition.checkLoseGameByTime() &&
+            !self.gameCondition.checkLoseGameByCannonBall() else {
             self.endTimer()
             return
         }
@@ -395,7 +397,7 @@ class PeggleGameEngine {
                 self.endTimer()
             }
 
-            if self.gameCondition.checkLoseGame() {
+            if self.gameCondition.checkLoseGameByCannonBall() {
                 NotificationCenter.default.post(name: .loseGameNotification, object: nil)
 
                 self.endTimer()
