@@ -384,12 +384,20 @@ class PeggleGameEngine {
             self.canFireCannon = true
 
             if self.gameCondition.checkWinGame() {
-                NotificationCenter.default.post(name: .winGameNotification, object: nil)
+                let gameTimeLeft = self.gameCondition.getGameTimeLeft()
+                let score = self.gameCondition.getScore()
+                let gameTimeLeftAndScoreDict: [String: Float] =
+                    [Keys.gameTimeLeftKey.rawValue: gameTimeLeft, Keys.scoreKey.rawValue:
+                    Float(score)]
+                NotificationCenter.default.post(name: .winGameNotification, object: nil,
+                    userInfo: gameTimeLeftAndScoreDict)
+
                 self.endTimer()
             }
 
             if self.gameCondition.checkLoseGame() {
                 NotificationCenter.default.post(name: .loseGameNotification, object: nil)
+
                 self.endTimer()
             }
         }

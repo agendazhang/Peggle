@@ -21,6 +21,13 @@ class PeggleGameViewController: UIViewController {
     @IBOutlet private var gameTimeLeftLabel: UILabel!
     @IBOutlet private var scoreLabel: UILabel!
 
+    @IBOutlet private var gameEndView: UIView!
+    @IBOutlet private var gameEndLabel: UILabel!
+    @IBOutlet private var gameEndStatsView: UIView!
+    @IBOutlet private var gameEndTimeTakenLabel: UILabel!
+    @IBOutlet private var gameEndScoreLabel: UILabel!
+    @IBOutlet private var gameEndExitButton: UIButton!
+
     override func viewDidLoad() {
         self.gameBoardView.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width +
             NumberConstants.cannonHeight + NumberConstants.bucketHeight)
@@ -107,33 +114,39 @@ class PeggleGameViewController: UIViewController {
     }
 
     @objc private func winGame(_ notification: Notification) {
-        let winGameAlert = UIAlertController(title: StringConstants.success, message:
-            StringConstants.winGameAlert,
-            preferredStyle: .alert)
+        // End game screen pops up
+        self.gameEndView.alpha = 1
 
-        winGameAlert
-            .addAction(UIAlertAction(title: StringConstants.ok,
-            style: .default) {
-                [weak self] (_) -> Void in self?
-                .segueToMainMenuViewController()
-        })
+        // End game stats screen pops up
+        self.gameEndStatsView.alpha = 1
 
-        present(winGameAlert, animated: true)
+        // Update label to "YOU WIN"
+        self.gameEndLabel.text = StringConstants.winGameMessage
+
+        if let dict = notification.userInfo as? [String: Float] {
+            // Update "Time Taken" label in end game stats screen
+            if let gameTimeLeft = dict[Keys.gameTimeLeftKey.rawValue] {
+                gameEndTimeTakenLabel.text = String(format: "%.2f",
+                NumberConstants.defaultGameTime - gameTimeLeft)
+            }
+            // Update "Score" label in end game stats screen
+            if let score = dict[Keys.scoreKey.rawValue] {
+                gameEndScoreLabel.text = String(Int(score))
+            }
+        }
     }
 
     @objc private func loseGame(_ notification: Notification) {
-        let loseGameAlert = UIAlertController(title: StringConstants.failed, message:
-            StringConstants.loseGameAlert,
-            preferredStyle: .alert)
+        // End game screen pops up
+        self.gameEndView.alpha = 1
 
-        loseGameAlert
-            .addAction(UIAlertAction(title: StringConstants.ok,
-            style: .default) {
-                [weak self] (_) -> Void in self?
-                .segueToMainMenuViewController()
-        })
+        // Update label to "GAME OVER"
+        self.gameEndLabel.text = StringConstants.loseGameMessage
+    }
 
-        present(loseGameAlert, animated: true)
+    @IBAction private func handleGameEndExitButtonTap(_ sender: UIButton) {
+        // Go back to main menu
+        segueToMainMenuViewController()
     }
 
     private func segueToMainMenuViewController() {

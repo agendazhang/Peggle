@@ -36,8 +36,8 @@ class StringConstants {
     static let greenPegGlowImagePath = "peg-green-glow"
 
     // PeggleGameLevelController
-    static let winGameAlert = "YOU WIN"
-    static let loseGameAlert = "YOU LOSE"
+    static let winGameMessage = "YOU WIN"
+    static let loseGameMessage  = "GAME OVER"
     static let failed = "Failed"
 
     // LevelDesignerViewController
