@@ -10,6 +10,7 @@ class PeggleGameCondition {
 
     private var numCannonBallsRemaining: Int
     private var numOrangePegsRemaining: Int
+    private var gameTimeLeft: Float
 
     init(pegBoardLevel: PegBoardLevel) {
         self.numCannonBallsRemaining = NumberConstants.defaultNumberOfCannonBalls
@@ -19,6 +20,8 @@ class PeggleGameCondition {
             numOrangePegs += 1
         }
         self.numOrangePegsRemaining = numOrangePegs
+
+        self.gameTimeLeft = NumberConstants.defaultGameTime
     }
 
     func updateNumOrangePegsRemaining(pegsHitPerCannonBall: [Peg]) {
@@ -35,12 +38,21 @@ class PeggleGameCondition {
         self.numCannonBallsRemaining += 1
     }
 
+    func decreaseGameTime() {
+        gameTimeLeft = max(gameTimeLeft - NumberConstants.gameInterval, 0.0)
+    }
+
+    func increaseGameTime() {
+        gameTimeLeft += NumberConstants.gameInterval
+    }
+
     func checkWinGame() -> Bool {
         return self.numOrangePegsRemaining == 0
     }
 
     func checkLoseGame() -> Bool {
-        return self.numCannonBallsRemaining == 0 && self.numOrangePegsRemaining > 0
+        return (self.numCannonBallsRemaining == 0 && self.numOrangePegsRemaining > 0) ||
+            (self.gameTimeLeft == 0.0 && self.numOrangePegsRemaining > 0)
     }
 
     func getNumOrangePegsRemaining() -> Int {
@@ -49,5 +61,9 @@ class PeggleGameCondition {
 
     func getNumCannonBallsRemaining() -> Int {
         return numCannonBallsRemaining
+    }
+
+    func getGameTimeLeft() -> Float {
+        return gameTimeLeft
     }
 }

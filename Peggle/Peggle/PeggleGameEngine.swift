@@ -154,6 +154,20 @@ class PeggleGameEngine {
         self.addGravityToCannonBall()
 
         gameRenderer.moveImages(physicsObjects: physicsObjects)
+
+        // Decrease the game time left
+        self.gameCondition.decreaseGameTime()
+        let gameTimeLeft = self.gameCondition.getGameTimeLeft()
+        let gameTimeLeftDict: [String: Float] =
+            [Keys.gameTimeLeftKey.rawValue: gameTimeLeft]
+        // Update the "Time Left" label with the new time
+        NotificationCenter.default.post(name: .gameTimeLeftNotification, object: nil,
+            userInfo: gameTimeLeftDict)
+
+        if self.gameCondition.checkLoseGame() {
+            NotificationCenter.default.post(name: .loseGameNotification, object: nil)
+            self.endTimer()
+        }
     }
 
     func fireCannon(cannonAngle: CGFloat) {
@@ -168,6 +182,7 @@ class PeggleGameEngine {
         }
 
         guard !self.gameCondition.checkWinGame() && !self.gameCondition.checkLoseGame() else {
+            self.endTimer()
             return
         }
 
@@ -285,6 +300,8 @@ class PeggleGameEngine {
     }
 
     private func fireSpookyBall(xPosition: CGFloat) {
+        self.canFireCannon = false
+
         // x position is the same as the x position where the previous cannon ball
         // disappeared
         let cannonBallStartingX = xPosition
@@ -308,12 +325,12 @@ class PeggleGameEngine {
     }
 
     func cannonBallHitsBottomWall(cannonBall: CannonBall) {
+        self.endCurrentTurn(cannonBall: cannonBall)
+
         if isSpookyBallActivated {
             isSpookyBallActivated = false
             fireSpookyBall(xPosition: cannonBall.x)
         }
-
-        self.endCurrentTurn(cannonBall: cannonBall)
     }
 
     func cannonBallEntersBucket(cannonBall: CannonBall) {
@@ -330,12 +347,12 @@ class PeggleGameEngine {
         NotificationCenter.default.post(name: .freeBallNotification, object:
             nil)
 
+        self.endCurrentTurn(cannonBall: cannonBall)
+
         if isSpookyBallActivated {
             isSpookyBallActivated = false
             fireSpookyBall(xPosition: cannonBall.x)
         }
-
-        self.endCurrentTurn(cannonBall: cannonBall)
     }
 
     // Specifies the end of turn when a cannon ball reaches the bottom wall or enters the
@@ -360,10 +377,12 @@ class PeggleGameEngine {
 
         if self.gameCondition.checkWinGame() {
             NotificationCenter.default.post(name: .winGameNotification, object: nil)
+            self.endTimer()
         }
 
         if self.gameCondition.checkLoseGame() {
             NotificationCenter.default.post(name: .loseGameNotification, object: nil)
+            self.endTimer()
         }
     }
 

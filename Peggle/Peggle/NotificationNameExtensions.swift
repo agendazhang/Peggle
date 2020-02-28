@@ -17,6 +17,7 @@ extension Notification.Name {
     static let numCannonBallsRemainingNotification =
         Notification.Name("numCannonBallsRemainingNotification")
     static let freeBallNotification = Notification.Name("freeBallNotification")
+    static let gameTimeLeftNotification = Notification.Name("gameTimeLeftNotification")
 
     // LevelDesignerSaveLevelViewController
     static let notAlphanumericLevelNameNotification =
