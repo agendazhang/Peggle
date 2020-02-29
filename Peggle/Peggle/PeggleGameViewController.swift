@@ -133,6 +133,10 @@ class PeggleGameViewController: UIViewController {
         self.gameEngine.endGame()
     }
 
+    @IBAction func handlePlayPauseButtonTap(_ sender: UIButton) {
+        self.gameEngine.startPauseTimer()
+    }
+
     private func startGame() {
         let peggleGameEngine = PeggleGameEngine(pegBoardLevel: pegBoardLevel, gameBoardView:
             gameBoardView)

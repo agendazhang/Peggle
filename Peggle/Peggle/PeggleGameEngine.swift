@@ -140,6 +140,18 @@ class PeggleGameEngine {
             TimeInterval(NumberConstants.gameInterval),
             target: self, selector: #selector(gameInterval), userInfo: nil,
             repeats: true)
+        self.gamePaused = false
+    }
+
+    private var gamePaused = true
+    func startPauseTimer() {
+        if self.gamePaused {
+            startTimer()
+            self.gamePaused = false
+        } else {
+            endTimer()
+            self.gamePaused = true
+        }
     }
 
     func endTimer() {
@@ -171,6 +183,10 @@ class PeggleGameEngine {
     }
 
     func fireCannon(cannonAngle: CGFloat) {
+        guard !self.gamePaused else {
+            return
+        }
+
         guard self.cannonAngleIsValid(cannonAngle: cannonAngle) else {
             return
         }

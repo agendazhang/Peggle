@@ -535,7 +535,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OG8-9j-5Nf">
-                                <rect key="frame" x="20" y="1030.5" width="76" height="60.5"/>
+                                <rect key="frame" x="20" y="1035.5" width="76" height="60.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="76" id="Lfs-9u-KAp"/>
                                     <constraint firstAttribute="height" constant="61" id="XTN-IS-JgL"/>
@@ -703,6 +703,17 @@
                                     <constraint firstAttribute="width" constant="500" id="vx0-qU-Nu6"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dad-aP-J9h">
+                                <rect key="frame" x="25" y="936" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="1Yh-j6-egu"/>
+                                    <constraint firstAttribute="height" constant="60" id="MLB-XY-Zpv"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="play-pause-button"/>
+                                <connections>
+                                    <action selector="handlePlayPauseButtonTap:" destination="bVx-3a-O4f" eventType="touchUpInside" id="26k-87-9Tb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -720,12 +731,14 @@
                             <constraint firstItem="egg-bG-gGY" firstAttribute="centerX" secondItem="Shp-yP-2yH" secondAttribute="centerX" id="QDb-aM-XyF"/>
                             <constraint firstItem="PC5-Ai-aR7" firstAttribute="centerX" secondItem="aIE-9l-l0f" secondAttribute="centerX" id="RA0-I8-9Xw"/>
                             <constraint firstItem="Lnn-sn-s86" firstAttribute="leading" secondItem="aIE-9l-l0f" secondAttribute="leading" constant="117" id="Re7-G6-Loq"/>
+                            <constraint firstItem="Dad-aP-J9h" firstAttribute="top" secondItem="Shp-yP-2yH" secondAttribute="bottom" constant="12" id="TkL-5q-Y5S"/>
                             <constraint firstItem="Lnn-sn-s86" firstAttribute="top" secondItem="NKD-ik-1T7" secondAttribute="bottom" constant="45" id="VL5-CP-Zug"/>
                             <constraint firstItem="Jnz-0Y-yrq" firstAttribute="leading" secondItem="8e3-4Q-UFx" secondAttribute="trailing" constant="165" id="YYi-em-zvQ"/>
                             <constraint firstItem="8e3-4Q-UFx" firstAttribute="leading" secondItem="39k-H0-6rt" secondAttribute="trailing" constant="20" id="Zbw-jL-Yif"/>
                             <constraint firstItem="yEw-2C-osa" firstAttribute="top" secondItem="39k-H0-6rt" secondAttribute="bottom" constant="10" id="a8d-Ej-JSm"/>
                             <constraint firstItem="8e3-4Q-UFx" firstAttribute="centerX" secondItem="aIE-9l-l0f" secondAttribute="centerX" id="dAw-NA-ais"/>
                             <constraint firstItem="39k-H0-6rt" firstAttribute="top" secondItem="PC5-Ai-aR7" secondAttribute="bottom" constant="10" id="g27-Sq-RK5"/>
+                            <constraint firstItem="Dad-aP-J9h" firstAttribute="leading" secondItem="aIE-9l-l0f" secondAttribute="leading" constant="25" id="glq-mg-zIm"/>
                             <constraint firstItem="PC5-Ai-aR7" firstAttribute="leading" secondItem="bYO-0J-VHw" secondAttribute="trailing" constant="100" id="inT-YB-a8B"/>
                             <constraint firstItem="aIE-9l-l0f" firstAttribute="trailing" secondItem="Lnn-sn-s86" secondAttribute="trailing" constant="117" id="izD-kB-ZGE"/>
                             <constraint firstItem="5SC-M6-akL" firstAttribute="leading" secondItem="yEw-2C-osa" secondAttribute="trailing" constant="20" id="kWf-40-Adj"/>
@@ -733,7 +746,7 @@
                             <constraint firstItem="NKD-ik-1T7" firstAttribute="centerX" secondItem="aIE-9l-l0f" secondAttribute="centerX" id="p6E-du-93m"/>
                             <constraint firstItem="Shp-yP-2yH" firstAttribute="trailing" secondItem="aIE-9l-l0f" secondAttribute="trailing" id="sLM-vj-jw7"/>
                             <constraint firstItem="Shp-yP-2yH" firstAttribute="top" secondItem="aIE-9l-l0f" secondAttribute="top" id="tN3-gh-w8A"/>
-                            <constraint firstItem="aIE-9l-l0f" firstAttribute="bottom" secondItem="OG8-9j-5Nf" secondAttribute="bottom" constant="20" id="tw2-fu-Uzs"/>
+                            <constraint firstItem="aIE-9l-l0f" firstAttribute="bottom" secondItem="OG8-9j-5Nf" secondAttribute="bottom" constant="15" id="tw2-fu-Uzs"/>
                             <constraint firstItem="5SC-M6-akL" firstAttribute="top" secondItem="8e3-4Q-UFx" secondAttribute="bottom" constant="22" id="uzx-Wi-dTR"/>
                             <constraint firstItem="NKD-ik-1T7" firstAttribute="top" secondItem="aIE-9l-l0f" secondAttribute="top" id="ywp-zM-Mm5"/>
                         </constraints>
@@ -769,6 +782,7 @@
         <image name="peg-blue" width="128" height="128"/>
         <image name="peg-green" width="128" height="128"/>
         <image name="peg-orange" width="128" height="128"/>
+        <image name="play-pause-button" width="512" height="512"/>
         <image name="plus.magnifyingglass" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
