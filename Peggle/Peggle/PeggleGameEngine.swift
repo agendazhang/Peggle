@@ -168,7 +168,7 @@ class PeggleGameEngine {
         gameRenderer.moveImages(physicsObjects: physicsObjects)
 
         // Decrease the game time left
-        self.gameCondition.decreaseGameTime()
+        self.gameCondition.decreaseGameTime(time: NumberConstants.gameInterval)
         let gameTimeLeft = self.gameCondition.getGameTimeLeft()
         let gameTimeLeftDict: [String: Float] =
             [Keys.gameTimeLeftKey.rawValue: gameTimeLeft]
@@ -281,6 +281,13 @@ class PeggleGameEngine {
     }
 
     private func activatePowerUps(peg: Peg) {
+        // If game time left <= 10.0, the powerup will be "Time Boost"
+        if self.gameCondition.getGameTimeLeft() <=
+            NumberConstants.timerBoostMaximumTimeLeft {
+            self.activateTimeBoost()
+            return
+        }
+
         // If number of orange pegs remaining >= 10, then the powerup will be "Space Blast",
         // else it will be "Spooky Ball"
         if self.gameCondition.getNumOrangePegsRemaining() >=
@@ -289,6 +296,14 @@ class PeggleGameEngine {
         } else {
             self.activateSpookyBall(peg: peg)
         }
+    }
+
+    // Add 30.0 to game time left
+    private func activateTimeBoost() {
+        NotificationCenter.default.post(name: .timeBoostNotification, object:
+            nil)
+
+        self.gameCondition.increaseGameTime(time: NumberConstants.timerBoostAddedTime)
     }
 
     // Pegs close to the original green peg get cleared

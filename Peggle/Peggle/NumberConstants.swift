@@ -30,6 +30,8 @@ class NumberConstants {
     static let minimumOrangePegsRemainingToActivateSpaceBlast: Int = 10
     static let maximumDistanceToActivateSpaceBlast: CGFloat = 80
     static let defaultGameTime: Float = 60.0
+    static let timerBoostMaximumTimeLeft: Float = 10.0
+    static let timerBoostAddedTime: Float = 30.0
 
     // PhysicsEngine
     static let gravityForce: CGFloat = 0.2

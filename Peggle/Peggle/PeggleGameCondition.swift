@@ -41,12 +41,12 @@ class PeggleGameCondition {
         self.numCannonBallsRemaining += 1
     }
 
-    func decreaseGameTime() {
-        gameTimeLeft = max(gameTimeLeft - NumberConstants.gameInterval, 0.0)
+    func decreaseGameTime(time: Float) {
+        gameTimeLeft = max(gameTimeLeft - time, 0.0)
     }
 
-    func increaseGameTime() {
-        gameTimeLeft += NumberConstants.gameInterval
+    func increaseGameTime(time: Float) {
+        gameTimeLeft += time
     }
 
     func updateScore(pegsHitPerCannonBall: [Peg]) {

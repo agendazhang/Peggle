@@ -40,6 +40,7 @@ class StringConstants {
     static let loseGameMessage  = "GAME OVER"
     static let failed = "Failed"
     static let freeBallAnimation = "+1 FREE BALL"
+    static let timeBoostAnimation = "TIME BOOST ACTIVATED"
     static let spaceBlastAnimation = "SPACE BLAST ACTIVATED"
     static let spookyBallAnimation = "SPOOKY BALL ACTIVATED"
     static let gameBackgroundMusicPath = "game_background"

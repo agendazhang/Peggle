@@ -80,12 +80,17 @@ class PeggleGameViewController: UIViewController {
             #selector(displayFreeBallAnimation(_:)), name:
             .freeBallNotification, object: nil)
 
-        // To get notification about the space blast
+        // To get notification about the "Time Boost" powerup
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(displayTimeBoostAnimation(_:)), name:
+            .timeBoostNotification, object: nil)
+
+        // To get notification about the "Space Blast" powerup
         NotificationCenter.default.addObserver(self, selector:
             #selector(displaySpaceBlastAnimation(_:)), name:
             .spaceBlastNotification, object: nil)
 
-        // To get notification about the spooky ball
+        // To get notification about the "Spooky Ball" powerup
         NotificationCenter.default.addObserver(self, selector:
             #selector(displaySpookyBallAnimation(_:)), name:
             .spookyBallNotification, object: nil)
@@ -236,6 +241,22 @@ class PeggleGameViewController: UIViewController {
         self.animationLabel.alpha = 1.0
         self.animationLabel.text = StringConstants.freeBallAnimation
         self.animationLabel.textColor = .gray
+
+        UIView.animate(withDuration: NumberConstants.animationDuration, delay: 0.0, options:
+            .curveEaseOut, animations: {
+            self.animationLabel.alpha = 0.0
+        }, completion: {
+            (_: Bool) -> Void in
+            self.animationLabel.alpha = 0.0
+        })
+    }
+
+    @objc private func displayTimeBoostAnimation(_ notification: Notification) {
+        musicPlayer.playSoundEffect(fileName: StringConstants.spaceBlastSpookyBallSoundPath)
+
+        self.animationLabel.alpha = 1.0
+        self.animationLabel.text = StringConstants.timeBoostAnimation
+        self.animationLabel.textColor = .green
 
         UIView.animate(withDuration: NumberConstants.animationDuration, delay: 0.0, options:
             .curveEaseOut, animations: {
