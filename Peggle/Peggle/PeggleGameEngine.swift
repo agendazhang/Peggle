@@ -250,8 +250,6 @@ class PeggleGameEngine {
             return
         }
 
-        NotificationCenter.default.post(name: .pegHitNotification, object: nil)
-
         pegsHitPerCannonBall.append(peg)
 
         // Light up the pegs that are hit

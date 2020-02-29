@@ -70,11 +70,6 @@ class PeggleGameViewController: UIViewController {
             #selector(playFireCannonSound(_:)), name:
             .fireCannonNotification, object: nil)
 
-        // To get notification of the cannon ball hitting a peg
-        NotificationCenter.default.addObserver(self, selector:
-            #selector(playPegHitSound(_:)), name:
-            .pegHitNotification, object: nil)
-
         // To get notification of the score
        NotificationCenter.default.addObserver(self, selector:
            #selector(updateScore(_:)), name:
@@ -221,10 +216,6 @@ class PeggleGameViewController: UIViewController {
 
     @objc private func playFireCannonSound(_ notification: Notification) {
         musicPlayer.playSoundEffect(fileName: StringConstants.fireCannonSoundPath)
-    }
-
-    @objc private func playPegHitSound(_ notification: Notification) {
-        musicPlayer.playSoundEffect(fileName: StringConstants.pegHitSoundPath)
     }
 
     @objc private func updateScore(_ notification: Notification) {
