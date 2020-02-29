@@ -17,9 +17,10 @@ class PeggleGameViewController: UIViewController {
     @IBOutlet private var cannonView: UIImageView!
     @IBOutlet private var numOrangePegsRemainingLabel: UILabel!
     @IBOutlet private var numCannonBallsRemainingLabel: UILabel!
-    @IBOutlet private var freeBallAnimationLabel: UILabel!
     @IBOutlet private var gameTimeLeftLabel: UILabel!
     @IBOutlet private var scoreLabel: UILabel!
+
+    @IBOutlet private var animationLabel: UILabel!
 
     @IBOutlet private var gameEndView: UIView!
     @IBOutlet private var gameEndLabel: UILabel!
@@ -67,12 +68,22 @@ class PeggleGameViewController: UIViewController {
            #selector(updateScore(_:)), name:
            .scoreNotification, object: nil)
 
-        // To get notification to display free ball animation
+        // To get notification about the free ball after the cannon ball enters the bucket
         NotificationCenter.default.addObserver(self, selector:
             #selector(displayFreeBallAnimation(_:)), name:
             .freeBallNotification, object: nil)
 
-        // To get notification to display free ball animation
+        // To get notification about the space blast
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(displaySpaceBlastAnimation(_:)), name:
+            .spaceBlastNotification, object: nil)
+
+        // To get notification about the spooky ball
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(displaySpookyBallAnimation(_:)), name:
+            .spookyBallNotification, object: nil)
+
+        // To get notification of the game time left
         NotificationCenter.default.addObserver(self, selector:
             #selector(updateGameTimeLeft(_:)), name:
             .gameTimeLeftNotification, object: nil)
@@ -192,13 +203,41 @@ class PeggleGameViewController: UIViewController {
     }
 
     @objc private func displayFreeBallAnimation(_ notification: Notification) {
-        freeBallAnimationLabel.alpha = 1.0
+        self.animationLabel.alpha = 1.0
+        self.animationLabel.text = StringConstants.freeBallAnimation
+        self.animationLabel.textColor = .gray
 
-        UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseOut, animations: {
-            self.freeBallAnimationLabel.alpha = 0.0
+        UIView.animate(withDuration: 3.0, delay: 0.0, options: .curveEaseOut, animations: {
+            self.animationLabel.alpha = 0.0
         }, completion: {
             (_: Bool) -> Void in
-            self.freeBallAnimationLabel.alpha = 0.0
+            self.animationLabel.alpha = 0.0
+        })
+    }
+
+    @objc private func displaySpaceBlastAnimation(_ notification: Notification) {
+        self.animationLabel.alpha = 1.0
+        self.animationLabel.text = StringConstants.spaceBlastAnimation
+        self.animationLabel.textColor = .green
+
+        UIView.animate(withDuration: 3.0, delay: 0.0, options: .curveEaseOut, animations: {
+            self.animationLabel.alpha = 0.0
+        }, completion: {
+            (_: Bool) -> Void in
+            self.animationLabel.alpha = 0.0
+        })
+    }
+
+    @objc private func displaySpookyBallAnimation(_ notification: Notification) {
+        self.animationLabel.alpha = 1.0
+        self.animationLabel.text = StringConstants.spookyBallAnimation
+        self.animationLabel.textColor = .green
+
+        UIView.animate(withDuration: 3.0, delay: 0.0, options: .curveEaseOut, animations: {
+            self.animationLabel.alpha = 0.0
+        }, completion: {
+            (_: Bool) -> Void in
+            self.animationLabel.alpha = 0.0
         })
     }
 

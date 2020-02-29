@@ -37,9 +37,9 @@
 		37B7CB3C24018A3C00A221F2 /* PhysicsTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3B24018A3C00A221F2 /* PhysicsTriangle.swift */; };
 		37B7CB3E240772E600A221F2 /* LevelSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3D240772E600A221F2 /* LevelSaver.swift */; };
 		37B7CB40240782DF00A221F2 /* LevelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB3F240782DF00A221F2 /* LevelLoader.swift */; };
-		37B7CB4F240820FB00A221F2 /* Preloaded3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB4C240820FA00A221F2 /* Preloaded3.plist */; };
 		37B7CB50240820FB00A221F2 /* Preloaded2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB4D240820FB00A221F2 /* Preloaded2.plist */; };
 		37B7CB53240967DE00A221F2 /* Preloaded1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB52240967DE00A221F2 /* Preloaded1.plist */; };
+		37B7CB55240A735E00A221F2 /* Preloaded3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB54240A735D00A221F2 /* Preloaded3.plist */; };
 		37E5442C23D949C600C0FBF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5442B23D949C600C0FBF2 /* AppDelegate.swift */; };
 		37E5442E23D949C600C0FBF2 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E5442D23D949C600C0FBF2 /* art.scnassets */; };
 		37E5443323D949C600C0FBF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E5443123D949C600C0FBF2 /* Main.storyboard */; };
@@ -105,9 +105,9 @@
 		37B7CB3B24018A3C00A221F2 /* PhysicsTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsTriangle.swift; sourceTree = "<group>"; };
 		37B7CB3D240772E600A221F2 /* LevelSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSaver.swift; sourceTree = "<group>"; };
 		37B7CB3F240782DF00A221F2 /* LevelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLoader.swift; sourceTree = "<group>"; };
-		37B7CB4C240820FA00A221F2 /* Preloaded3.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Preloaded3.plist; sourceTree = "<group>"; };
 		37B7CB4D240820FB00A221F2 /* Preloaded2.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Preloaded2.plist; sourceTree = "<group>"; };
 		37B7CB52240967DE00A221F2 /* Preloaded1.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Preloaded1.plist; sourceTree = "<group>"; };
+		37B7CB54240A735D00A221F2 /* Preloaded3.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Preloaded3.plist; sourceTree = "<group>"; };
 		37E5442823D949C600C0FBF2 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E5442B23D949C600C0FBF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37E5442D23D949C600C0FBF2 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 			children = (
 				37B7CB52240967DE00A221F2 /* Preloaded1.plist */,
 				37B7CB4D240820FB00A221F2 /* Preloaded2.plist */,
-				37B7CB4C240820FA00A221F2 /* Preloaded3.plist */,
+				37B7CB54240A735D00A221F2 /* Preloaded3.plist */,
 			);
 			name = "Preloaded Levels";
 			sourceTree = "<group>";
@@ -394,11 +394,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				37E5442E23D949C600C0FBF2 /* art.scnassets in Resources */,
-				37B7CB4F240820FB00A221F2 /* Preloaded3.plist in Resources */,
 				37B7CB50240820FB00A221F2 /* Preloaded2.plist in Resources */,
 				37E5443823D949C800C0FBF2 /* LaunchScreen.storyboard in Resources */,
 				37B7CB53240967DE00A221F2 /* Preloaded1.plist in Resources */,
 				37E5443523D949C800C0FBF2 /* Assets.xcassets in Resources */,
+				37B7CB55240A735E00A221F2 /* Preloaded3.plist in Resources */,
 				37E5443323D949C600C0FBF2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

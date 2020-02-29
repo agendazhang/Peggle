@@ -39,6 +39,9 @@ class StringConstants {
     static let winGameMessage = "YOU WIN"
     static let loseGameMessage  = "GAME OVER"
     static let failed = "Failed"
+    static let freeBallAnimation = "+1 FREE BALL"
+    static let spaceBlastAnimation = "SPACE BLAST ACTIVATED"
+    static let spookyBallAnimation = "SPOOKY BALL ACTIVATED"
 
     // LevelDesignerViewController
     static let noOrangePegAlert = "Cannot proceed with no orange pegs on the board"

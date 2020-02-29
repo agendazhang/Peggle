@@ -275,6 +275,9 @@ class PeggleGameEngine {
 
     // Pegs close to the original green peg get cleared
     private func activateSpaceBlast(peg: Peg) {
+        NotificationCenter.default.post(name: .spaceBlastNotification, object:
+            nil)
+
         for physicsObject in self.physicsObjects {
             guard let eachPeg = physicsObject as? Peg else {
                 continue
@@ -299,6 +302,8 @@ class PeggleGameEngine {
     // area at the same x-axis position
     private func activateSpookyBall(peg: Peg) {
         isSpookyBallActivated = true
+        NotificationCenter.default.post(name: .spookyBallNotification, object:
+            nil)
     }
 
     private func fireSpookyBall(xPosition: CGFloat) {
