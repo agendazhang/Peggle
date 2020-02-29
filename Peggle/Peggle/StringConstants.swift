@@ -42,6 +42,13 @@ class StringConstants {
     static let freeBallAnimation = "+1 FREE BALL"
     static let spaceBlastAnimation = "SPACE BLAST ACTIVATED"
     static let spookyBallAnimation = "SPOOKY BALL ACTIVATED"
+    static let gameBackgroundMusicPath = "game_background"
+    static let fireCannonSoundPath = "fire_cannon"
+    static let pegHitSoundPath = "peg_hit"
+    static let spaceBlastSpookyBallSoundPath = "space_blast_spooky_ball"
+    static let freeBallSoundPath = "free_ball"
+    static let winGameSoundPath = "win_game"
+    static let loseGameSoundPath = "lose_game"
 
     // LevelDesignerViewController
     static let noOrangePegAlert = "Cannot proceed with no orange pegs on the board"
@@ -53,4 +60,7 @@ class StringConstants {
     static let preloaded1 = "Preloaded1"
     static let preloaded2 = "Preloaded2"
     static let preloaded3 = "Preloaded3"
+
+    // MainMenuViewController
+    static let mainMenuBackgroundMusicPath = "main_menu_background"
 }

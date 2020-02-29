@@ -40,6 +40,15 @@
 		37B7CB50240820FB00A221F2 /* Preloaded2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB4D240820FB00A221F2 /* Preloaded2.plist */; };
 		37B7CB53240967DE00A221F2 /* Preloaded1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB52240967DE00A221F2 /* Preloaded1.plist */; };
 		37B7CB55240A735E00A221F2 /* Preloaded3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB54240A735D00A221F2 /* Preloaded3.plist */; };
+		37B7CB5C240AA2AF00A221F2 /* free_ball.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB57240AA2AF00A221F2 /* free_ball.wav */; };
+		37B7CB5E240AA2AF00A221F2 /* space_blast_spooky_ball.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB59240AA2AF00A221F2 /* space_blast_spooky_ball.wav */; };
+		37B7CB5F240AA2AF00A221F2 /* peg_hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB5A240AA2AF00A221F2 /* peg_hit.wav */; };
+		37B7CB60240AA2AF00A221F2 /* game_background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB5B240AA2AF00A221F2 /* game_background.mp3 */; };
+		37B7CB62240AA47900A221F2 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7CB61240AA47900A221F2 /* MusicPlayer.swift */; };
+		37B7CB64240AA6FA00A221F2 /* main_menu_background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB63240AA6FA00A221F2 /* main_menu_background.mp3 */; };
+		37B7CB67240AAF7A00A221F2 /* win_game.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB65240AAF7A00A221F2 /* win_game.wav */; };
+		37B7CB68240AAF7A00A221F2 /* lose_game.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB66240AAF7A00A221F2 /* lose_game.wav */; };
+		37B7CB6A240AB63D00A221F2 /* fire_cannon.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37B7CB69240AB63C00A221F2 /* fire_cannon.wav */; };
 		37E5442C23D949C600C0FBF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5442B23D949C600C0FBF2 /* AppDelegate.swift */; };
 		37E5442E23D949C600C0FBF2 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E5442D23D949C600C0FBF2 /* art.scnassets */; };
 		37E5443323D949C600C0FBF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E5443123D949C600C0FBF2 /* Main.storyboard */; };
@@ -108,6 +117,15 @@
 		37B7CB4D240820FB00A221F2 /* Preloaded2.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Preloaded2.plist; sourceTree = "<group>"; };
 		37B7CB52240967DE00A221F2 /* Preloaded1.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Preloaded1.plist; sourceTree = "<group>"; };
 		37B7CB54240A735D00A221F2 /* Preloaded3.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Preloaded3.plist; sourceTree = "<group>"; };
+		37B7CB57240AA2AF00A221F2 /* free_ball.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = free_ball.wav; sourceTree = "<group>"; };
+		37B7CB59240AA2AF00A221F2 /* space_blast_spooky_ball.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = space_blast_spooky_ball.wav; sourceTree = "<group>"; };
+		37B7CB5A240AA2AF00A221F2 /* peg_hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = peg_hit.wav; sourceTree = "<group>"; };
+		37B7CB5B240AA2AF00A221F2 /* game_background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_background.mp3; sourceTree = "<group>"; };
+		37B7CB61240AA47900A221F2 /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		37B7CB63240AA6FA00A221F2 /* main_menu_background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_menu_background.mp3; sourceTree = "<group>"; };
+		37B7CB65240AAF7A00A221F2 /* win_game.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win_game.wav; sourceTree = "<group>"; };
+		37B7CB66240AAF7A00A221F2 /* lose_game.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose_game.wav; sourceTree = "<group>"; };
+		37B7CB69240AB63C00A221F2 /* fire_cannon.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fire_cannon.wav; sourceTree = "<group>"; };
 		37E5442823D949C600C0FBF2 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E5442B23D949C600C0FBF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37E5442D23D949C600C0FBF2 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -216,6 +234,7 @@
 				373E52CC23ED95A900CAA12B /* MainMenuViewController.swift */,
 				373E52E823EEEA7000CAA12B /* PeggleGameRenderer.swift */,
 				373E52E223EEE43400CAA12B /* PeggleGameViewController.swift */,
+				37B7CB61240AA47900A221F2 /* MusicPlayer.swift */,
 				3725CEE823DC8C97008824B9 /* LevelDesignerViewController.swift */,
 				37A14F0C23E32A0900E764FD /* LevelSelectorViewController.swift */,
 			);
@@ -230,6 +249,21 @@
 				37B7CB54240A735D00A221F2 /* Preloaded3.plist */,
 			);
 			name = "Preloaded Levels";
+			sourceTree = "<group>";
+		};
+		37B7CB56240A842800A221F2 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				37B7CB69240AB63C00A221F2 /* fire_cannon.wav */,
+				37B7CB57240AA2AF00A221F2 /* free_ball.wav */,
+				37B7CB5B240AA2AF00A221F2 /* game_background.mp3 */,
+				37B7CB66240AAF7A00A221F2 /* lose_game.wav */,
+				37B7CB63240AA6FA00A221F2 /* main_menu_background.mp3 */,
+				37B7CB5A240AA2AF00A221F2 /* peg_hit.wav */,
+				37B7CB59240AA2AF00A221F2 /* space_blast_spooky_ball.wav */,
+				37B7CB65240AAF7A00A221F2 /* win_game.wav */,
+			);
+			name = Music;
 			sourceTree = "<group>";
 		};
 		37E5441F23D949C500C0FBF2 = {
@@ -265,6 +299,7 @@
 				37E5443423D949C800C0FBF2 /* Assets.xcassets */,
 				37E5443623D949C800C0FBF2 /* LaunchScreen.storyboard */,
 				37E5443923D949C800C0FBF2 /* Info.plist */,
+				37B7CB56240A842800A221F2 /* Music */,
 				37B7CB452407F2D700A221F2 /* Preloaded Levels */,
 			);
 			path = Peggle;
@@ -393,12 +428,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37B7CB67240AAF7A00A221F2 /* win_game.wav in Resources */,
 				37E5442E23D949C600C0FBF2 /* art.scnassets in Resources */,
 				37B7CB50240820FB00A221F2 /* Preloaded2.plist in Resources */,
 				37E5443823D949C800C0FBF2 /* LaunchScreen.storyboard in Resources */,
+				37B7CB5E240AA2AF00A221F2 /* space_blast_spooky_ball.wav in Resources */,
+				37B7CB6A240AB63D00A221F2 /* fire_cannon.wav in Resources */,
+				37B7CB5F240AA2AF00A221F2 /* peg_hit.wav in Resources */,
 				37B7CB53240967DE00A221F2 /* Preloaded1.plist in Resources */,
 				37E5443523D949C800C0FBF2 /* Assets.xcassets in Resources */,
+				37B7CB5C240AA2AF00A221F2 /* free_ball.wav in Resources */,
+				37B7CB68240AAF7A00A221F2 /* lose_game.wav in Resources */,
 				37B7CB55240A735E00A221F2 /* Preloaded3.plist in Resources */,
+				37B7CB60240AA2AF00A221F2 /* game_background.mp3 in Resources */,
+				37B7CB64240AA6FA00A221F2 /* main_menu_background.mp3 in Resources */,
 				37E5443323D949C600C0FBF2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +505,7 @@
 				37E5446923DB098800C0FBF2 /* PegBoardLevel.swift in Sources */,
 				373E52EB23EFB57200CAA12B /* CannonBallView.swift in Sources */,
 				373E52E923EEEA7000CAA12B /* PeggleGameRenderer.swift in Sources */,
+				37B7CB62240AA47900A221F2 /* MusicPlayer.swift in Sources */,
 				37E5446323DAF84F00C0FBF2 /* PegColor.swift in Sources */,
 				37B7CB3A240187FC00A221F2 /* TrianglePeg.swift in Sources */,
 				37B7CB2E23FEBD1400A221F2 /* PeggleGameCondition.swift in Sources */,

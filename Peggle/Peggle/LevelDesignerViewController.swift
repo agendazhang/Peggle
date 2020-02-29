@@ -45,6 +45,8 @@ class LevelDesignerViewController: UIViewController {
     }
     private var currentPegButtonSelected: PegButton = .blue
 
+    private var musicPlayer = MusicPlayer()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,6 +80,15 @@ class LevelDesignerViewController: UIViewController {
         self.loadPegButtons()
 
         self.displayNumOfPegs()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        musicPlayer.playBackgroundMusic(fileName:
+            StringConstants.gameBackgroundMusicPath)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        musicPlayer.stopMusicPlayer()
     }
 
     private func loadPegBoard() {

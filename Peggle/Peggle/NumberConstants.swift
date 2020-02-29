@@ -42,4 +42,7 @@ class NumberConstants {
     static let bluePegBaseScore: Int = 10
     static let orangePegBaseScore: Int = 100
     static let greenPegBaseScore: Int = 10
+
+    // PeggleGameViewController
+    static let animationDuration: Double = 3.0
 }

@@ -16,6 +16,8 @@ extension Notification.Name {
         Notification.Name("numOrangePegsRemainingNotification")
     static let numCannonBallsRemainingNotification =
         Notification.Name("numCannonBallsRemainingNotification")
+    static let fireCannonNotification = Notification.Name("fireCannonNotification")
+    static let pegHitNotification = Notification.Name("pegHitNotification")
     static let freeBallNotification = Notification.Name("freeBallNotification")
     static let spaceBlastNotification = Notification.Name("spaceBlastNotification")
     static let spookyBallNotification = Notification.Name("spookyBallNotification")

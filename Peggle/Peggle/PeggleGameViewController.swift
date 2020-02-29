@@ -13,6 +13,8 @@ class PeggleGameViewController: UIViewController {
     var pegBoardLevel = PegBoardLevel()
     var gameEngine: PeggleGameEngine!
 
+    private var musicPlayer = MusicPlayer()
+
     @IBOutlet private var gameBoardView: UICollectionView!
     @IBOutlet private var cannonView: UIImageView!
     @IBOutlet private var numOrangePegsRemainingLabel: UILabel!
@@ -63,6 +65,16 @@ class PeggleGameViewController: UIViewController {
             #selector(updateNumCannonBallsRemaining(_:)), name:
             .numCannonBallsRemainingNotification, object: nil)
 
+        // To get notification of the cannon being fired
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(playFireCannonSound(_:)), name:
+            .fireCannonNotification, object: nil)
+
+        // To get notification of the cannon ball hitting a peg
+        NotificationCenter.default.addObserver(self, selector:
+            #selector(playPegHitSound(_:)), name:
+            .pegHitNotification, object: nil)
+
         // To get notification of the score
        NotificationCenter.default.addObserver(self, selector:
            #selector(updateScore(_:)), name:
@@ -89,6 +101,15 @@ class PeggleGameViewController: UIViewController {
             .gameTimeLeftNotification, object: nil)
 
         startGame()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        musicPlayer.playBackgroundMusic(fileName:
+            StringConstants.gameBackgroundMusicPath)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        musicPlayer.stopMusicPlayer()
     }
 
     private func setUpHandleGameBoardTap(gameBoardTapGestureRecognizer: UITapGestureRecognizer) {
@@ -125,6 +146,8 @@ class PeggleGameViewController: UIViewController {
     }
 
     @objc private func winGame(_ notification: Notification) {
+        musicPlayer.playSoundEffect(fileName: StringConstants.winGameSoundPath)
+
         // End game screen pops up
         self.gameEndView.alpha = 1
 
@@ -148,6 +171,8 @@ class PeggleGameViewController: UIViewController {
     }
 
     @objc private func loseGame(_ notification: Notification) {
+        musicPlayer.playSoundEffect(fileName: StringConstants.loseGameSoundPath)
+
         // End game screen pops up
         self.gameEndView.alpha = 1
 
@@ -194,6 +219,14 @@ class PeggleGameViewController: UIViewController {
         }
     }
 
+    @objc private func playFireCannonSound(_ notification: Notification) {
+        musicPlayer.playSoundEffect(fileName: StringConstants.fireCannonSoundPath)
+    }
+
+    @objc private func playPegHitSound(_ notification: Notification) {
+        musicPlayer.playSoundEffect(fileName: StringConstants.pegHitSoundPath)
+    }
+
     @objc private func updateScore(_ notification: Notification) {
         if let dict = notification.userInfo as? [String: Int] {
             if let score = dict[Keys.scoreKey.rawValue] {
@@ -203,11 +236,14 @@ class PeggleGameViewController: UIViewController {
     }
 
     @objc private func displayFreeBallAnimation(_ notification: Notification) {
+        musicPlayer.playSoundEffect(fileName: StringConstants.freeBallSoundPath)
+
         self.animationLabel.alpha = 1.0
         self.animationLabel.text = StringConstants.freeBallAnimation
         self.animationLabel.textColor = .gray
 
-        UIView.animate(withDuration: 3.0, delay: 0.0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: NumberConstants.animationDuration, delay: 0.0, options:
+            .curveEaseOut, animations: {
             self.animationLabel.alpha = 0.0
         }, completion: {
             (_: Bool) -> Void in
@@ -216,11 +252,14 @@ class PeggleGameViewController: UIViewController {
     }
 
     @objc private func displaySpaceBlastAnimation(_ notification: Notification) {
+        musicPlayer.playSoundEffect(fileName: StringConstants.spaceBlastSpookyBallSoundPath)
+
         self.animationLabel.alpha = 1.0
         self.animationLabel.text = StringConstants.spaceBlastAnimation
         self.animationLabel.textColor = .green
 
-        UIView.animate(withDuration: 3.0, delay: 0.0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: NumberConstants.animationDuration, delay: 0.0, options:
+            .curveEaseOut, animations: {
             self.animationLabel.alpha = 0.0
         }, completion: {
             (_: Bool) -> Void in
@@ -229,11 +268,14 @@ class PeggleGameViewController: UIViewController {
     }
 
     @objc private func displaySpookyBallAnimation(_ notification: Notification) {
+        musicPlayer.playSoundEffect(fileName: StringConstants.spaceBlastSpookyBallSoundPath)
+
         self.animationLabel.alpha = 1.0
         self.animationLabel.text = StringConstants.spookyBallAnimation
         self.animationLabel.textColor = .green
 
-        UIView.animate(withDuration: 3.0, delay: 0.0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: NumberConstants.animationDuration, delay: 0.0, options:
+            .curveEaseOut, animations: {
             self.animationLabel.alpha = 0.0
         }, completion: {
             (_: Bool) -> Void in

@@ -188,6 +188,8 @@ class PeggleGameEngine {
             return
         }
 
+        NotificationCenter.default.post(name: .fireCannonNotification, object: nil)
+
         self.canFireCannon = false
 
         let cannonBallStartingX = gameBoardView.frame.width / 2
@@ -247,6 +249,8 @@ class PeggleGameEngine {
         guard alreadyHitPeg.count == 0 else {
             return
         }
+
+        NotificationCenter.default.post(name: .pegHitNotification, object: nil)
 
         pegsHitPerCannonBall.append(peg)
 
