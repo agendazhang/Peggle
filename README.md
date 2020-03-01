@@ -396,13 +396,28 @@ Note: the triangular peg feature is not implemented, so I only have circular peg
   * When the cannon ball collides with a peg, it should bounce off the peg in a natural and reasonable manner. The peg should remain stationary.
   
 * Test peg lighting up after being hit by the cannon ball in Game
-  * When a blue peg gets hit by the cannon ball, it should light up to a bright blue colour. It should remain there and not be removed until the cannon ball reaches the bottom wall and disappears.
-  * When a orange peg gets hit by the cannon ball, it should light up to a bright orange (looks like white) colour. It should remain there and not be removed until the cannon ball reaches the bottom wall and disappears.
+  * When a blue peg gets hit by the cannon ball, it should light up to a bright blue colour. It should remain there and not be removed until the cannon ball reaches the bottom wall/enters bucket and disappears.
+  * When a orange peg gets hit by the cannon ball, it should light up to a bright orange (looks like white) colour. It should remain there and not be removed until the cannon ball reaches the bottom wall/enters bucket and disappears.
   * When the cannon ball hits a peg that has already been hit and lighted up, the peg should remain lit.
   
 * Test peg removal in Game
-  * After a peg is being hit by a cannon ball, it should not disappear until the cannon ball hits the bottom wall and disappears.
-  * After the cannon ball hits the bottom wall and disappears, all the lighted pegs should be removed from the game. They should disappear with a fade-out animation.
+  * After a peg is being hit by a cannon ball, it should not disappear until the cannon ball hits the bottom wall/enters bucket and disappears.
+  * After the cannon ball hits the bottom wall/enters bucket and disappears, all the lighted pegs should be removed from the game. They should disappear with a fade-out animation.
+  
+* Test win/lose conditions in Game
+  * If I clear all the orange pegs before the number of cannon balls run out and before timer reaches 0.0, I win the game.
+  * If there are still orange pegs remaining when timer reaches 0.0, I lose the game.
+  * If there are still orange pegs remaining when I run out of cannon balls, I lose the game.
+  
+* Test bucket in Game
+  * Bucket is at the bottom of the screen.
+  * Bucket moves left and right, turning the other direction when it reaches the left/right wall.
+  * When the ball reaches the bottom of the screen and does not enter the bucket, no extra ball should be added to the remaining number of cannon balls.
+  * When the ball reaches the bottom of the screen and enters the bucket, an extra ball should be added to the remaining number of cannon balls, and an animation should show up on the screen saying "+1 FREE BALL"
+  * If the ball hits the side of the bucket, it should slightly deflect towards the opposite x-direction.
+  
+* Test powerups in Game
+  * 
 
 ## Written Answers
 
