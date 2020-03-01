@@ -138,6 +138,22 @@ If there is more than 10.0 seconds left on the game timer, and there are less th
 
 ## Bells and Whistles
 
+* There is a home button at Level Designer and game screen. Once pressed, it will return to the main menu.
+* There is a Play/Pause button at the game screen. You can press it to pause the game, or resume a paused game. Once paused, the game timer will stop running, the game objects will also stop moving and the cannon cannot be fired. Once resumed, the game timer will continue running, the game objects will continue moving and the cannon can once again be fired.
+* The number of blue, orange and green pegs that are currently added are displayed at the top of the Level Designer screen.
+* The number of orange pegs and cannon balls remaining are displayed at the bottom of the game screen.
+* There is a game timer for the game. The time remaining is displayed at the bottom left of the game screen. It is elaborated in the "Win and Lose Conditions" section.
+* There is a score system for the game. It adds up the scores of each shot by the cannon ball. For each shot, hitting a blue or green peg gives 10 points and an orange peg gives 100 points. The sum is then multiplied by the total number of pegs hit in that shot. For example, if you hit 10 blue pegs, 5 orange pegs, and 1 green peg, the total score is (10 * 10 + 5 * 100 + 1 * 10) * (10 + 5 + 1) = 9760. The score of the game is displayued at the bottom right of the game screen.
+* There is an extra powerup "Time Boost" if you hit a green peg. It is elaborated in the "Powerups" section.
+* If you win the game, the "YOU WIN" popup will also display the total time that you took for the level and the score you obtained.
+* Once a powerup is activated, there will be an animation that displays the name of the powerup on the game board, then fades away.
+* Once the cannon ball enters the bucket, there will be an animation that displays "+1 FREE BALL" on the game board, then fades away.
+* There is music being played in the background of the main menu, Level Designer and game screens.
+* When a powerup is activated, a sound will be played.
+* When the cannon is fired, a sound will be played.
+* When the cannon ball enters the bucket, a sound will be played.
+* When you win the game, a cheerful sound will be played.
+* When you lose the game, a disappointed sound will be played.
 
 ## Tests
 If you decide to write how you are going to do your tests instead of writing
