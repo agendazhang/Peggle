@@ -156,9 +156,194 @@ If there is more than 10.0 seconds left on the game timer, and there are less th
 * When you lose the game, a disappointed sound will be played.
 
 ## Tests
-If you decide to write how you are going to do your tests instead of writing
-actual tests, please write in this section. If you decide to write all of your
-tests in code, please delete this section.
+
+### Unit Tests
+* `Peg.swift`
+	* `init` method
+		* When passed with `(x: CGFloat, y: CGFloat, color: PegColor, radius: CGFloat)`, it should initialize the properties `x`, `y` and `color` to the respective values.
+		* It should not be passed with any other properties other than `(coder decoder: NSCoder)`
+	
+	* `==` method
+		* When I create two `Peg` objects by passing the same `(x: CGFloat, y: CGFloat, color: PegColor, radius: CGFloat)` properties, they should give `true` when tested for equality.
+		* When I create two `Peg` objects by passing any different `(x: CGFloat, y: CGFloat, color: PegColor, radius: CGFloat)` properties, they should give `false` when tested for equality.
+	
+	* `init?(coder decoder: NSCoder)` and encode() methods
+		* let testPeg = Peg(x: 5, y: 3, color: .Blue, radius: 5), let data = try NSKeyedArchiver.archivedData(withRootObject: testPeg, requiringSecureCoding: false). Testing data should not return nil.
+		* let testPeg = Peg(x: 5, y: 3, color: .Blue, radius: 5), let data = try NSKeyedArchiver.archivedData(withRootObject: testPeg, requiringSecureCoding: false), let testPeg2 = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Peg. Testing testPeg2 should not return nil.
+		* let testPeg = Peg(x: 5, y: 3, color: .Blue, radius: 5), let data = try NSKeyedArchiver.archivedData(withRootObject: testPeg, requiringSecureCoding: false), let testPeg2 = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! Peg. Testing testPeg == testPeg2 should give true when tested with the `==` method since a `Peg` object encoded and then decoded should give the same object.
+		
+* `PegBoard.swift`
+	* `init` method
+		* When passed with `(boardWidth: CGFloat, boardHeight: CGFloat, pegs: [Peg])`, it should initialize the properties `boardWidth`, `boardHeight` and `pegs` to the respective values.
+		* When passed with `(boardWidth: CGFloat, boardHeight: CGFloat)`, it should initialize the properties `boardWidth` and `boardHeight` to the respective values, and `pegs` should be initialized to an empty `Peg` array.
+		* When passed with `()`, it should initialize the properties `boardWidth` and `boardHeight` to the default values stated in `NumberConstants.swift`, and `pegs` should be initialized to an empty `Peg` array.
+		* The properties `numRows` and `numCols` should be initialized to the default values stated in `NumberConstants.swift` for all 3 of the above constructors.
+		* It should not be passed with any other properties other than `(coder decoder: NSCoder)`
+	
+	* `getPegPosition(targetPeg: Peg)` method
+		* When passed with any `Peg` object, it should return a `CGPoint` value where the `CGPoint.x` property is equal to the `x` property of the peg and the `CGPoint.y` property is equal to the `y` property of the peg.
+	
+	* `getPeg(point: CGPoint)` method: Point must be within a radius distance from any peg in the board
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), let point = CGPoint(x: 100, y: 100), pegBoard.getPeg(point: point) should return nil as pegBoard.pegs is currently empty.
+		* let pegs = \[Peg(x: 100, y: 100, color: .Blue, radius: 10)\], let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024, pegs: pegs), let point = CGPoint(x: 100, y: 100), pegBoard.getPeg(point: point) should return Peg(x: 100, y: 100, color: .Blue, radius: 5) as pegBoard.pegs contains the peg that is centered at (x: 100, y: 100).
+		* let pegs = \[Peg(x: 100, y: 100, color: .Blue, radius: 10)\], let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024, pegs: pegs), let point = CGPoint(x: 105, y: 105), numRows and numCols both equal 20, pegBoard.getPeg(point: point) should return Peg(x: 100, y: 100, color: .Blue, radius: 10) as pegBoard.pegs contains the peg at (x: 100, y: 100) that the point (x: 105, y: 105) is within a radius distance away.
+		* let pegs = \[Peg(x: 100, y: 100, color: .Blue, radius: 10)\], let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024, pegs: pegs), let point = CGPoint(x: 130, y: 130), numRows and numCols both equal 20, pegBoard.getPeg(point: point) should return nil as pegBoard.pegs only contain the peg at (x: 100, y: 100) and the point (x: 130, y: 130) is more than a radius distance away.
+	
+	* `addPeg(position: CGPoint, color: PegColor)` method: Added peg's position must be more than a radius distance away from all 4 borders and more than a diameter distance away from all the other pegs in the board
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position = CGPoint(x: 10, y: 10), addPeg(position: position, color = .Blue) should return false as the added peg is within a radius away (radius = 1024 / 2 / 20 = 25.6) from 2 of the borders. pegBoard.pegs should be now empty as the peg is not added.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position = CGPoint(x: 100, y: 100), addPeg(position: position, color = .Blue) should return true as pegBoard.pegs is currently empty and the added peg is more than a radius away (radius = 1024 / 2 / 20 = 25.6) from all four borders. pegBoard.pegs should now contain the peg at (x: 100, y: 100).
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position1 = CGPoint(x: 100, y: 100), addPeg(position: position1, color = .Blue), let position2 = CGPoint(x: 120, y: 120), addPeg(position: position2, color = .Blue) should return false as pegBoard.pegs currently has the first peg at (x: 100, y: 100), which is within a diameter away (diameter = 1024 / 20 = 51.2) from the second peg at (x: 120, y: 120) so the second peg cannot be added in. pegBoard.pegs should now only contain the first peg at (x: 100, y: 100).
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position1 = CGPoint(x: 100, y: 100), addPeg(position: position1, color = .Blue), let position2 = CGPoint(x: 200, y: 200), addPeg(position: position2, color = .Blue) should return true as pegBoard.pegs currently has the first peg at (x: 100, y: 100), which is more than a diameter away (diameter = 1024 / 20 = 51.2) from the second peg at (x: 200, y: 200). The second peg is also more than a radius distance away from all 4 borders, so the second peg can be added in. pegBoard.pegs should now contain the first peg at (x: 100, y: 100) and the second peg at (x: 200, y: 200).
+		
+	* `removePeg(position: CGPoint)` method: Position must be within a radius distance away from any of the pegs in the board for the peg to be removed.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position = CGPoint(x: 100, y: 100), removePeg(position: position) should give false as pegBoard.pegs is currently empty and there is no peg to be removed.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position1 = CGPoint(x: 100, y: 100), addPeg(position: position1, color = .Blue), let position = CGPoint(x: 105, y: 105), removePeg(position: position) should give true as pegBoard.pegs contains the peg at (x: 100, y: 100) which is within a radius distance away (radius = 1024 / 2 / 20 = 25.6) from the position (x: 105, y: 105). The peg is removed and pegBoard.pegs should now be empty.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position1 = CGPoint(x: 100, y: 100), addPeg(position: position1, color = .Blue), let position = CGPoint(x: 200, y: 200), removePeg(position: position) should give false as pegBoard.pegs contains the peg at (x: 100, y: 100) which is more than a radius distance away (radius = 1024 / 2 / 20 = 25.6) from the position (x: 200, y: 200). The peg is not removed and pegBoard.pegs should still contain the peg.
+		
+	* `movePeg(oldPosition: CGPoint, newPosition: CGPoint)` method: oldPosition should be within a radius distance away from any peg in the board. newPosition should be more than a radius distance away from all 4 borders and more than a diameter distance away from all the other pegs in the board
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let oldPosition = CGPoint(x: 100, y: 100), let newPosition = CGPoint(x: 200, y: 200), movePeg(oldPosition: oldPosition, newPosition: newPosition) should give false as pegBoard.pegs is currently empty and there is no peg to be moved.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let oldPosition = CGPoint(x: 100, y: 100), addPeg(position: oldPosition, color = .Blue), let newPosition = CGPoint(x: 200, y: 200), movePeg(oldPosition: oldPosition, newPosition: newPosition) should give true as pegBoard.pegs contains the peg at (x: 100, y: 100) which is within a radius distance away (radius = 1024 / 2 / 20 = 25.6) from the oldPosition (x: 100, y: 100). The newPosition (x: 200, y: 200) is also more than a radius distance from all 4 borders and there are no other pegs in the board. pegBoard.pegs should now contain the original peg at new location (x: 200, y: 200).
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let oldPosition = CGPoint(x: 100, y: 100), addPeg(position: oldPosition, color = .Blue), let newPosition = CGPoint(x: 10, y: 10), movePeg(oldPosition: oldPosition, newPosition: newPosition) should give false as the newPosition (x: 10, y: 10) is within a radius distance (radius = 1024 / 2 / 20 = 25.6) from 2 of the borders. pegBoard.pegs should now contain the original peg at the old location (x: 100, y: 100).
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let oldPosition1 = CGPoint(x: 100, y: 100), addPeg(position: oldPosition1, color = .Blue), let oldPosition2 = CGPoint(x: 200, y: 200), addPeg(position: oldPosition2, color = .Blue), newPosition = CGPoint(x: 205, y: 205), movePeg(oldPosition: oldPosition1, newPosition: newPosition) should give false as the newPosition (x: 205, y: 205) is within a radius distance (radius = 1024 / 2 / 20 = 25.6) from the second peg at (x: 200, y: 200). pegBoard.pegs should now contain the 2 original pegs at the old locations (x: 100, y: 100) and (x: 200, y: 200).
+		
+	* `resetPegBoard()` method
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let oldPosition1 = CGPoint(x: 100, y: 100), addPeg(position: oldPosition1, color = .Blue), let oldPosition2 = CGPoint(x: 200, y: 200), addPeg(position: oldPosition2, color = .Blue). resetPegBoard() should give true as it empties the peg board. pegBoard.pegs should now be an empty array.
+		
+	* `increasePegSize(position: CGPoint)` method
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position = CGPoint(x: 100, y: 100), addPeg(position: position, color = .Blue). increasePegSize(position: position) should increase the radius of the peg by 1.1 times.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position1 = CGPoint(x: 100, y: 100), addPeg(position: position1, color = .Blue). let position2 = CGPoint(x: 105, y: 105). increasePegSize(position: position) should increase the radius of the peg by 1.1 times since position2 is within radius distance away from the peg.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position1 = CGPoint(x: 100, y: 100), addPeg(position: position1, color = .Blue). let position2 = CGPoint(x: 130, y: 130). increasePegSize(position: position) should should not have any effect on the peg since position2 is more than a radius distance away from the peg.
+		* If the peg is directly beside any of the border, increasePegSize(position: position) should not have any effect on the peg as the peg will exceed the borders.
+		* If the peg is directly beside any other peg, increasePegSize(position: position) should not have any effect on the peg as the peg will overlap with another peg.
+		
+	* `decreasePegSize(position: CGPoint)` method
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position = CGPoint(x: 100, y: 100), addPeg(position: position, color = .Blue). decreasePegSize(position: position) should decrease the radius of the peg by 0.9 times.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position1 = CGPoint(x: 100, y: 100), addPeg(position: position1, color = .Blue). let position2 = CGPoint(x: 105, y: 105). decreasePegSize(position: position) should decrease the radius of the peg by 0.9 times since position2 is within radius distance away from the peg.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let position1 = CGPoint(x: 100, y: 100), addPeg(position: position1, color = .Blue). let position2 = CGPoint(x: 130, y: 130). decreasePegSize(position: position) should should not have any effect on the peg since position2 is more than a radius distance away from the peg.
+		
+	* `init?(coder decoder: NSCoder)` and encode() methods
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let oldPosition1 = CGPoint(x: 100, y: 100), addPeg(position: oldPosition1, color = .Blue), let oldPosition2 = CGPoint(x: 200, y: 200), addPeg(position: oldPosition2, color = .Blue), let data = try NSKeyedArchiver.archivedData(withRootObject: pegBoard, requiringSecureCoding: false). Testing data should not return nil.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let oldPosition1 = CGPoint(x: 100, y: 100), addPeg(position: oldPosition1, color = .Blue), let oldPosition2 = CGPoint(x: 200, y: 200), addPeg(position: oldPosition2, color = .Blue), let data = try NSKeyedArchiver.archivedData(withRootObject: pegBoard, requiringSecureCoding: false), let pegBoard2 = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? PegBoard. Testing pegBoard2 should not return nil.
+		* let pegBoard = PegBoard(boardWidth: 1024, boardHeight: 1024), numRows and numCols both equal 20, let oldPosition1 = CGPoint(x: 100, y: 100), addPeg(position: oldPosition1, color = .Blue), let oldPosition2 = CGPoint(x: 200, y: 200), addPeg(position: oldPosition2, color = .Blue), let data = try NSKeyedArchiver.archivedData(withRootObject: pegBoard, requiringSecureCoding: false), let pegBoard2 = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! PegBoard. Testing pegBoard1.boardWidth == pegBoard2.boardWidth should give true. Testing pegBoard1.boardHeight == pegBoard2.boardHeight should give true. Testing pegBoard1.pegs == pegBoard2.pegs should give true. A `PegBoard` object encoded and then decoded should give the same object.
+		
+* `PegBoardLevel.swift`
+	* `init` method
+		* When passed with `()`, `pegBoard` property should be initialized with the `init()` method of `PegBoard` class, `levelName` property should be nil.
+		* When passed with `(boardWidth: CGFloat, boardHeight: CGFloat)`, `pegBoard` property should be initialized with the `init(boardWidth: CGFloat, boardHeight: CGFloat)` method of `PegBoard` class, `levelName` property should be nil.
+		* When passed with `(boardWidth: CGFloat, boardHeight: CGFloat, levelName: String)`, `pegBoard` property should be initialized with the `init(boardWidth: CGFloat, boardHeight: CGFloat)` method of `PegBoard` class, `levelName` property should be initialized to `levelName`.
+		* When passed with `(pegBoard: PegBoard, levelName: String)`, `pegBoard` property should be initialized with the value of `pegBoard`, `levelName` property should be initialized to `levelName`.
+	* `getPegPosition()`, `getPeg()`, `addPeg()`, `removePeg()`, `movePeg()`, `resetPegBoard(), increasePegSize(), decreasePegSize()` methods should give the same outcome as the respective methods in `PegBoard` class with the same inputs, as they simply call those methods in `PegBoard` class.
+	
+* `CannonBall.swift`
+	* `init` method
+		* When passed with `(x: CGFloat, y: CGFloat, radius: CGFloat, velocity: CGVector)`, it should initialize the properties `x`, `y`, `radius` and `velocity` to the respective values. Its other properties `uuid` and `canMove` should also be initialized, with `canMove` being `true`.
+		* It should not be passed with any other properties.
+		
+* `Wall.swift`
+	* `init` method
+		* When passed with `(x: CGFloat, y: CGFloat, wallType: WallType, width: CGFloat, height: CGFloat)`, it should initialize the properties `x`, `y`, `wallType`, `width` and `height` to the respective values. Its other properties `uuid`, `canMove` and `velocity` should also be initialized, with `canMove` being `true` and `velocity` being zero.
+		* It should not be passed with any other properties.
+		
+* `PhysicsEngine.swift`
+	* `init` method
+		* When passed with `(physicsObjects: [PhysicsObject], physicsCollisionHandler: PhysicsCollisionHandler)`, it should initialize the properties `physicsObject` and `physicsCollisionHandler` to the respective values.
+		* It should not be passed with any other properties.
+	* `moveObjects()` method
+		* When this method is called, the `x` and `y` properties of all the physics objects should increase/decrease by their own `dx` and `dy` properties respectively.
+	* `addGravityToObjects()` method
+		* Whem this method is called, the `dy` property of all the physics objects whose `canMove` is `true` should increase by `NumberConstants.gravityForce`.
+	* `checkCollisionForCircleWithCircle(physicsCircle: PhysicsCircle, physicsCircle2: PhysicsCircle)` method
+		* If the distance between the centre of `physicsCircle` and `physicsCircle2` calculated using their `x` and `y` values is more than the sum of their `radius`, a collision should not be detected.
+		* If the distance between the centre of `physicsCircle` and `physicsCircle2` calculated using their `x` and `y` values is less than the sum of their `radius`, a collision should be detected.
+	* `checkCollisionForCircleWithRectangle(physicsCircle: PhysicsCircle, physicsRectangle: PhysicsRectangle)` method
+		* If no part of the `physicsCircle` overlaps with any part of the `physicsRectangle` after calculating using the `x`, `y`, `radius` values of the `physicsCircle` and the `x`, `y`, `width`, `height` of the `physicsRectangle`, a collision should not be detected.
+		* If any part of the `physicsCircle` overlaps with some part of the `physicsRectangle` after calculating using the `x`, `y`, `radius` values of the `physicsCircle` and the `x`, `y`, `width`, `height` of the `physicsRectangle`, a collision should be detected.
+	* `checkCollisionForRectangleWithRectangle(physicsRectangle: PhysicsRectangle, physicsRectangle2: PhysicsRectangle)` method
+		* If no part of the `physicsRectangle` overlaps with any part of the `physicsRectangle2` after calculating using their `x`, `y`, `width`, `height` values, a collision should not be detected.
+		* If any part of the `physicsRectangle` overlaps with some part of the `physicsRectangle2` after calculating using their `x`, `y`, `width`, `height` values, a collision should be detected.
+		
+* `PeggleGameEngine.swift`
+	* `init` method
+		* When passed with `(pegBoardModel: PegBoardModel, gameBoardView: UICollectionView)`, it should initialize the properties `pegBoardModel` and `gameBoardView` to the respective values. Its other properties `gameRenderer`, `physicsObjects`, `canFireCannon` and `pegsHitPerCannonBall` should also be initialized, with `gameRenderer` initialized with a new `PeggleGameRenderer` object, `physicsObjects` initialized with an empty `PhysicsObject` array, `canFireCannon` initialized with `true` and `pegsHitPerCannonBall` initialized with an empty `Peg` array.
+		* It should not be passed with any other properties.
+	* `addPhysicsObject(physicsObject: PhysicsObject)` method
+		* When this method is called, the `physicsObjects` array should now have an additional element `physicsObject`
+	* `addPhysicsObject(physicsObject: PhysicsObject, image: UIImageView)` method
+		* When this method is called, the `physicsObjects` array should now have an additional element `physicsObject` and the `gameRenderer.addImage()` method should be called.
+	* `removePhysicsObject(physicsObject: PhysicsObject)` method
+		* When this method is called, the `physicsObject` element should now be removed from the `physicsObjects` array and the `gameRenderer.removeImage()` method should be called.
+	* `startGame()` method
+		* When the method is called, the `physicsObjects` array should now have the `Peg` objects that are obtained from `pegBoardModel` and the 4 `Wall` objects (topWall, leftWall, rightWall and bottomWall). The `Timer` object should be started with `timeInterval` value equal to `NumberConstants.gameInterval`.
+	* `endGame()` method
+		* When this method is called, the `Timer` object should be invalidated.
+	* `fireCannon(cannonAngle: CGFloat)` method
+		* If `cannonAngle` value is not between `-Double.pi / 2` and `Double.pi / 2`, the method should return without doing anything.
+		* If `canFireCannon` value is `false`, the method should return without doing anything.
+		* If both of the above values are valid and the method proceeds, the `physicsObjects` array should now have an additional `CannonBall` object, with its `velocity` value calculated based on `NumberConstants.cannonBallStartingVelocity` and `cannonAngle`. `canFireCannon` value should now also be changed to `false`.
+	* `cannonBallHitsPeg(peg: Peg)` method
+		* When this method is called, `pegsHitPerCannonBall` array should now have an additional element `peg`, if it does not already contain it. The `gameRenderer.changeImage()` method should be called.
+	* `cannonBallHitsBottomWall(cannonBall: CannonBall)` method
+		* When this method is called, the `cannonBall` should now be removed from the `physicsObjects` array. `pegsHitPerCannonBall` array should now be emptied and all the `Peg` objects that were in it should also be removed from the `physicsObjects` array.`
+
+### Integration Tests
+* Test selecting a peg on the palette
+	* When app is first opened to the Level Designer part, the blue peg should be highlighted to indicate selection by default and the orange and delete pegs should be dimmed to indicate not selected.
+	* When I press the orange peg, the orange peg should be highlighted to indicate selection and the blue and delete pegs should be dimmed to indicate not selected.
+	* When I press the delete peg, the delete peg should be highlighted to indicate selection and the blue and orange pegs should be dimmed to indicate not selected.
+	* When I press the blue peg, the blue peg should be highlighted to indicate selection and the orange and delete pegs should be dimmed to indicate not selected.
+	* When I press the blue peg again, the blue peg should remain highlighted to indicate selection and the orange and delete pegs should remain dimmed to indicate not selected.
+	
+* Test adding a peg on the board by tapping
+	* Blue peg is selected on the palette
+		* Tapping a location on an empty board, and the tap location is far away from all 4 borders should create a blue peg on it.
+		* Tapping a location on a board with pegs, and the tap location is at least a diameter distance away from all the current pegs and at least a radius distance away from all 4 borders should create a blue peg on it.
+		* Tapping a location on a board with pegs, and the tap location is at least a diameter distance away from all the current pegs but less than a radius distance away from any of the 4 borders should not create a blue peg on it.
+		* Tapping a location on a board with pegs, and the tap location is at least a radius distance away from all 4 borders but within a diameter distance away from any of the current pegs should not create a blue peg on it.
+		
+	* Orange peg is selected on the palette
+		* Tapping a location on an empty board, and the tap location is far away from all 4 borders should create a orange peg on it.
+		* Tapping a location on a board with pegs, and the tap location is at least a diameter distance away from all the current pegs and at least a radius distance away from all 4 borders should create a orange peg on it.
+		* Tapping a location on a board with pegs, and the tap location is at least a diameter distance away from all the current pegs but less than a radius distance away from any of the 4 borders should not create a orange peg on it.
+		* Tapping a location on a board with pegs, and the tap location is at least a radius distance away from all 4 borders but within a diameter distance away from any of the current pegs should not create a orange peg on it.
+
+* Test removing a peg on the board by tapping
+	* Delete peg is selected on the palette
+		* Tapping a location on an empty board should not have any effect.
+		* Tapping a location on a board with pegs, and the tap location is within the circumference of one of the current pegs should remove the peg from the board.
+		* Tapping a location on a board with pegs, and the tap location is not within the circumference of any of the current pegs should not remove any peg from the board.
+		
+* Test removing a peg on the board by long press
+	* Any peg is selected on the palette
+		* Long pressing a location on an empty board should not have any effect.
+		* Long pressing a location on a board with pegs, and the long press location is within the circumference of one of the current pegs should remove the peg from the board.
+		* Long pressing a location on a board with pegs, and the long press location is not within the circumference of any of the current pegs should not remove any peg from the board.
+		
+* Test moving a peg around the board by dragging
+	* Any peg is selected on the palette
+		* Dragging on an empty board should not have any effect.
+		* On a board with pegs, start dragging from a location that is not within the circumference of any of the current pegs should not move any pegs.
+		* On a board with pegs, start dragging from a location that is within the circumference of one of the current pegs and across locations that are at least a diameter distance away from all the other current pegs and at least a radius distance away from all 4 borders, should move the peg in the dragging direction.
+		* On a board with pegs, start dragging from a location that is within the circumference of one of the current pegs and across locations that are at least a diameter distance away from all the other current pegs and at least a radius distance away from all 4 borders, but reaching a location that is within a diameter distance away from one of the other current pegs. This should move the peg in the dragging direction to the final location that is more than a diameter distance away from all of the other pegs and make it stop there.
+		* On a board with pegs, start dragging from a location that is within the circumference of one of the current pegs and across locations that are at least a diameter distance away from all the other current pegs and at least a radius distance away from all 4 borders, but reaching a location that is within a radius distance away from one of the borders. This should move the peg in the dragging direction to the final location that is more than a radius distance away from all of the 4 borders and make it stop there.
+		
+* Test pressing the 'Reset' button
+	* Pressing when the board is empty should not show any effect.
+	* Pressing when there are pegs on the board should clear the board of all pegs.
+		
+* Test pressing the 'Save' button
+	* After pressing, it should bring me to another screen that says 'Save Level' on top, and a text field for me to specify the level name and 2 buttons that are 'Cancel' and 'Save'.
+	* On the 'Save Level' screen, if I leave the text field empty and press 'Save', it should not save and show me an alert that informs me that the text field cannot be blank.
+	* On the 'Save Level' screen, if I type something on the text field that includes non-alphanumerical characters or leave spaces between characters, and press 'Save', it should not save and show me an alert that informs me that the text field cannot have non-alphanumerical characters and cannot leave spaces between characters.
+	* On the 'Save Level' screen, if I type something on the text field that has all alphanumerical characters with no space between characters and press 'Save', and the level name has not been saved before, it should successfully save the level and alert me.
+	* On the 'Save Level' screen, if I type something on the text field that has all alphanumerical characters with no space between characters and press 'Save', but the level name has already been saved before, it should pop up an alert asking me to confirm whether to override the saved level.
+	* From the previous example, if I press 'OK' to override, it will tell me that the level has been successfully saved and alert me. Else if I press 'Cancel', it will not save the level.
+	* On the 'Save Level' screen, if I press 'Cancel', it will bring me back to the previous Level Designer screen.
+	
+* Test pressing the 'Load' button
+	* After pressing, it should bring me to another screen that says 'Select Level', with a table that shows all the saved levels and 3 buttons that are 'Cancel', 'Edit' and 'Play'.
+	* On the 'Select Level' screen, if I click on the level name of a saved level and click 'Edit', it will load the saved level and bring me back to the Level Designer screen with the saved level.
+	* On the 'Select Level' screen, if I click on 'Cancel', it will bring me back to the previous Level Designer screen.
+	* On the 'Select Level' screen, if I click on 'Play', nothing will happen as the play feature has not been implemented yet.
 
 ## Written Answers
 
