@@ -451,7 +451,7 @@ Note: the triangular peg feature is not implemented, so I only have circular peg
 I believe that I have designed my code from the previous Problem Sets quite well. Here are some good things that i have done.
 
 * The Level Designer feature from PS2 and gameplay feature from PS3 are separable as they have their own independent domain logic. Hence, I was able to merge both features in my final game.
-* The domain logic in my `PeggleGameEngine` was quite clearly defined and with good abstractions. This allowed me to add more features into the game in this PS with relatively little trouble as I was able to continue the game logic from the previous assignments.
+* The domain logic in my `PeggleGameEngine` was quite clearly defined and with good function abstractions. This allowed me to add more features into the game in this PS with relatively little trouble as I was able to continue the game logic from the previous assignments by adding more functions.
 
 However, there were some problems that I had faced.
 
