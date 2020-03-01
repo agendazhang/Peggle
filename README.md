@@ -39,7 +39,7 @@ Here are some screenshots of the game.
 ![alt text](https://github.com/cs3217-1920/2020-ps4-agendazhang/blob/master/images/LevelSelector.png)
 
 ### Features
-* Peg shooting (in development)
+* Peg shooting
 	* Shoot cannon ball from a fixed cannon at the top of the screen to clear all the orange 
    pegs at each level.
 * Physics Engine
@@ -95,6 +95,7 @@ An example will be when the `CannonBall` object collides with one of the `Peg` o
 The performance constraints for the gameplay feature are as follows:
 * Due to the effect of gravity added on the cannon ball and the cannon can only be fired towards the bottom half part of the game board, there are certain parts on the top left and top right hand side of the game board that the cannon ball cannot reach when the cannon ball is first fired from the cannon. Hence, the pegs that are placed there can only be cleared if the ball hits a peg below and bounces up.
 * If you place a peg directly below the cannon and you fire the cannon ball straight down, it will hit the peg, bounce up and hit the top wall, bounce back down and hit the peg again, repeating this forever. This is because the pegs that are hit will only be removed once the cannon ball reaches the bottom and is removed from the game board. Hence, when the user designs the level, they should avoid such cases where the cannon ball will not be able to go down.
+* If there are too many pegs during the gameplay, it will be a little laggy.
 
 ## Rules of the Game
 Please write the rules of your game here. This section should include the
@@ -447,4 +448,12 @@ Note: the triangular peg feature is not implemented, so I only have circular peg
 > - if you were to redo the entire application, is there anything you would
 >   have done differently?
 
+I believe that I have designed my code from the previous Problem Sets quite well. Here are some good things that i have done.
 
+* The Level Designer feature from PS2 and gameplay feature from PS3 are separable as they have their own independent domain logic. Hence, I was able to merge both features in my final game.
+* The domain logic in my `PeggleGameEngine` was quite clearly defined and with good abstractions. This allowed me to add more features into the game in this PS with relatively little trouble as I was able to continue the game logic from the previous assignments.
+
+However, there were some problems that I had faced.
+
+* As my domain logic for saving/loading the levels were written in the `ViewController` classes from PS2, I created a `LevelSaver` and `LevelLoader` class separatedly for each of these features, so that the domain logic is separated from the presentation logic.
+* My original game assumes that pegs can only be circular. Hence, I made the `Peg` class strictly conform to `PhysicsCircle`. However, in this PS, we can see that pegs can be of different shapes, eg triangle. In that case, I cannot just have a generic peg class that represents the peg. I have to have a `CirclePeg` and `TrianglePeg` which conform to `Peg`. `CirclePeg` will also conform to `PhysicsCircle` while `TrianglePeg` will conform to `PhysicsTriangle`. I would also have to change the implementation of methods from the `PegBoard`, `PhysicsEngine` classes as now I need to handle the interaction between pegs of different shapes. As I did not have enough time to implement the triangle peg feature, I did not do it and my current implementation still has one generic `Peg` class that conforms to `PhysicsCircle`. However, if I were to redo the application, i would definitely create separate classes for the different shapes that the peg can hold.
