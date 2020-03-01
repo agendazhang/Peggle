@@ -113,6 +113,7 @@ To win:
 To lose:
 * There is a game timer which gives 60 seconds (excluding the extra time that you can receive) for each level. If the timer reaches 0.0 before you clear all the orange pegs, you lose the game. If you hit all the remaining orange pegs with the cannon ball but the cannon ball failed to reach the bottom of the screen/enters the bucket (meaning it is still in motion in the game board) and time runs out, you will also lose the game. This is because the pegs that are hit by the cannon ball will only be removed from the game board after the cannon ball reaches the bottom of the screen/enters the bucket.
 * You are given 10 cannon balls (excluding the free balls that you can receive) for each level. If you run out of cannon balls and there are still orange pegs remaining, you lose the game. If you manage to clear the remaining orange pegs with your last cannon ball, you will win the game.
+* If the cannon ball is stuck in a cluster of pegs and is unable to move, you will lose the game once the timer reaches 0.0
 
 ## Level Designer Additional Features
 
@@ -289,6 +290,11 @@ Note: the triangular peg feature is not implemented, so I only have circular peg
 
 ### Integration Tests
 
+* Test main menu
+	* The main menu should show 2 buttons, "Load Levels" and "Design Level".
+	* If I select "Load Levels", it should bring me to the Level Selector where I am able to choose a level to edit in the Level Designer or play in the game screen.
+	* If I select "Design Level", it should bring me to the Level Designer with an empty board.
+
 * Test selecting a peg on the palette in Level Designer
 	* When app is first opened to the Level Designer part, the blue peg should be highlighted to indicate selection by default and the other buttons should be dimmed to indicate not selected.
 	* When I press the orange peg, the orange peg should be highlighted to indicate selection and the other buttons should be dimmed to indicate not selected.
@@ -408,6 +414,8 @@ Note: the triangular peg feature is not implemented, so I only have circular peg
   * If I clear all the orange pegs before the number of cannon balls run out and before timer reaches 0.0, I win the game.
   * If there are still orange pegs remaining when timer reaches 0.0, I lose the game.
   * If there are still orange pegs remaining when I run out of cannon balls, I lose the game.
+  * If I clear all the remaining orange pegs, but the currently cannon ball did not reach the bottom wall/did not enter the bucket before the timer reaches 0.0, I lose the game.
+  * If the cannon ball is stuck in a cluster of pegs and is unable to move, I will lose the game once the timer reaches 0.0
   
 * Test bucket in Game
   * Bucket is at the bottom of the screen.
@@ -417,7 +425,16 @@ Note: the triangular peg feature is not implemented, so I only have circular peg
   * If the ball hits the side of the bucket, it should slightly deflect towards the opposite x-direction.
   
 * Test powerups in Game
-  * 
+  * If I have less than 10.0 seconds left and I hit a green peg, the "Time Boost" powerup should be activated which gives 30.0 extra seconds to my game timer.
+  * If I have more than 10.0 seconds left and >= 10 remaining orange pegs, and I hit a green peg, the "Space Blast" powerup should be activated. The nearby pegs (pegs that have <= 80.0 distance from the green peg) should be "hit" and lighted up. If one of the other green pegs is "hit" by this powerup, its own powerup should also be activated.
+  * If I have more than 10.0 seconds left and < 10 remaining orange pegs, and I hit a green peg, the "Spooky Ball" powerup should be activated. Once the current cannon ball reaches the bottom wall/enters the bucket and disappears, an extra cannon ball should be fired from the top, where the x-direction is the same as the x-direction of the previous cannon ball where it disappeared. It should be fired towards the bottom at a random angle. The remaining cannon ball count should remain the same as the extra cannon ball is "extra". If this extra cannon ball enters the bucket, the remaining cannon ball count should increase by one.
+  
+* Test preloaded levels
+  * When I press "Load Levels" in main menu, or when I press "Load" in Level Designer, there should be 3 preloaded levels known as "Preloaded1", "Preloaded2" and "Preloaded3".
+  * When I choose any of the preloaded levels in Level Selector and press "Play", I should be able to play them in the game screen.
+  * When I choose any of the preloaded levels in Level Selector and press "Edit", I should be able to edit them in the Level Designer screen.
+  * When I try to override any of the preloaded levels when I save them with the same name in Level Designer, it should popup a warning that prohibits me from overriding them.
+  * When I try to open the same preloaded level in the game or Level Designer screen in different iPad sizes, the relative positions of the pegs on the board should be the same. The size of the pegs should also be proportionate relative to the width and height of the game board on the iPad screen.
 
 ## Written Answers
 
@@ -430,4 +447,4 @@ Note: the triangular peg feature is not implemented, so I only have circular peg
 > - if you were to redo the entire application, is there anything you would
 >   have done differently?
 
-Your answer here
+
