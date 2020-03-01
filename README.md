@@ -21,14 +21,14 @@
 
 ### About
 This is an iPad game similar to the popular game `Peggle`. The game is made up of 
-different levels that have blue and orange pegs on them. The objective is to clear 
+different levels that have blue, orange and green pegs on them. The objective is to clear 
 all the orange pegs in each level by shooting cannon balls from a cannon at the top of the 
 screen.
 
 Here are some screenshots of the game.
 * Main Menu: Select "Design Level" to design your own level.
 ![alt text](https://github.com/cs3217-1920/2020-ps4-agendazhang/blob/master/images/MainMenu.png)
-* Level Designer: Place blue or orange pegs on the board to customize your own level, then select "Start" to start playing.
+* Level Designer: Place blue, orange or green pegs on the board to customize your own level, then select "Start" to start playing.
 ![alt text](https://github.com/cs3217-1920/2020-ps4-agendazhang/blob/master/images/LevelDesignerWithoutPegs.png)
 ![alt text](https://github.com/cs3217-1920/2020-ps4-agendazhang/blob/master/images/LevelDesignerWithPegs.png)
 * Gameplay: Shoot the cannon ball from the cannon on top of the screen to clear all the orange pegs on the board. Rotate the cannon by swiping clockwise or anti-clockwise on the game board (light blue background) to change the angle to launch the ball. Tap the game board (light blue background) to shoot the cannon.
@@ -124,9 +124,20 @@ There are two buttons beside the "Delete" button in the Level Designer. The one 
 
 If you try to increase/decrease the size of the peg, but the new peg will overlap with another existing peg or exceed the boundaries of the screen, then the operation will be cancelled and the peg remains the same size.
 
+## Powerups
+You can gain powerups by hitting a green peg. The type of powerup gained will be explained below.
+
+### Time Boost
+If there is less than 10.0 seconds left on the game timer, this powerup will be activated. An additional 30.0 seconds will be added to the game timer.
+
+### Space Blast
+If there is more than 10.0 seconds left on the game timer, and there are 10 or more remaining orange pegs (the orange pegs that are hit this turn before the cannon ball reaches the bottom/enters the bucket are considered "remaining" and "not cleared yet"), this powerup will be activated. Any peg that is within a short distance (it is set as 80 in my game) from the green peg will be considered hit by the cannon ball and lighted up. If another green ball is hit by this manner, it will also activate its own powerup.
+
+### Spooky Ball
+If there is more than 10.0 seconds left on the game timer, and there are less than 10 remaining orange pegs (the orange pegs that are hit this turn before the cannon ball reaches the bottom/enters the bucket are considered "remaining" and "not cleared yet"), this powerup will be activated. After the current cannon ball reaches the bottom/enters the bucket, an extra cannon ball will be fired from the top, where the x-position will be the same as the x-position where the previous cannon ball reaches the bottom/enters the bucket, at a random angle. This extra cannon ball will not be subtracted from the remaining count of cannon ball. If this extra cannon ball enters the bucket, you will also gain an extra cannon ball.
+
 ## Bells and Whistles
-Please write all of the additional features that you have implemented so that
-your grader can award you credit.
+
 
 ## Tests
 If you decide to write how you are going to do your tests instead of writing
