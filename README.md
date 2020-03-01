@@ -157,6 +157,8 @@ If there is more than 10.0 seconds left on the game timer, and there are less th
 
 ## Tests
 
+Note: the triangular peg feature is not implemented, so I only have circular pegs in my game.
+
 ### Unit Tests
 * `Peg.swift`
 	* `init` method
@@ -286,14 +288,19 @@ If there is more than 10.0 seconds left on the game timer, and there are less th
 		* When this method is called, the `cannonBall` should now be removed from the `physicsObjects` array. `pegsHitPerCannonBall` array should now be emptied and all the `Peg` objects that were in it should also be removed from the `physicsObjects` array.`
 
 ### Integration Tests
-* Test selecting a peg on the palette
-	* When app is first opened to the Level Designer part, the blue peg should be highlighted to indicate selection by default and the orange and delete pegs should be dimmed to indicate not selected.
-	* When I press the orange peg, the orange peg should be highlighted to indicate selection and the blue and delete pegs should be dimmed to indicate not selected.
-	* When I press the delete peg, the delete peg should be highlighted to indicate selection and the blue and orange pegs should be dimmed to indicate not selected.
-	* When I press the blue peg, the blue peg should be highlighted to indicate selection and the orange and delete pegs should be dimmed to indicate not selected.
-	* When I press the blue peg again, the blue peg should remain highlighted to indicate selection and the orange and delete pegs should remain dimmed to indicate not selected.
+
+* Test selecting a peg on the palette in Level Designer
+	* When app is first opened to the Level Designer part, the blue peg should be highlighted to indicate selection by default and the other buttons should be dimmed to indicate not selected.
+	* When I press the orange peg, the orange peg should be highlighted to indicate selection and the other buttons should be dimmed to indicate not selected.
+	* When I press the green peg, the green peg should be highlighted to indicate selection and the other buttons should be dimmed to indicate not selected.
+	* When I press the green peg, the green peg should be highlighted to indicate selection and the other buttons should be dimmed to indicate not selected.
+	* When I press the "increase size" peg, the "increase size" peg should be highlighted to indicate selection and the other buttons should be dimmed to indicate not selected.
+	* When I press the "decrease size" peg, the "decrease size" peg should be highlighted to indicate selection and the other buttons should be dimmed to indicate not selected.
+	* When I press the delete peg, the delete peg should be highlighted to indicate selection and the other buttons should be dimmed to indicate not selected.
+	* When I press the blue peg, the blue peg should be highlighted to indicate selection and the other buttons should be dimmed to indicate not selected.
+	* When I press the blue peg again, the blue peg should remain highlighted to indicate selection and the other buttons should remain dimmed to indicate not selected.
 	
-* Test adding a peg on the board by tapping
+* Test adding a peg on the board by tapping in Level Designer
 	* Blue peg is selected on the palette
 		* Tapping a location on an empty board, and the tap location is far away from all 4 borders should create a blue peg on it.
 		* Tapping a location on a board with pegs, and the tap location is at least a diameter distance away from all the current pegs and at least a radius distance away from all 4 borders should create a blue peg on it.
@@ -305,20 +312,26 @@ If there is more than 10.0 seconds left on the game timer, and there are less th
 		* Tapping a location on a board with pegs, and the tap location is at least a diameter distance away from all the current pegs and at least a radius distance away from all 4 borders should create a orange peg on it.
 		* Tapping a location on a board with pegs, and the tap location is at least a diameter distance away from all the current pegs but less than a radius distance away from any of the 4 borders should not create a orange peg on it.
 		* Tapping a location on a board with pegs, and the tap location is at least a radius distance away from all 4 borders but within a diameter distance away from any of the current pegs should not create a orange peg on it.
+		
+	* Green peg is selected on the palette
+		* Tapping a location on an empty board, and the tap location is far away from all 4 borders should create a green peg on it.
+		* Tapping a location on a board with pegs, and the tap location is at least a diameter distance away from all the current pegs and at least a radius distance away from all 4 borders should create a green peg on it.
+		* Tapping a location on a board with pegs, and the tap location is at least a diameter distance away from all the current pegs but less than a radius distance away from any of the 4 borders should not create a green peg on it.
+		* Tapping a location on a board with pegs, and the tap location is at least a radius distance away from all 4 borders but within a diameter distance away from any of the current pegs should not create a green peg on it.
 
-* Test removing a peg on the board by tapping
+* Test removing a peg on the board by tapping in Level Designer
 	* Delete peg is selected on the palette
 		* Tapping a location on an empty board should not have any effect.
 		* Tapping a location on a board with pegs, and the tap location is within the circumference of one of the current pegs should remove the peg from the board.
 		* Tapping a location on a board with pegs, and the tap location is not within the circumference of any of the current pegs should not remove any peg from the board.
 		
-* Test removing a peg on the board by long press
+* Test removing a peg on the board by long press in Level Designer
 	* Any peg is selected on the palette
 		* Long pressing a location on an empty board should not have any effect.
 		* Long pressing a location on a board with pegs, and the long press location is within the circumference of one of the current pegs should remove the peg from the board.
 		* Long pressing a location on a board with pegs, and the long press location is not within the circumference of any of the current pegs should not remove any peg from the board.
 		
-* Test moving a peg around the board by dragging
+* Test moving a peg around the board by dragging in Level Designer
 	* Any peg is selected on the palette
 		* Dragging on an empty board should not have any effect.
 		* On a board with pegs, start dragging from a location that is not within the circumference of any of the current pegs should not move any pegs.
@@ -326,12 +339,25 @@ If there is more than 10.0 seconds left on the game timer, and there are less th
 		* On a board with pegs, start dragging from a location that is within the circumference of one of the current pegs and across locations that are at least a diameter distance away from all the other current pegs and at least a radius distance away from all 4 borders, but reaching a location that is within a diameter distance away from one of the other current pegs. This should move the peg in the dragging direction to the final location that is more than a diameter distance away from all of the other pegs and make it stop there.
 		* On a board with pegs, start dragging from a location that is within the circumference of one of the current pegs and across locations that are at least a diameter distance away from all the other current pegs and at least a radius distance away from all 4 borders, but reaching a location that is within a radius distance away from one of the borders. This should move the peg in the dragging direction to the final location that is more than a radius distance away from all of the 4 borders and make it stop there.
 		
-* Test pressing the 'Reset' button
+* Test increasing the size of a peg when the "increase size" button is pressed in Level Designer
+	* If I tap on a position without a peg, nothing should happen.
+	* If I tap within a peg that is not near any other pegs and not near any of the borders, it should increase the size of the peg slightly.
+	* If I tap within a peg that is directly next to another peg, it should not increase the size of the peg as it will result in an overlap.
+	* If I tap within a peg that is directly next to the border, it should not increase the size of the peg as it will exceed the boundaries.
+	* If I tap within a peg that already has radius about 2 times its original radius, it should not increase the size of the peg as the maximum size is 2 times of its original radius.
+	
+* Test decreasing the size of a peg when the "decrease size" button is pressed in Level Designer
+	* If I tap on a position without a peg, nothing should happen.
+	* If I tap within any peg, it should decrease the size of the peg slightly.
+	* If I tap within a peg that already has radius about 0.5 times its original radius, it should not decrease the size of the peg as the minimum size is 0.5 times of its original radius.
+		
+* Test pressing the 'Reset' button in Level Designer
 	* Pressing when the board is empty should not show any effect.
 	* Pressing when there are pegs on the board should clear the board of all pegs.
 		
-* Test pressing the 'Save' button
-	* After pressing, it should bring me to another screen that says 'Save Level' on top, and a text field for me to specify the level name and 2 buttons that are 'Cancel' and 'Save'.
+* Test pressing the 'Save' button in Level Designer
+	* If I do not have a single orange peg on the board, it should popup an error message.
+	* After pressing and no error message pops up, it should bring me to another screen that says 'Save Level' on top, and a text field for me to specify the level name and 2 buttons that are 'Cancel' and 'Save'.
 	* On the 'Save Level' screen, if I leave the text field empty and press 'Save', it should not save and show me an alert that informs me that the text field cannot be blank.
 	* On the 'Save Level' screen, if I type something on the text field that includes non-alphanumerical characters or leave spaces between characters, and press 'Save', it should not save and show me an alert that informs me that the text field cannot have non-alphanumerical characters and cannot leave spaces between characters.
 	* On the 'Save Level' screen, if I type something on the text field that has all alphanumerical characters with no space between characters and press 'Save', and the level name has not been saved before, it should successfully save the level and alert me.
@@ -339,11 +365,44 @@ If there is more than 10.0 seconds left on the game timer, and there are less th
 	* From the previous example, if I press 'OK' to override, it will tell me that the level has been successfully saved and alert me. Else if I press 'Cancel', it will not save the level.
 	* On the 'Save Level' screen, if I press 'Cancel', it will bring me back to the previous Level Designer screen.
 	
-* Test pressing the 'Load' button
+* Test pressing the 'Load' button in Level Designer
 	* After pressing, it should bring me to another screen that says 'Select Level', with a table that shows all the saved levels and 3 buttons that are 'Cancel', 'Edit' and 'Play'.
 	* On the 'Select Level' screen, if I click on the level name of a saved level and click 'Edit', it will load the saved level and bring me back to the Level Designer screen with the saved level.
 	* On the 'Select Level' screen, if I click on 'Cancel', it will bring me back to the previous Level Designer screen.
 	* On the 'Select Level' screen, if I click on 'Play', nothing will happen as the play feature has not been implemented yet.
+	
+* Test pressing the 'Start' button in Level Designer
+	* If I do not have a single orange peg on the board, it should popup an error message.
+	* After pressing and no error message pops up, it should bring me to the actual game screen with the same board that I have created.
+	
+* Test cannon ball launch in Game
+  * I can turn the cannon to specify the angle in which the cannon ball is fired, by swiping clockwise or anti-clockwise on the screen.
+  * When I tap the screen, the cannon ball is launched from centre of the cannon, which is at the top-centre of the screen.
+  * The cannon ball can only be fired towards the bottom half of the screen. When I turn the cannon >= 90 degrees clockwise or anti-clockwise from its starting position, the cannon ball cannot be fired when I tap the screen.
+  * After I fired a cannon ball, before it reaches the bottom of the game board and exits the game, another cannon ball cannot be fired when I tap the screen.
+
+* Test cannon ball movement in Game
+  * When I point the cannon directly straight at the bottom (its starting position) and fire it, the cannon ball should travel straight down, with its velocity increasing (due to gravity).
+  * When I point the cannon at an angle towards the botton and fire it, the cannon ball should start travelling at the angle where it is specified. It should also gradually travel towards the bottom in a curved trajectory, due to the effect of gravity, with its velocity increasing. Overall, it should look like how a ball in real life travels when thrown down from a tall building at an angle.
+  * When the cannon ball travels upwards, for example after hitting a peg and bounces up, its upward velocity should gradually decrease to zero, and then it will travel downwards, all these due to gravity.
+  
+* Test cannon ball collision with walls (sides of game board) in Game
+  * When the cannon ball travels straight up and hits the top wall, it should bounce back towards the bottom direction in a straight direction.
+  * When the cannon ball hits the top wall at an angle, it should deflect off with the angle of incidence equal to the angle of reflection.
+  * When the cannon ball hits the left/right wall, it should deflect off with the angle of incidence equal to the angle of reflection.
+  * When the cannon ball hits the bottom wall at any angle, it should disappear and exit the game, allowing the next cannon ball to be fired.
+  
+* Test cannon ball collision with pegs in Game
+  * When the cannon ball collides with a peg, it should bounce off the peg in a natural and reasonable manner. The peg should remain stationary.
+  
+* Test peg lighting up after being hit by the cannon ball in Game
+  * When a blue peg gets hit by the cannon ball, it should light up to a bright blue colour. It should remain there and not be removed until the cannon ball reaches the bottom wall and disappears.
+  * When a orange peg gets hit by the cannon ball, it should light up to a bright orange (looks like white) colour. It should remain there and not be removed until the cannon ball reaches the bottom wall and disappears.
+  * When the cannon ball hits a peg that has already been hit and lighted up, the peg should remain lit.
+  
+* Test peg removal in Game
+  * After a peg is being hit by a cannon ball, it should not disappear until the cannon ball hits the bottom wall and disappears.
+  * After the cannon ball hits the bottom wall and disappears, all the lighted pegs should be removed from the game. They should disappear with a fade-out animation.
 
 ## Written Answers
 
