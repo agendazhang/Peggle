@@ -1,22 +1,3 @@
-# CS3217 Problem Set 4
-
-**Name:** Zhang Cheng
-
-**Matric No:** A0173268X
-
-## Tips
-1. CS3217's docs is at https://cs3217.netlify.com. Do visit the docs often, as
-   it contains all things relevant to CS3217.
-2. A Swiftlint configuration file is provided for you. It is recommended for you
-   to use Swiftlint and follow this configuration. We opted in all rules and
-   then slowly removed some rules we found unwieldy; as such, if you discover
-   any rule that you think should be added/removed, do notify the teaching staff
-   and we will consider changing it!
-
-   In addition, keep in mind that, ultimately, this tool is only a guideline;
-   some exceptions may be made as long as code quality is not compromised.
-3. Do not burn out. Have fun!
-
 ## Dev Guide
 
 ### About
@@ -115,16 +96,6 @@ To lose:
 * There is a game timer which gives 60 seconds (excluding the extra time that you can receive) for each level. If the timer reaches 0.0 before you clear all the orange pegs, you lose the game. If you hit all the remaining orange pegs with the cannon ball but the cannon ball failed to reach the bottom of the screen/enters the bucket (meaning it is still in motion in the game board) and time runs out, you will also lose the game. This is because the pegs that are hit by the cannon ball will only be removed from the game board after the cannon ball reaches the bottom of the screen/enters the bucket.
 * You are given 10 cannon balls (excluding the free balls that you can receive) for each level. If you run out of cannon balls and there are still orange pegs remaining, you lose the game. If you manage to clear the remaining orange pegs with your last cannon ball, you will win the game.
 * If the cannon ball is stuck in a cluster of pegs and is unable to move, you will lose the game once the timer reaches 0.0
-
-## Level Designer Additional Features
-
-### Peg Rotation
-i did not implement the triangular pegs feature.
-
-### Peg Resizing
-There are two buttons beside the "Delete" button in the Level Designer. The one with the "plus" sign in the magnifying glass represents the "increase size" button, while the other with the "minus" sign in the magnifying glass represents the "decrease size" button. If you select the "increase size"/"decrease size" button, then click on an existing peg on the board, it will increase/decrease the size of the peg respectively. The maximum size of the peg that you can increase is 2 times of its original radius, while the minimum size that you can decrease is 0.5 times of its original radius.
-
-If you try to increase/decrease the size of the peg, but the new peg will overlap with another existing peg or exceed the boundaries of the screen, then the operation will be cancelled and the peg remains the same size.
 
 ## Powerups
 You can gain powerups by hitting a green peg. The type of powerup gained will be explained below.
@@ -436,24 +407,3 @@ Note: the triangular peg feature is not implemented, so I only have circular peg
   * When I choose any of the preloaded levels in Level Selector and press "Edit", I should be able to edit them in the Level Designer screen.
   * When I try to override any of the preloaded levels when I save them with the same name in Level Designer, it should popup a warning that prohibits me from overriding them.
   * When I try to open the same preloaded level in the game or Level Designer screen in different iPad sizes, the relative positions of the pegs on the board should be the same. The size of the pegs should also be proportionate relative to the width and height of the game board on the iPad screen.
-
-## Written Answers
-
-### Reflecting on your Design
-> Now that you have integrated the previous parts, comment on your architecture
-> in problem sets 2 and 3. Here are some guiding questions:
-> - do you think you have designed your code in the previous problem sets well
->   enough?
-> - is there any technical debt that you need to clean in this problem set?
-> - if you were to redo the entire application, is there anything you would
->   have done differently?
-
-I believe that I have designed my code from the previous Problem Sets quite well. Here are some good things that i have done.
-
-* The Level Designer feature from PS2 and gameplay feature from PS3 are separable as they have their own independent domain logic. Hence, I was able to merge both features in my final game.
-* The domain logic in my `PeggleGameEngine` was quite clearly defined and with good function abstractions. This allowed me to add more features into the game in this PS with relatively little trouble as I was able to continue the game logic from the previous assignments by adding more functions.
-
-However, there were some problems that I had faced.
-
-* As my domain logic for saving/loading the levels were written in the `ViewController` classes from PS2, I created a `LevelSaver` and `LevelLoader` class separatedly for each of these features, so that the domain logic is separated from the presentation logic.
-* My original game assumes that pegs can only be circular. Hence, I made the `Peg` class strictly conform to `PhysicsCircle`. However, in this PS, we can see that pegs can be of different shapes, eg triangle. In that case, I cannot just have a generic peg class that represents the peg. I have to have a `CirclePeg` and `TrianglePeg` which conform to `Peg`. `CirclePeg` will also conform to `PhysicsCircle` while `TrianglePeg` will conform to `PhysicsTriangle`. I would also have to change the implementation of methods from the `PegBoard`, `PhysicsEngine` classes as now I need to handle the interaction between pegs of different shapes. As I did not have enough time to implement the triangle peg feature, I did not do it and my current implementation still has one generic `Peg` class that conforms to `PhysicsCircle`. However, if I were to redo the application, i would definitely create separate classes for the different shapes that the peg can hold.
